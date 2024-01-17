@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class super_admin extends Model
+class Admin extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'rol'
     ];
-
-    public function roles(){
-        return $this->belongsToMany('App\Models\Role')->withTimesTamps();
-    }
 }

@@ -14,4 +14,8 @@ class usuarios extends Model
         'password',
         'rol'
     ];
+
+    public function roles(){
+        return $this->belongsToMany('App\Models\Role')->withTimesTamps();
+    }
 }

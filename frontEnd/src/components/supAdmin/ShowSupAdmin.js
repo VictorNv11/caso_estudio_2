@@ -42,7 +42,7 @@ const ShowSupAdmin = () => {
             </div>
         </nav>
         <div style={{marginTop:'5%'}}>
-          <h1 className='text-center'>Listado de Usuarios, Aministradores y Sueper Administradores</h1>  
+          <h1 className='text-center'>Listado de Usuarios, Administradores y Super Administradores</h1>  
         </div>
         <Link to='/create' className='btn btn-secondary btn-sm' style={{marginLeft:'82%', marginTop:'2%'}}>Crear</Link>{' '}
        <div>
