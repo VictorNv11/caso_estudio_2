@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Usuarios;
+use Illuminate\Http\Request;
+
+
 class UsuariosController extends Controller
 {
  
@@ -26,20 +28,19 @@ class UsuariosController extends Controller
 
         
         $usuarios->save();
-        return $usuarios;
     }
 
 
     public function show(string $id)
     {
-        $usuarios = Usuarios::find($id);
+        $usuarios = usuarios::find($id);
         return $usuarios;   
     }
 
   
     public function update(Request $request, string $id)
     {
-        $usuarios = Usuarios::findOrFail($request->id);
+        $usuarios = usuarios::findOrFail($request->id);
         $usuarios->nombre = $request-> nombre;
         $usuarios->email = $request-> email;
         $usuarios->password = $request-> password;

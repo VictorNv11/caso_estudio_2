@@ -28,6 +28,7 @@ const EditUsuarios = () => {
     useEffect(  () =>{
         const getUsuariosById = async () =>{
             const response = await axios.get(`${endpoint}${id}`)
+            console.log(response.data)
             setNombre(response.data.nombre)
             setEmail(response.data.email)
             setPass(response.data.password)
@@ -55,23 +56,11 @@ const EditUsuarios = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Contraseña</label>
-                    <input value={password} onChange={(e)=>setPass(e.target.value)} type='password' className='form-control'required />
+                    <input value={password} onChange={(e)=>setPass(e.target.value)} type='text' className='form-control'required />
                 </div>
-                {/* <div className="mb-3">
-                <label htmlFor="confirmationPassword" className="form-label">Confirmación contraseña</label>
-                <input type="password" className="form-control" id="confirmationPassword" name="confirmationPassword"required />
-                </div> */}
                 <div className="mb-3">
                     <label htmlFor="phone" className="form-label">Telefono</label>
                     <input value={phone} onChange={(e)=> setPhone(e.target.value)} type='phone' className='form-control'required />
-                </div>
-                <div className="mb-3">
-                <label htmlFor="confirmationPassword" className="form-label">Tipo de Usuario</label>
-                    <select className="form-select" aria-label="Default select example" value={rol} onChange={(e)=> setRol(e.target.value)} type='number' required>
-                    <option value="1">Usuario</option>
-                    <option value="2">Administrador</option>
-                    <option value="3">Super Administrador</option>
-                    </select>
                 </div>
                 <button type="submit" className="btn btn-primary">Editar</button>       
             </form>

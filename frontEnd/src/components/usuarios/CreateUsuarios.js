@@ -1,14 +1,14 @@
 import axios from 'axios'
 import React,{useState}from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const endpoint = 'http://localhost:8000/api/Usuarios'
+const endpoint = 'http://localhost:8000/api/usuarios'
 const CreateUsuarios = () => {
     const [nombre, setNombre] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
     const [phone, setPhone] = useState ('')
-    const [rol] = useState('usuario')
+    const [rol] = useState(1)
     const navigate = useNavigate()
     
     const store = async (e) =>{
@@ -25,8 +25,23 @@ const CreateUsuarios = () => {
 
   return (
     <div>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a className="navbar-brand" href="#" style={{paddingLeft: 20}}>Super Administrador </a>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item active" style={{paddingRight: 20}}>
+                  <Link to='/usuarios' className='nav-link'>Volver</Link>
+                </li>
+              
+              </ul>
+            </div>
+            <div className="ml-auto" style={{paddingRight: 30}}>
+              <Link to='/' className='btn btn-light'>Salir</Link>
+            </div>
+        </nav>
+
         <div>
-            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Creando Tipo  de Usuario</h1>
+            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Creando Usuario</h1>
         </div>
       <div style={{ marginTop:'5%', backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
             <form onSubmit={store} >

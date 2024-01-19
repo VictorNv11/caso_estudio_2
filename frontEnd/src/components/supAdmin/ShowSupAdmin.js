@@ -31,6 +31,9 @@ const ShowSupAdmin = () => {
             <a className="navbar-brand" href="#" style={{paddingLeft: 20}}>Super Administrador </a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
+              <li className="nav-item active" style={{paddingRight: 20}}>
+                  <Link to='/supAdmins' className='nav-link'>Super Administrador</Link>
+                </li>
                 <li className="nav-item active" style={{paddingRight: 20}}>
                   <Link to='/usuarios' className='nav-link'>Usuarios</Link>
                 </li>

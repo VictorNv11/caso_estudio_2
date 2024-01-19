@@ -17,8 +17,10 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
+
         <Route path="/formRegistro" element={<FormRegistro />} />
         <Route path="/login" element={<Login />} />
+        
         <Route path="/supAdmins" element={<ShowSupAdmin />} />
         <Route path="/create" element={<CreateSupAdmin />} />
         <Route path="/edit/:id" element={<EditSupAdmin />} />
@@ -28,7 +30,7 @@ export default function App() {
         <Route path="/edit/:id" element={<EditAdmin />} />
 
         <Route path="/usuarios" element={<ShowUsuarios />} />
-        <Route path="/create" element={<CreateUsuarios />} />
+        <Route path="/createU" element={<CreateUsuarios />} />
         <Route path="/editU/:id" element={<EditUsuarios />} />
       </Routes>
     </BrowserRouter>

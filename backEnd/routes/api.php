@@ -32,8 +32,8 @@ Route::controller(AdminController::class)->group(function () {
 
 Route::controller(UsuariosController::class)->group(function () {
     Route::get('/usuarios','index');                 //SIRVE
-    Route::post('/Usuarios', 'store');               //SIRVE
-    Route::get('/Usuarios/{id}','show');            //SIRVE
-    Route::put('/Usuarios/{id}','update');         //SIRVE
+    Route::post('/usuarios', 'store');               //SIRVE
+    Route::get('/usuarios/{id}','show');            //SIRVE
+    Route::put('/usuarios/{id}','update');         //SIRVE
     Route::delete('/Usuarios/{id}','destroy');    //SIRVE
 });

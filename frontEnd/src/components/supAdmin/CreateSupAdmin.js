@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React,{useState}from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const endpoint = 'http://localhost:8000/api/supAdmin'
 const CreateSupAdmin = () => {
@@ -24,6 +24,19 @@ const CreateSupAdmin = () => {
 
   return (
     <div>
+         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a className="navbar-brand" href="#" style={{paddingLeft: 20}}>Super Administrador </a>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item active" style={{paddingRight: 20}}>
+                  <Link to='/supAdmins' className='nav-link'>Volver</Link>
+                </li>
+              </ul>
+            </div>
+            <div className="ml-auto" style={{paddingRight: 30}}>
+              <Link to='/' className='btn btn-light'>Salir</Link>
+            </div>
+        </nav>
         <div>
             <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Creando Tipo  de Usuario</h1>
         </div>
