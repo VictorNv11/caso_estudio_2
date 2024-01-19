@@ -5,34 +5,34 @@ import { Link } from 'react-router-dom'
 
 const endpoint = 'http://localhost:8000/api'
 
-const ShowSupAdmin = () => {
+const ShowAdmin = () => {
 
-    const [supAdmins, setSupAdmins] = useState([])
+    const [Admins, setAdmins] = useState([])
     
     useEffect (()=>{
-        getAllSupAdmins()
+        getAllAdmins()
     }, [])
    
       
-    const getAllSupAdmins = async () =>{
-      const response = await axios.get(`${endpoint}/supAdmins`)
-        setSupAdmins(response.data)
+    const getAllAdmins = async () =>{
+      const response = await axios.get(`${endpoint}/Admins`)
+        setAdmins(response.data)
     }
     
-    const deleteSupAdmin = async(id) =>{
-      await axios.delete(`${endpoint}/supAdmin/${id}`)
-      getAllSupAdmins()
+    const deleteAdmin = async(id) =>{
+      await axios.delete(`${endpoint}/Admin/${id}`)
+      getAllAdmins()
       alert('Cliente eliminado con exito');
     }
 
   return (
     <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="#" style={{paddingLeft: 20}}>Super Administrador </a>
+            <a className="navbar-brand" href="#" style={{paddingLeft: 20}}> Administrador </a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item active" style={{paddingRight: 20}}>
-                  <Link to='/usuarios' className='nav-link'>Usuarios</Link>
+                  {/* <Link to='/Admins' className='nav-link'>Usuarios</Link> */}
                 </li>
               </ul>
             </div>
@@ -50,21 +50,22 @@ const ShowSupAdmin = () => {
                 <tr>
                     <th>Nombre</th>
                     <th>email</th>
+                    <th>Telefono</th>
                     <th>rol</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
             {
-              supAdmins.map(supAdmin => (
-                      <tr key={supAdmin._id}>
-                          <td>{supAdmin.name}</td>
-                          <td>{supAdmin.email}</td>
-                         
-                          <td>{supAdmin.rol}</td>
+              Admins.map(Admin => (
+                      <tr key={Admin._id}>
+                          <td>{Admin.name}</td>
+                          <td>{Admin.email}</td>
+                          <td>{Admin.phone}</td>
+                          <td>{Admin.rol}</td>
                           <td>
-                              <Link className='btn btn-primary btn-sm' to={`/edit/${supAdmin.id}`}>Editar</Link>{' '}
-                              <button className='btn btn-danger btn-sm' onClick={() => deleteSupAdmin(supAdmin.id)}>Eliminar</button>
+                              <Link className='btn btn-primary btn-sm' to={`/edit/${Admin.id}`}>Editar</Link>{' '}
+                              <button className='btn btn-danger btn-sm' onClick={() => deleteAdmin(Admin.id)}>Eliminar</button>
                           </td>
                       </tr>
                   ))
@@ -76,4 +77,4 @@ const ShowSupAdmin = () => {
   )
 }
 
-export default ShowSupAdmin
+export default ShowAdmin

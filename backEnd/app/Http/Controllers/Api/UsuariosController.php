@@ -21,8 +21,12 @@ class UsuariosController extends Controller
         $usuarios->nombre = $request-> nombre;
         $usuarios->email = $request-> email;
         $usuarios->password = $request-> password;
+        $usuarios->phone = $request-> phone;
         $usuarios->rol = $request-> rol;
+
+        
         $usuarios->save();
+        return $usuarios;
     }
 
 
@@ -39,7 +43,11 @@ class UsuariosController extends Controller
         $usuarios->nombre = $request-> nombre;
         $usuarios->email = $request-> email;
         $usuarios->password = $request-> password;
+        $usuarios->phone = $request-> phone;
         $usuarios->rol = $request-> rol;
+
+        $usuarios->save();
+        return $usuarios;
     }
 
     

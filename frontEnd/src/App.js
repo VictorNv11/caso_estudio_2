@@ -6,6 +6,12 @@ import Login from './pages/login.jsx';
 import ShowSupAdmin from './components/supAdmin/ShowSupAdmin.js';
 import CreateSupAdmin from './components/supAdmin/CreateSupAdmin.js';
 import EditSupAdmin from './components/supAdmin/EditSupAdmin.js';
+import ShowAdmin from './components/Admin/showAdmin.js';
+import CreateAdmin from './components/Admin/CreateAdmin.js';
+import EditAdmin from './components/Admin/EditAdmin.js';
+import ShowUsuarios from './components/usuarios/ShowUsuarios.js';
+import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
+import EditUsuarios from './components/usuarios/EditUsuarios.js';
 export default function App() {
   return (
     <BrowserRouter>
@@ -16,6 +22,14 @@ export default function App() {
         <Route path="/supAdmins" element={<ShowSupAdmin />} />
         <Route path="/create" element={<CreateSupAdmin />} />
         <Route path="/edit/:id" element={<EditSupAdmin />} />
+        
+        <Route path="/Admin" element={<ShowAdmin />} />
+        <Route path="/create" element={<CreateAdmin />} />
+        <Route path="/edit/:id" element={<EditAdmin />} />
+
+        <Route path="/usuarios" element={<ShowUsuarios />} />
+        <Route path="/create" element={<CreateUsuarios />} />
+        <Route path="/editU/:id" element={<EditUsuarios />} />
       </Routes>
     </BrowserRouter>
   );

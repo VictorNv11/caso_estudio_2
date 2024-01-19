@@ -37,10 +37,10 @@ class SupAdminController extends Controller
 
     public function update(Request $request, string $id)
     {
-       $sup_admin = super_admin::findOrFail($request->id);
+        $sup_admin = super_admin::findOrFail($request->id);
         $sup_admin->name = $request-> name;
         $sup_admin->email = $request-> email;
-        $sup_admin->password = $request-> password;
+        $sup_admin->password = $request-> password;;
         $sup_admin->rol = $request-> rol;
 
         $sup_admin->save();

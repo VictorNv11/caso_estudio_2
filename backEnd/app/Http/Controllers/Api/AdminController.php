@@ -21,6 +21,7 @@ class AdminController extends Controller
         $pers_admin->name = $request-> name;
         $pers_admin->email = $request-> email;
         $pers_admin->password = $request-> password;
+        $pers_admin->phone = $request-> phone;
         $pers_admin->rol = $request-> rol;
 
         $pers_admin->save();
@@ -35,10 +36,11 @@ class AdminController extends Controller
 
     public function update(Request $request, string $id)
     {
-       $pers_admin = admin::findOrFail($request->id);
+        $pers_admin = admin::findOrFail($request->id);
         $pers_admin->name = $request-> name;
         $pers_admin->email = $request-> email;
         $pers_admin->password = $request-> password;
+        $pers_admin->phone = $request-> phone;
         $pers_admin->rol = $request-> rol;
 
         $pers_admin->save();

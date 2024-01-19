@@ -9,6 +9,7 @@ const EditSupAdmin = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
+    const [phone, setPhone] = useState('')
     const [rol, setRol] = useState(1)
     const navigate = useNavigate()
     const {id} = useParams()
@@ -19,6 +20,7 @@ const EditSupAdmin = () => {
             name: name,
             email: email,
             password: password,
+            phone:phone,
             rol: rol
         })
         navigate('/supAdmins')
@@ -29,6 +31,7 @@ const EditSupAdmin = () => {
             setName(response.data.name)
             setEmail(response.data.email)
             setPass(response.data.password)
+            setPhone(response.data.phone)
             setRol(response.data.rol)
         }
         getSupAdminById()
@@ -58,6 +61,10 @@ const EditSupAdmin = () => {
                       <label htmlFor="confirmationPassword" className="form-label">Confirmación contraseña</label>
                       <input type="password" className="form-control" id="confirmationPassword" name="confirmationPassword"required />
                   </div> */}
+                  <div className="mb-3">
+                      <label htmlFor="phone" className="form-label">Telefono</label>
+                      <input value={phone} onChange={(e)=> setPhone(e.target.value)} type='phone' className='form-control'required />
+                  </div>
                   <div className="mb-3">
                   <label htmlFor="confirmationPassword" className="form-label">Tipo de Usuario</label>
                       <select className="form-select" aria-label="Default select example" value={rol} onChange={(e)=> setRol(e.target.value)} type='number' required>

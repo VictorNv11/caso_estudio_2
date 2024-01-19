@@ -2,32 +2,33 @@ import axios from 'axios'
 import React,{useState}from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const endpoint = 'http://localhost:8000/api/supAdmin'
-const CreateSupAdmin = () => {
+const endpoint = 'http://localhost:8000/api/Admin'
+const CreateAdmin = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
+    const [phone, setPhone] = useState ('')
     const [rol, setRol] = useState(1)
     const navigate = useNavigate()
     
     const store = async (e) =>{
         e.preventDefault()
-         await axios.post(endpoint, {name: name, email:email, password:password, rol:rol})
+        await axios.post(endpoint, {name: name, email:email, password:password, phone:phone, rol:rol})
         .then(res =>{
             console.log(res)
-            navigate('/supAdmins')
+            navigate('/Admin')
         })
         .catch(err =>{
             console.log(err)
         })  
     }
 
-  return (
+return (
     <div>
         <div>
             <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Creando Tipo  de Usuario</h1>
         </div>
-      <div style={{ marginTop:'5%', backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
+    <div style={{ marginTop:'5%', backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
             <form onSubmit={store} >
                 <div className="mb-3">
                     <label htmlFor="nombre" className="form-label">Nombre completo</label>
@@ -39,13 +40,16 @@ const CreateSupAdmin = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Contraseña</label>
-                    <input value={password} onChange={(e)=>setPass(e.target.value)} type='text' className='form-control'required />
+                    <input value={password} onChange={(e)=>setPass(e.target.value)} type='password' className='form-control'required />
                 </div>
                 {/* <div className="mb-3">
                     <label htmlFor="confirmationPassword" className="form-label">Confirmación contraseña</label>
                     <input type="password" className="form-control" id="confirmationPassword" name="confirmationPassword"required />
                 </div> */}
-                 
+                 <div className="mb-3">
+                    <label htmlFor="phone" className="form-label">Telefono</label>
+                    <input value={phone} onChange={(e)=> setPhone(e.target.value)} type='phone' className='form-control'required />
+                </div>
                 <div className="mb-3">
                 <label htmlFor="confirmationPassword" className="form-label">Tipo de Usuario</label>
                     <select className="form-select" aria-label="Default select example" value={rol} onChange={(e)=> setRol(e.target.value)} type='number' required>
@@ -61,4 +65,4 @@ const CreateSupAdmin = () => {
   )
 }
 
-export default CreateSupAdmin
+export default CreateAdmin

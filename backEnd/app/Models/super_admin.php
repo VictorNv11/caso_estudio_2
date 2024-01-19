@@ -15,7 +15,7 @@ class super_admin extends Model
         'rol'
     ];
 
-    public function roles(){
-        return $this->belongsToMany('App\Models\Role')->withTimesTamps();
-    }
+    // public function roles(){
+    //     return $this->belongsToMany('App\Models\Role')->withTimesTamps();
+    // }
 }

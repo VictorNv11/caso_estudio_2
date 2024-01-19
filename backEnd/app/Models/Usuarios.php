@@ -12,6 +12,7 @@ class usuarios extends Model
         'nombre',
         'email',
         'password',
+        'phone',
         'rol'
     ];
 
