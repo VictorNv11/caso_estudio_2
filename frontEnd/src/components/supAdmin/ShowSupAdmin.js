@@ -38,7 +38,7 @@ const ShowSupAdmin = () => {
 
   const filteredSupAdmins = search
     ? supAdmins.filter((supAdmin) =>
-        supAdmin.name.toLowerCase().includes(search.toLowerCase())
+        supAdmin.email.toLowerCase().includes(search.toLowerCase())
       )
     : supAdmins
 
@@ -67,7 +67,7 @@ const ShowSupAdmin = () => {
           <h1 className='text-center'>Listado de Super Administradores</h1>  
         </div>
             <div style={{marginLeft:'4%', marginTop:'2%'}}>
-              <input value={search} onChange={searcher} type='text' placeholder='buscar' className='form'></input>
+              <input value={search} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input>
               <Link to='/create' className='btn btn-secondary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
             </div>
        <div>

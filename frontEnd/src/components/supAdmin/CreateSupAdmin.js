@@ -9,6 +9,7 @@ const CreateSupAdmin = () => {
     const [password, setPass] = useState('')
     const[phone, setPhone] = useState ('')
     const [rol, setRol] = useState('3')
+    
     const navigate = useNavigate()
     
     const store = async (e) =>{

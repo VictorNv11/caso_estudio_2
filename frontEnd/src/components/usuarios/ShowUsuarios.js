@@ -44,7 +44,7 @@ const ShowUsuarios = () => {
 
     const filteredUsuarios = search
     ? usuarios.filter((supAdmin) =>
-        supAdmin.nombre.toLowerCase().includes(search.toLowerCase())
+        supAdmin.email.toLowerCase().includes(search.toLowerCase())
       )
     : usuarios
 
@@ -75,7 +75,7 @@ return (
         </div>
 
         <div style={{marginLeft:'4%', marginTop:'2%'}}>
-              <input value={search} onChange={searcher} type='text' placeholder='buscar' className='form'></input>
+              <input value={search} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input>
               <Link to='/createU' className='btn btn-secondary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
         </div>
     <div>
