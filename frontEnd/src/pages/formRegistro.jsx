@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -12,15 +12,35 @@ const CreateUsuario = () => {
   const [phone, setPhone]= useState('');
   const [rol] = useState('1');
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [missingFieldsError, setMissingFieldsError] = useState(null);
 
+  // Limpia el mensaje de error
+  useEffect(() => {
+    setMissingFieldsError(null);
+    setError(null);
+  }, [nombre, email, password, phone, rol]);
+  
+  // Limpia el mensaje de error
+  useEffect(() => {
+    setError(null);
+  }, [nombre, email, password, phone, rol]);
+  
+  // Verifica que todos los datos se completen
   const store = async (e) => {
     e.preventDefault();
+
+    if (!nombre || !email || !password || !phone) {
+      setMissingFieldsError("Completa todos los campos, gracias.");
+      return;
+    }
     try {
-      await axios.post(endpoint, { nombre: nombre, email: email,password: password,phone: phone,rol: rol });
+      await axios.post(endpoint, { nombre, email,password,phone,rol });
       console.log("Usuario creado exitosamente");
       navigate('/Login'); // Cambio aquí
     } catch (err) {
       console.error("Error al crear el usuario", err);
+      setError("Error al crear el usuario. Mire los datos e intentelo nuevamente.")
     }
   };
 
@@ -68,6 +88,8 @@ const CreateUsuario = () => {
           <label htmlFor="phone" className="form-label">Telefono</label>
           <input value={phone} onChange={(e)=> setPhone (e.target.value)}  pattern="[0-9]{10}" title="Solo se permite telefono de 10 numeros" type="phone" className="form-control" id="phone" name="phone" required />
         </div>
+        {missingFieldsError && <div className="alert alert-danger" role="alert">{missingFieldsError}</div>}
+        {error && <div className="alert alert-danger" role="alert">{error}</div>}
         <button type="submit" className="btn btn-primary" >
           Enviar
         </button>     
