@@ -8,6 +8,8 @@ const endpoint = 'http://localhost:8000/api';
 const ShowSupAdmin = () => {
   const [supAdmins, setSupAdmins] = useState([]);
   const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(8);
 
   const showData = async () => {
     try {
@@ -24,7 +26,7 @@ const ShowSupAdmin = () => {
 
   useEffect(() => {
     showData();
-  }, []);
+  }, [currentPage]);
 
   const deleteSupAdmin = async (id) => {
     try {
@@ -38,9 +40,13 @@ const ShowSupAdmin = () => {
 
   const filteredSupAdmins = search
     ? supAdmins.filter((supAdmin) =>
-        supAdmin.name.toLowerCase().includes(search.toLowerCase())
+        supAdmin.email.toLowerCase().includes(search.toLowerCase())
       )
     : supAdmins
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentAdmins = filteredSupAdmins.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div>
@@ -67,7 +73,7 @@ const ShowSupAdmin = () => {
           <h1 className='text-center'>Listado de Super Administradores</h1>  
         </div>
             <div style={{marginLeft:'4%', marginTop:'2%'}}>
-              <input value={search} onChange={searcher} type='text' placeholder='buscar' className='form'></input>
+              <input value={search} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input>
               <Link to='/create' className='btn btn-secondary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
             </div>
        <div>
@@ -83,7 +89,7 @@ const ShowSupAdmin = () => {
             </thead>
             <tbody>
             {
-              filteredSupAdmins.map(supAdmin => (
+              currentAdmins.map(supAdmin => (
                       <tr key={supAdmin._id}>
                           <td>{supAdmin.name}</td>
                           <td>{supAdmin.email}</td>
@@ -97,7 +103,30 @@ const ShowSupAdmin = () => {
                   ))
                 }
             </tbody>
-        </table>      
+        </table>    
+        <footer>
+          <div style={{ marginLeft: '44.5%', marginTop: 'auto' }}>
+            <ul className="pagination">
+              <li className="page-item" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+                <a className="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              {Array.from({ length: Math.ceil(supAdmins.length / itemsPerPage) }, (_, index) => (
+                <li className={`page-item ${currentPage === index + 1 && 'active'}`} key={index + 1} onClick={() => setCurrentPage(index + 1)}>
+                  <a className="page-link" href="#">
+                    {index + 1}
+                  </a>
+                </li>
+              ))}
+              <li className="page-item" onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(supAdmins.length / itemsPerPage)}>
+                <a className="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </footer>  
       </div>
     </div>
   )

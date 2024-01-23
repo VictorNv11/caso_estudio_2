@@ -9,6 +9,11 @@ const ShowAdmin = () => {
 
     const [Admins, setAdmins] = useState([])
     const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(8);
+
+
+  
 
     const showData = async () => {
       try {
@@ -26,7 +31,7 @@ const ShowAdmin = () => {
     useEffect (()=>{
         getAllAdmins()
         showData();
-    }, [])
+    }, [currentPage])
    
       
     const getAllAdmins = async () =>{
@@ -39,11 +44,18 @@ const ShowAdmin = () => {
       getAllAdmins()
       alert('Administrador eliminado con exito');
     }
-    const filteredSupAdmins = search
-    ? Admins.filter((supAdmin) =>
-        supAdmin.name.toLowerCase().includes(search.toLowerCase())
+
+
+     const filteredAdmins = search
+    ? Admins.filter((admin) =>
+        admin.email.toLowerCase().includes(search.toLowerCase())
       )
-    : Admins
+    : Admins;
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentAdmins = filteredAdmins.slice(indexOfFirstItem, indexOfLastItem);
+  
 
   return (
     <div>
@@ -65,17 +77,19 @@ const ShowAdmin = () => {
             <div className="ml-auto" style={{paddingRight: 30}}>
               <Link to='/' className='btn btn-light'>Salir</Link>
             </div>
-          </nav>
+         </nav>
 
         <div style={{marginTop:'5%'}}>
           <h1 className='text-center'>Listado de Administradores</h1>  
         </div>
 
         <div style={{marginLeft:'4%', marginTop:'2%'}}>
-            <input value={search} onChange={searcher} type='text' placeholder='buscar' className='form'></input>
+            <input value={search} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input>
             <Link to='/createA' className='btn btn-secondary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
         </div>
+        
        <div>
+
         <table className='table table-striped  container' style={{marginTop:'2%',border: '1px solid black', borderRadius: '20px'}}>
             <thead className='bg-dark text-white'>
                 <tr>
@@ -88,7 +102,7 @@ const ShowAdmin = () => {
             </thead>
             <tbody>
             {
-              filteredSupAdmins.map(Admin => (
+              currentAdmins.map(Admin => (
                       <tr key={Admin._id}>
                           <td>{Admin.name}</td>
                           <td>{Admin.email}</td>
@@ -102,7 +116,32 @@ const ShowAdmin = () => {
                   ))
                 }
             </tbody>
-        </table>      
+        </table> 
+
+        <footer>
+          <div style={{ marginLeft: '44.5%', marginTop: 'auto' }}>
+            <ul className="pagination">
+              <li className="page-item" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+                <a className="page-link" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              {Array.from({ length: Math.ceil(Admins.length / itemsPerPage) }, (_, index) => (
+                <li className={`page-item ${currentPage === index + 1 && 'active'}`} key={index + 1} onClick={() => setCurrentPage(index + 1)}>
+                  <a className="page-link">
+                    {index + 1}
+                  </a>
+                </li>
+              ))}
+              <li className="page-item" onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(Admins.length / itemsPerPage)}>
+                <a className="page-link" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </footer>
+
       </div>
     </div>
   )
