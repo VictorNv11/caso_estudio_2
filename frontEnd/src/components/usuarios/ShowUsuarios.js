@@ -9,7 +9,8 @@ const ShowUsuarios = () => {
 
     const [usuarios, setUsuarios] = useState([])
     const [search, setSearch] = useState('');
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(8);
 
     const showData = async () => {
       try {
@@ -28,7 +29,7 @@ const ShowUsuarios = () => {
     useEffect (()=>{
         getAllUsuarios()
         showData();
-    }, [])
+    }, [currentPage])
    
       
     const getAllUsuarios= async () =>{
@@ -47,6 +48,10 @@ const ShowUsuarios = () => {
         supAdmin.email.toLowerCase().includes(search.toLowerCase())
       )
     : usuarios
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentUsuarios = filteredUsuarios.slice(indexOfFirstItem, indexOfLastItem);
 
 return (
     <div>
@@ -91,7 +96,7 @@ return (
             </thead>
             <tbody>
             {
-            filteredUsuarios.map(usuarios => (
+            currentUsuarios.map(usuarios => (
             <tr key={usuarios._id}>
             <td>{usuarios.nombre}</td>
             <td>{usuarios.email}</td>
@@ -105,7 +110,30 @@ return (
         ))
                 }
             </tbody>
-        </table>      
+        </table>
+        <footer>
+          <div style={{ marginLeft: '44.5%', marginTop: 'auto' }}>
+            <ul className="pagination">
+              <li className="page-item" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+                <a className="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              {Array.from({ length: Math.ceil(usuarios.length / itemsPerPage) }, (_, index) => (
+                <li className={`page-item ${currentPage === index + 1 && 'active'}`} key={index + 1} onClick={() => setCurrentPage(index + 1)}>
+                  <a className="page-link" href="#">
+                    {index + 1}
+                  </a>
+                </li>
+              ))}
+              <li className="page-item" onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(usuarios.length / itemsPerPage)}>
+                <a className="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </footer>      
       </div>
     </div>
   )
