@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('email');
             $table->string('password');
-            $table->integer('phone');
+            $table->bigInteger('phone');
             $table->string('rol')->default('1');
             $table->timestamps();
         });
