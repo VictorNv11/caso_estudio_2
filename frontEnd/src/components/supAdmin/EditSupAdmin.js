@@ -10,7 +10,7 @@ const EditSupAdmin = () => {
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
     const [phone, setPhone] = useState('')
-    const [rol, setRol] = useState(1)
+    const [rol, setRol] = useState('3')
     const navigate = useNavigate()
     const {id} = useParams()
 
@@ -57,21 +57,9 @@ const EditSupAdmin = () => {
                       <label htmlFor="password" className="form-label">Contraseña</label>
                       <input value={password} onChange={(e)=>setPass(e.target.value)} type='text' className='form-control'required />
                   </div>
-                  {/* <div className="mb-3">
-                      <label htmlFor="confirmationPassword" className="form-label">Confirmación contraseña</label>
-                      <input type="password" className="form-control" id="confirmationPassword" name="confirmationPassword"required />
-                  </div> */}
                   <div className="mb-3">
                       <label htmlFor="phone" className="form-label">Telefono</label>
                       <input value={phone} onChange={(e)=> setPhone(e.target.value)} type='phone' className='form-control'required />
-                  </div>
-                  <div className="mb-3">
-                  <label htmlFor="confirmationPassword" className="form-label">Tipo de Usuario</label>
-                      <select className="form-select" aria-label="Default select example" value={rol} onChange={(e)=> setRol(e.target.value)} type='number' required>
-                          <option value="1">Usuario</option>
-                          <option value="2">Administrador</option>
-                          <option value="3">Super Administrador</option>
-                      </select>
                   </div>
                   <button type="submit" className="btn btn-primary">Editar</button>       
               </form>

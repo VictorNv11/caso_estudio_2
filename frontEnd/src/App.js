@@ -26,8 +26,8 @@ export default function App() {
         <Route path="/edit/:id" element={<EditSupAdmin />} />
         
         <Route path="/Admin" element={<ShowAdmin />} />
-        <Route path="/create" element={<CreateAdmin />} />
-        <Route path="/edit/:id" element={<EditAdmin />} />
+        <Route path="/createA" element={<CreateAdmin />} />
+        <Route path="/editA/:id" element={<EditAdmin />} />
 
         <Route path="/usuarios" element={<ShowUsuarios />} />
         <Route path="/createU" element={<CreateUsuarios />} />

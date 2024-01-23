@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 
-const endpoint = 'http://localhost:8000/api/Usuarios'
+const endpoint = 'http://localhost:8000/api/usuarios'
 const CreateUsuario = () => {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
   const [phone, setPhone]= useState('');
-  const [rol] = useState('usuario');
+  const [rol] = useState('1');
   const navigate = useNavigate();
 
   const store = async (e) => {
@@ -23,6 +23,8 @@ const CreateUsuario = () => {
       console.error("Error al crear el usuario", err);
     }
   };
+
+  
 
     
  
@@ -50,7 +52,9 @@ const CreateUsuario = () => {
       <form onSubmit={store}>
         <div className="mb-3">
           <label htmlFor="nombre" className="form-label">Nombre completo</label>
-          <input value={nombre} onChange={(e)=> setNombre (e.target.value)} type="text" className="form-control" id="nombre" name="nombre"  />
+          <input value={nombre} onChange={(e)=> setNombre (e.target.value)}  pattern="[a-zA-Z ]*"
+            title="Solo se permiten letras de la A a la Z"
+            require type="text" className="form-control" id="nombre" name="nombre"  />
         </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email</label>
@@ -58,11 +62,11 @@ const CreateUsuario = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">Contraseña</label>
-          <input value={password} onChange={(e)=> setPass (e.target.value)} type="password" className="form-control" id="password" name="password"  required />
+          <input value={password} onChange={(e)=> setPass (e.target.value)}  pattern="[A-z-a-Z] {0-10}"type="password" className="form-control" id="password" name="password"  required />
         </div>
         <div className="mb-3">
           <label htmlFor="phone" className="form-label">Telefono</label>
-          <input value={phone} onChange={(e)=> setPhone (e.target.value)} type="phone" className="form-control" id="phone" name="phone" required />
+          <input value={phone} onChange={(e)=> setPhone (e.target.value)}  pattern="[0-9]{10}" title="Solo se permite telefono de 10 numeros" type="phone" className="form-control" id="phone" name="phone" required />
         </div>
         <button type="submit" className="btn btn-primary" >
           Enviar

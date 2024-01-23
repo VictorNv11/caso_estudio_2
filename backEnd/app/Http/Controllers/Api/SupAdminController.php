@@ -22,6 +22,7 @@ class SupAdminController extends Controller
         $sup_admin = new super_admin();
         $sup_admin->name = $request-> name;
         $sup_admin->email = $request-> email;
+        $sup_admin->phone = $request-> phone;
         $sup_admin->password = $request-> password;
         $sup_admin->rol = $request-> rol;
 
@@ -40,7 +41,8 @@ class SupAdminController extends Controller
         $sup_admin = super_admin::findOrFail($request->id);
         $sup_admin->name = $request-> name;
         $sup_admin->email = $request-> email;
-        $sup_admin->password = $request-> password;;
+        $sup_admin->password = $request-> password;
+        $sup_admin->phone = $request-> phone;
         $sup_admin->rol = $request-> rol;
 
         $sup_admin->save();

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React,{useState}from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const endpoint = 'http://localhost:8000/api/Admin'
 const CreateAdmin = () => {
@@ -8,7 +8,7 @@ const CreateAdmin = () => {
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
     const [phone, setPhone] = useState ('')
-    const [rol, setRol] = useState(1)
+    const [rol, setRol] = useState(2)
     const navigate = useNavigate()
     
     const store = async (e) =>{
@@ -25,8 +25,21 @@ const CreateAdmin = () => {
 
 return (
     <div>
+           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a className="navbar-brand" href="#" style={{paddingLeft: 20}}>Super Administrador </a>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item active" style={{paddingRight: 20}}>
+                  <Link to='/Admin' className='nav-link'>Volver</Link>
+                </li>
+              </ul>
+            </div>
+            <div className="ml-auto" style={{paddingRight: 30}}>
+              <Link to='/' className='btn btn-light'>Salir</Link>
+            </div>
+        </nav>
         <div>
-            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Creando Tipo  de Usuario</h1>
+            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Creando Administrador</h1>
         </div>
     <div style={{ marginTop:'5%', backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
             <form onSubmit={store} >
@@ -42,22 +55,11 @@ return (
                     <label htmlFor="password" className="form-label">Contraseña</label>
                     <input value={password} onChange={(e)=>setPass(e.target.value)} type='password' className='form-control'required />
                 </div>
-                {/* <div className="mb-3">
-                    <label htmlFor="confirmationPassword" className="form-label">Confirmación contraseña</label>
-                    <input type="password" className="form-control" id="confirmationPassword" name="confirmationPassword"required />
-                </div> */}
                  <div className="mb-3">
                     <label htmlFor="phone" className="form-label">Telefono</label>
                     <input value={phone} onChange={(e)=> setPhone(e.target.value)} type='phone' className='form-control'required />
                 </div>
-                <div className="mb-3">
-                <label htmlFor="confirmationPassword" className="form-label">Tipo de Usuario</label>
-                    <select className="form-select" aria-label="Default select example" value={rol} onChange={(e)=> setRol(e.target.value)} type='number' required>
-                        <option value="1">Usuario</option>
-                        <option value="2">Administrador</option>
-                        <option value="3">Super Administrador</option>
-                    </select>
-                </div>
+                
                 <button type="submit" className="btn btn-primary">Enviar</button>       
             </form>
         </div>

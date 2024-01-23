@@ -41,7 +41,7 @@ const EditAdmin = () => {
     return(
         <div>
             <div>
-            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Editando Usuario</h1>
+            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Editando Administrador</h1>
         </div>
         <div style={{ marginTop:'5%', backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
             <form onSubmit={update} >
@@ -64,14 +64,6 @@ const EditAdmin = () => {
                 <div className="mb-3">
                     <label htmlFor="phone" className="form-label">Telefono</label>
                     <input value={phone} onChange={(e)=> setPhone(e.target.value)} type='phone' className='form-control'required />
-                </div>
-                <div className="mb-3">
-                <label htmlFor="confirmationPassword" className="form-label">Tipo de Usuario</label>
-                    <select className="form-select" aria-label="Default select example" value={rol} onChange={(e)=> setRol(e.target.value)} type='number' required>
-                        <option value="1">Usuario</option>
-                        <option value="2">Administrador</option>
-                        <option value="3">Super Administrador</option>
-                    </select>
                 </div>
                 <button type="submit" className="btn btn-primary">Editar</button>       
             </form>

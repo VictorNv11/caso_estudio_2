@@ -8,7 +8,7 @@ const CreateUsuarios = () => {
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
     const [phone, setPhone] = useState ('')
-    const [rol] = useState(1)
+    const [rol] = useState('1')
     const navigate = useNavigate()
     
     const store = async (e) =>{

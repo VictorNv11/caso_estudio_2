@@ -1,29 +1,46 @@
 
-import React ,{useEffect, useState} from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-const endpoint = 'http://localhost:8000/api'
+const endpoint = 'http://localhost:8000/api';
 
 const ShowSupAdmin = () => {
+  const [supAdmins, setSupAdmins] = useState([]);
+  const [search, setSearch] = useState('');
 
-    const [supAdmins, setSupAdmins] = useState([])
-    
-    useEffect (()=>{
-        getAllSupAdmins()
-    }, [])
-   
-      
-    const getAllSupAdmins = async () =>{
-      const response = await axios.get(`${endpoint}/supAdmins`)
-        setSupAdmins(response.data)
+  const showData = async () => {
+    try {
+      const response = await axios.get(`${endpoint}/supAdmins`);
+      setSupAdmins(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
-    
-    const deleteSupAdmin = async(id) =>{
-      await axios.delete(`${endpoint}/supAdmin/${id}`)
-      getAllSupAdmins()
-      alert('Cliente eliminado con exito');
+  };
+
+  const searcher = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    showData();
+  }, []);
+
+  const deleteSupAdmin = async (id) => {
+    try {
+      await axios.delete(`${endpoint}/supAdmin/${id}`);
+      showData();
+      alert('Super Administrador eliminado con éxito');
+    } catch (error) {
+      console.error('Error deleting Super Admin:', error);
     }
+  };
+
+  const filteredSupAdmins = search
+    ? supAdmins.filter((supAdmin) =>
+        supAdmin.name.toLowerCase().includes(search.toLowerCase())
+      )
+    : supAdmins
 
   return (
     <div>
@@ -35,6 +52,9 @@ const ShowSupAdmin = () => {
                   <Link to='/supAdmins' className='nav-link'>Super Administrador</Link>
                 </li>
                 <li className="nav-item active" style={{paddingRight: 20}}>
+                  <Link to='/Admin' className='nav-link'>Administradores</Link>
+                </li>
+                <li className="nav-item active" style={{paddingRight: 20}}>
                   <Link to='/usuarios' className='nav-link'>Usuarios</Link>
                 </li>
               </ul>
@@ -42,28 +62,32 @@ const ShowSupAdmin = () => {
             <div className="ml-auto" style={{paddingRight: 30}}>
               <Link to='/' className='btn btn-light'>Salir</Link>
             </div>
-        </nav>
+          </nav>
         <div style={{marginTop:'5%'}}>
-          <h1 className='text-center'>Listado de Usuarios, Administradores y Super Administradores</h1>  
+          <h1 className='text-center'>Listado de Super Administradores</h1>  
         </div>
-        <Link to='/create' className='btn btn-secondary btn-sm' style={{marginLeft:'82%', marginTop:'2%'}}>Crear</Link>{' '}
+            <div style={{marginLeft:'4%', marginTop:'2%'}}>
+              <input value={search} onChange={searcher} type='text' placeholder='buscar' className='form'></input>
+              <Link to='/create' className='btn btn-secondary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
+            </div>
        <div>
         <table className='table table-striped  container' style={{marginTop:'2%',border: '1px solid black', borderRadius: '20px'}}>
             <thead className='bg-dark text-white'>
                 <tr>
                     <th>Nombre</th>
                     <th>email</th>
+                    <th>Telefono</th>
                     <th>rol</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
             {
-              supAdmins.map(supAdmin => (
+              filteredSupAdmins.map(supAdmin => (
                       <tr key={supAdmin._id}>
                           <td>{supAdmin.name}</td>
                           <td>{supAdmin.email}</td>
-                         
+                          <td>{supAdmin.phone}</td>
                           <td>{supAdmin.rol}</td>
                           <td>
                               <Link className='btn btn-primary btn-sm' to={`/edit/${supAdmin.id}`}>Editar</Link>{' '}
