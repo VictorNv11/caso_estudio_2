@@ -5,9 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\UsuariosController;
-
-
-
+use App\Http\Controllers\Excel\ImportController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -36,4 +34,10 @@ Route::controller(UsuariosController::class)->group(function () {
     Route::get('/usuarios/{id}','show');            //SIRVE
     Route::put('/usuarios/{id}','update');         //SIRVE
     Route::delete('/Usuarios/{id}','destroy');    //SIRVE
+});
+
+Route::controller(ImportController::class)->group(function () {
+Route::get('/clientes', 'ImportController@index');
+Route::post('/clientes/import', 'importar');
+Route::get('/clientes/export', 'exportar');
 });
