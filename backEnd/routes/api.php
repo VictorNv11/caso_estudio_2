@@ -36,8 +36,8 @@ Route::controller(UsuariosController::class)->group(function () {
     Route::delete('/Usuarios/{id}','destroy');    //SIRVE
 });
 
-Route::controller(ImportController::class)->group(function () {
-Route::get('/clientes', 'ImportController@index');
-Route::post('/clientes/import', 'importar');
-Route::get('/clientes/export', 'exportar');
+Route::prefix('clientes')->group(function () {
+    Route::get('/', [ImportController::class, 'index']);
+    Route::post('/import', [ImportController::class, 'importar']);
+    Route::get('/export', [ImportController::class, 'exportar']);
 });

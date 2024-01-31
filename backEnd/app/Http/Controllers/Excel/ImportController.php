@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Cliente;
-
+use Exception;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ImportController extends Controller
-{   
+{  
 
     public function index()
     {
@@ -18,22 +19,30 @@ class ImportController extends Controller
     }
 
     public function importar(Request $request){
-        if($request->hasFile('documento')){
-            $path = $request->file('documento')->getRealPath();
-            $datos = Excel::load($path, function($reader){})->get();
-
-            if(!empty($datos) && $datos->count()){
-                $datos = $datos->toArray();
-                for($i=0; $i< count($datos); $i++){
-                    $datosImportar[] = $datos[$i]; 
+      
+       try{
+        $nombreColumnas= ["id","cc/nit","nombre_completo","direccion","ciudad","telefono","correo_electronico"];
+        $data = json_decode($request->getContent(), true);
+        $dataContenido = $data['contenido'];
+        if(!empty($dataContenido)){
+            foreach ($dataContenido as $contenido) {
+                $datos= array_combine($nombreColumnas, $contenido);
+                if(!empty($datos)){
+                    Cliente::insert($datos);
                 }
-            }
-
-            Cliente::insert($datosImportar);
-
+               }
+               $resultado="EXITOSO";
+               return response()-> json(['mensaje'=> $resultado], 200);
+        }
+        else{
+            return response()-> json(['mensaje'=> "no llego informacion"], 400);
         }
 
-        return back();
+       } catch(Exception $e) {
+        return response()-> json(['error'=>$e->getMessage()], 400);
+       }
+
+     //  return response()-> json(['mensaje'=> 'hola'], 200);
     }
 
     public function exportar(){
