@@ -59,33 +59,33 @@ const ShowAdmin = () => {
 
   return (
     <div>
-         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="#" style={{paddingLeft: 20}}>Super Administrador </a>
+         <nav className="navbar navbar-expand-lg "style={{backgroundColor:"#4717F6", borderRadius:5}}>
+            <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:"#E7DFDD"}}>Super Administrador </a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
               <li className="nav-item active" style={{paddingRight: 20}}>
-                  <Link to='/supAdmins' className='nav-link'>Super Administrador</Link>
+                  <Link to='/supAdmins' className='nav-link' style={{color:"#E7DFDD"}}>Super Administrador</Link>
                 </li>
                 <li className="nav-item active" style={{paddingRight: 20}}>
-                  <Link to='/Admin' className='nav-link'>Administradores</Link>
+                  <Link to='/Admin' className='nav-link' style={{color:"#E7DFDD"}}>Administradores</Link>
                 </li>
                 <li className="nav-item active" style={{paddingRight: 20}}>
-                  <Link to='/usuarios' className='nav-link'>Usuarios</Link>
+                  <Link to='/usuarios' className='nav-link' style={{color:"#E7DFDD"}}>Usuarios</Link>
                 </li>
               </ul>
             </div>
             <div className="ml-auto" style={{paddingRight: 30}}>
-              <Link to='/' className='btn btn-light'>Salir</Link>
+              <Link to='/' className='btn btn-dark'>Salir</Link>
             </div>
          </nav>
 
         <div style={{marginTop:'5%'}}>
-          <h1 className='text-center'>Listado de Administradores</h1>  
+          <h1 className='text-center' style={{color:"#E7DFDD"}}>Listado de Administradores</h1>  
         </div>
 
         <div style={{marginLeft:'4%', marginTop:'2%'}}>
-            <input value={search} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input>
-            <Link to='/createA' className='btn btn-secondary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
+            <input value={search} style={{borderRadius:5}} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input>
+            <Link to='/createA' className='btn btn-primary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
         </div>
         
        <div>

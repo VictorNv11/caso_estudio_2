@@ -1,24 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import fondoImagen from "../assets/img/img_home.jpg";
 
 export default function login() {
+    const estiloSeccion = {
+        backgroundImage: `url(${fondoImagen})`,
+        backgroundSize: 'cover', // Puedes ajustar el tamaño según tus necesidades
+        backgroundPosition: 'center center', // Ajusta la posición según tus necesidades
+        height: '400px', // Ajusta la altura según tus necesidades
+        // Otros estilos según sea necesario
+      };
     return(
-<div>
+<div style={{estiloSeccion}}>
     <div>
     <div>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a className="navbar-brand"style={{paddingLeft: 20}}>Mis Usuarios </a>
+    <nav className="navbar navbar-expand-lg " style={{backgroundColor:'#4717F6'}}>
+          <a className="navbar-brand"style={{paddingLeft: 20, color:'#E7DFDD'}}>Mis Usuarios </a>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <Link to="/" className="nav-link" style={{color:'#E7DFDD'}}>
                 Inicio   
            </Link>
               </li>
             </ul>
           </div>
           <div className="ml-auto" style={{paddingRight: 30}}>
-          <Link to='/Login' className='btn btn-light'>Ingresar</Link>
+          <Link to='/Login' className='btn btn-dark'>Ingresar</Link>
           </div>
         </nav>
         </div>

@@ -5,9 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0E0B16;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+ colores{
+  color:#0E0B16 ; /*FONDOS*/
+  color:#A239CA ; /*BARRA DE NAVEGACION*/
+  color:#4717F6 ;/*LOGIN*/
+  color:#E7DFDD ;/*BOTONES*/
+ }
+.navbar  {
+  color: #49274A;
+ }
+

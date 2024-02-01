@@ -50,47 +50,47 @@ const CreateUsuario = () => {
  
     return(
         <div>
-          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="#" style={{paddingLeft: 20}}>Mis Usuarios </a>
+          <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#4717F6 '}}>
+            <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:'#E7DFDD'}}>Mis Usuarios </a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                <Link to="/" className="nav-link">
+                <Link to="/" className="nav-link" style={{ color:'#E7DFDD'}}>
                   Inicio   
                 </Link>
                 </li>
               </ul>
             </div>
             <div className="ml-auto" style={{paddingRight: 30}}>
-              <Link to='/Login' className='btn btn-light'>Ingresar</Link>
+              <Link to='/Login' className='btn btn-dark'>Ingresar</Link>
             </div>
         </nav>
         <div>
-            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Regitro cliente</h1>
+            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%',  color:'#E7DFDD'}}>Regitro Usuario</h1>
         </div>
-        <div style={{ marginTop:'5%', backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
+        <div style={{ marginTop:'5%', backgroundColor: '', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
       <form onSubmit={store}>
         <div className="mb-3">
-          <label htmlFor="nombre" className="form-label">Nombre completo</label>
-          <input value={nombre} onChange={(e)=> setNombre (e.target.value)}  pattern="[a-zA-Z ]*"
+          <label htmlFor="nombre" className="form-label" style={{ color:'#828081'}}>Nombre completo</label>
+          <input value={nombre} placeholder="name" onChange={(e)=> setNombre (e.target.value)}  pattern="[a-zA-Z ]*"
             title="Solo se permiten letras de la A a la Z"
             require type="text" className="form-control" id="nombre" name="nombre"  />
         </div>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email</label>
-          <input value={email} onChange={(e)=> setEmail (e.target.value)} type="email" className="form-control" id="email" name="email" required />
+          <label htmlFor="email" className="form-label" style={{color:'#828081'}}>Email</label>
+          <input value={email} placeholder="email" onChange={(e)=> setEmail (e.target.value)} type="email" className="form-control" id="email" name="email" required />
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">Contraseña</label>
-          <input value={password} onChange={(e)=> setPass (e.target.value)}  pattern="[A-z-a-Z] {0-10}"type="password" className="form-control" id="password" name="password"  required />
+          <label htmlFor="password" className="form-label" style={{color:'#828081'}}>Contraseña</label>
+          <input value={password} placeholder="password" onChange={(e)=> setPass (e.target.value)}  pattern="[A-z-a-Z] {0-10}"type="password" className="form-control" id="password" name="password"  required />
         </div>
         <div className="mb-3">
-          <label htmlFor="phone" className="form-label">Telefono</label>
-          <input value={phone} onChange={(e)=> setPhone (e.target.value)}  pattern="[0-9]{10}" title="Solo se permite telefono de 10 numeros" type="phone" className="form-control" id="phone" name="phone" required />
+          <label htmlFor="phone" className="form-label" style={{color:'#828081'}}>Telefono</label>
+          <input value={phone} placeholder="phone" onChange={(e)=> setPhone (e.target.value)}  pattern="[0-9]{10}" title="Solo se permite telefono de 10 numeros" type="phone" className="form-control" id="phone" name="phone" required />
         </div>
         {missingFieldsError && <div className="alert alert-danger" role="alert">{missingFieldsError}</div>}
         {error && <div className="alert alert-danger" role="alert">{error}</div>}
-        <button type="submit" className="btn btn-primary" >
+        <button type="submit" className="btn btn-primary" style={{backgroundcolor:'#4717F6'}} >
           Enviar
         </button>     
       </form>
