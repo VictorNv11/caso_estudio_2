@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Asegúrate de importar axios
+//import axios from "axios";
 import Papa from 'papaparse';
 
 export default function ImportClient() {
-  const [clientes, setClientes] = useState([]);
+  const [clientes] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const endpoint = 'http://localhost:8000/api/clientes/import';
-  const endpointdata = 'http://localhost:8000/api/clientes';
+  //const endpointdata = 'http://localhost:8000/api/clientes';
   const [contenido, setContenido] = useState(null);
-  //const formData 
 
   useEffect(() => {
     // Llamamos a la función para obtener los clientes
@@ -17,78 +16,71 @@ export default function ImportClient() {
 
   const getAllClientes = async () => {
     try {
-      // Realizamos la solicitud al backend para obtener los datos de clientes
-      //const response = await axios.post(endpointdata, formData);
-      //console.log('Import successful:', response);
-      
-      // Actualizamos el estado con los datos obtenidos
-      //setClientes(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   const handleFileChange = (event) => {
-    //setSelectedFile(event.target.files[0]);
-    /////
-const file = event.target.files[0];
+
+    const file = event.target.files[0];
 
 
-if (file) {
-  setSelectedFile(file);
-  const reader = new FileReader();
+    if (file) {
+      setSelectedFile(file);
+      const reader = new FileReader();
 
-  reader.onload = function (e) {
-    const fileContent = e.target.result;
-   
-    Papa.parse(fileContent, {
-      complete: function (result) {
-        // El resultado contiene data, errors y meta
-        // data es un array donde cada elemento es una fila (cada fila es un array de campos)
-        const linesArray = result.data;
-        setContenido(linesArray);
-    
-        // Puedes hacer algo más con el array de líneas si es necesario
-        console.log('Contenido del archivo CSV en un array:', linesArray);
-      },
-      header: false, // Si la primera fila del CSV es el encabezado, establecer en true
-    });
-  };
+      reader.onload = function (e) {
+        const fileContent = e.target.result;
 
-  // Lees el contenido del archivo como texto
-  reader.readAsText(file);
-  }
+        Papa.parse(fileContent, {
+          complete: function (result) {
+            // El resultado contiene data, errors y meta
+            // data es un array donde cada elemento es una fila (cada fila es un array de campos)
+            const linesArray = result.data;
+            setContenido(linesArray);
+
+            // Puedes hacer algo más con el array de líneas si es necesario
+            console.log('Contenido del archivo CSV en un array:', linesArray);
+          },
+          header: false, // Si la primera fila del CSV es el encabezado, establecer en true
+        });
+      };
+
+      // Lees el contenido del archivo como texto
+      reader.readAsText(file);
+    }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(selectedFile){
+    if (selectedFile) {
       console.log('cont', contenido)
       const formData = JSON.stringify({ contenido });
       console.log(formData)
       fetch(endpoint, {
-        method:'POST',
+        method: 'POST',
         body: formData,
 
       })
-      .then(response => {
-        console.log(response)
-        if (!response.ok) {
-          throw new Error(`Error en la respuesta del servidor: ${response}`);
-         
-        }
-        console.log('Archivo enviado con éxito');
-        console.log(response);
-        // Puedes realizar más acciones si es necesario
-      })
-      .catch(error=>{
-        console.error('Error al enviar el archivo:', error);
-      });
-      
-    } else{
+        .then(response => {
+          console.log(response)
+          if (!response.ok) {
+            throw new Error(`Error en la respuesta del servidor: ${response}`);
+
+          }
+          console.log('Archivo enviado con éxito');
+          console.log(response);
+          // Puedes realizar más acciones si es necesario
+        })
+        .catch(error => {
+          console.error('Error al enviar el archivo:', error);
+        });
+
+    } else {
       console.error('Selecciona un archivo antes de subirlo');
     }
-    
+
   }
 
 
@@ -101,7 +93,7 @@ if (file) {
           <div className="col-md-4"></div>
           <div className="col-md-6">
             <div className="row">
-            <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 <div className="col-md-6">
                   <input type="file" onChange={handleFileChange} />
                 </div>
