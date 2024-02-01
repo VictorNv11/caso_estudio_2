@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 
 class SupAdminController extends Controller
 {
-   
+    // Función principal
     public function index()
     {
         $sup_admin = super_admin::all();
         return  $sup_admin;
     }
 
-   
+    // Creación de SuperAdministradores (Create)
     public function store(Request $request)
     {
         $sup_admin = new super_admin();
@@ -29,13 +29,14 @@ class SupAdminController extends Controller
         $sup_admin->save();
     }
 
-   
+    // Leer (Read)
     public function show(string $id)
     {
         $sup_admin = super_admin::find($id);
         return $sup_admin;
     }
 
+    // Actualizar (Update)
     public function update(Request $request, string $id)
     {
         $sup_admin = super_admin::findOrFail($request->id);
@@ -48,6 +49,8 @@ class SupAdminController extends Controller
         $sup_admin->save();
         return $sup_admin;
     }
+
+    // Eliminar (DELETE)
     public function destroy(string $id)
     {
         $sup_admin = super_admin::destroy($id);
