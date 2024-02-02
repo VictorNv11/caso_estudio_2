@@ -8,6 +8,8 @@ export default function ImportClient() {
   const endpoint = 'http://localhost:8000/api/clientes/import';
   //const endpointdata = 'http://localhost:8000/api/clientes';
   const [contenido, setContenido] = useState(null);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     // Llamamos a la función para obtener los clientes
@@ -54,6 +56,7 @@ export default function ImportClient() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError(null);
     if (selectedFile) {
       console.log('cont', contenido)
       const formData = JSON.stringify({ contenido });
@@ -69,16 +72,24 @@ export default function ImportClient() {
             throw new Error(`Error en la respuesta del servidor: ${response}`);
 
           }
-          console.log('Archivo enviado con éxito');
-          console.log(response);
+          return response.json();
           // Puedes realizar más acciones si es necesario
         })
+        .then(data => {
+          console.log('Archivo enviado con éxito', data);
+          setSuccessMessage('Archvio enviado con exito');
+
+          alert('Archivo enviado con éxito');
+        })
+
         .catch(error => {
           console.error('Error al enviar el archivo:', error);
+
+          setError('Error al enviar el archivo: ${error.message}');
         });
 
     } else {
-      console.error('Selecciona un archivo antes de subirlo');
+      setError('Selecciona un archivo antes de subirlo');
     }
 
   }
@@ -101,6 +112,16 @@ export default function ImportClient() {
                   <button className="btn btn-primary" type="submit">
                     Importar
                   </button>
+                  {error && (
+                    <div className="alert alert-danger" role="alert">
+                      {error}
+                    </div>
+                  )}
+                  {successMessage && (
+                    <div className="alert alert-success" role="alert">
+                      {successMessage}
+                    </div>
+                  )}
                 </div>
               </form>
             </div>
