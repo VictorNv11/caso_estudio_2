@@ -41,7 +41,7 @@ const EditSupAdmin = () => {
     return(
         <div>
             <div>
-            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Editando Usuario</h1>
+            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%', color:"#E7DFDD"}}>Editando Usuario</h1>
         </div>
         <div style={{ marginTop:'5%', backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
               <form onSubmit={update} >
