@@ -32,7 +32,7 @@ export default function ImportClient() {
   // Modelo Clientes
   const [clientes, setClientes] = useState([]);
 
-  // Filtrando clientes por Correo Electrónico
+  // Filtrando clientes por Correo Electrónico y Número de Teléfono
   const filteredClientes = search
   ? clientesFromDB.filter((cliente) =>
       cliente.correo_electronico.toLowerCase().includes(search.toLowerCase()) ||
@@ -140,6 +140,27 @@ export default function ImportClient() {
 
   }
 
+  const handleExportExcelClick = async () => {
+    try {
+      const response = await fetch(`${endpointdata}/export/excel`);
+      if (response.ok) {
+        // Aquí puedes descargar el archivo Excel, por ejemplo, utilizando Blob y URL.createObjectURL
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'clientes.xlsx';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        console.error(`Error fetching data from ${endpointdata}/export/excel: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
     <div>
       <div className="container">
@@ -172,12 +193,12 @@ export default function ImportClient() {
             </div>
           </div>
           <div className="col-md-2">
-            <form action={`${endpointdata}/export`}method="get" encType="multipart/form-data">
-              <button className="btn btn-success">Exportar</button>
-            </form>
+         
+              <button className="btn btn-success" onClick={handleExportExcelClick}>Exportar a Excel</button>
+            
           </div>
         </div>
-        <div style={{marginLeft:'4%', marginTop:'2%'}}>
+        <div style={{marginLeft:'4%', marginTop:'2%', paddingBottom:'30px'}}>
             <input value={search} style={{borderRadius:5}} onChange={searcher} type='text' placeholder='Buscar por Email' className='form'></input>
             <Link to='/createC' className='btn btn-primary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
         </div>

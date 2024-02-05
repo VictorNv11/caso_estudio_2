@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Cliente;
+use App\Exports\ClienteExport;
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 
@@ -44,7 +46,7 @@ class ImportController extends Controller
         }
     }
 
-    // Función de exportación al frontend
+    // Función de exportación al frontend para la tabla
     public function exportar()
     {
 
@@ -52,6 +54,20 @@ class ImportController extends Controller
 
         return response()->json(['clientes' => $clientes], 200);
     }
+
+    public function exportarExcel()
+{
+    try {
+        $clientes = Cliente::all();
+        return Excel::download(new ClienteExport($clientes), 'clientes.xlsx');
+    } catch (\Exception $e) {
+        // Registra el mensaje de error en los registros del servidor
+        Log::error('Error al exportar a Excel: ' . $e->getMessage());
+        return response()->json(['error' => 'Error interno del servidor'], 500);
+    }
+}
+
+
 
     // Creación de usuarios (Create)
     public function store(Request $request)
