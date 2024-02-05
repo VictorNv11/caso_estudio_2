@@ -25,23 +25,23 @@ const CreateUsuarios = () => {
 
   return (
     <div>
-          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="#" style={{paddingLeft: 20}}>Super Administrador </a>
+          <nav className="navbar navbar-expand-lg" style={{backgroundColor:"#4717F6", borderRadius:5}}>
+            <a className="navbar-brand" href="#" style={{paddingLeft: 20 , color:"#E7DFDD"}}>Super Administrador </a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item active" style={{paddingRight: 20}}>
-                  <Link to='/usuarios' className='nav-link'>Volver</Link>
+                  <Link to='/usuarios' className='nav-link' style={{color:"#E7DFDD"}}>Volver</Link>
                 </li>
               
               </ul>
             </div>
             <div className="ml-auto" style={{paddingRight: 30}}>
-              <Link to='/' className='btn btn-light'>Salir</Link>
+              <Link to='/' className='btn btn-dark'>Salir</Link>
             </div>
         </nav>
 
         <div>
-            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Creando Usuario</h1>
+            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%', color:"#E7DFDD"}}>Creando Usuario</h1>
         </div>
       <div style={{ marginTop:'5%', backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
             <form onSubmit={store} >

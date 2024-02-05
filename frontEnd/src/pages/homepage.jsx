@@ -36,7 +36,7 @@ export default function Homepage() {
                   <h6 style={{color:"#828081"}}>Por los Siguientes Motivos</h6>
                   <p style={{textAlign: 'left', color:"#828081"}}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima assumenda quaerat iste consequatur possimus dolorem incidunt in molestiae ipsam inventore doloremque, delectus nisi pariatur. Earum excepturi consequuntur veritatis suscipit quos.
                   </p></div>
-                    <Link to='/formRegistro' className='btn btn-dark' style={{marginLeft:'13%', marginTop:'1%'}}>Registrarme</Link>
+                    <Link to='/formRegistro' className='btn btn-primary' style={{marginLeft:'13%', marginTop:'1%'}}>Registrarme</Link>
               </div>
             </div>
           </div>

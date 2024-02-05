@@ -14,7 +14,7 @@ export default function login() {
 <div style={{estiloSeccion}}>
     <div>
     <div>
-    <nav className="navbar navbar-expand-lg " style={{backgroundColor:'#4717F6'}}>
+    <nav className="navbar navbar-expand-lg " style={{backgroundColor:'#4717F6',borderRadius:7}}>
           <a className="navbar-brand"style={{paddingLeft: 20, color:'#E7DFDD'}}>Mis Usuarios </a>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">
@@ -50,7 +50,7 @@ export default function login() {
                     </div>
             
                     <button className="btn" type="submit">
-                    <Link to="/supAdmins" className="btn btn-outline-light btn-lg px-5">Ingresar</Link></button>
+                    <Link to="/supAdmins" className="btn btn-outline-primary btn-lg px-5">Ingresar</Link></button>
                     <div className="d-flex justify-content-center text-center mt-4 pt-1">
                     </div>
                 </div>
