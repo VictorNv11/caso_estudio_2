@@ -3,16 +3,23 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Homepage from './pages/homepage.jsx';
 import FormRegistro from './pages/formRegistro.jsx';
 import Login from './pages/login.jsx';
+
 import ShowSupAdmin from './components/supAdmin/ShowSupAdmin.js';
 import CreateSupAdmin from './components/supAdmin/CreateSupAdmin.js';
 import EditSupAdmin from './components/supAdmin/EditSupAdmin.js';
+
 import ShowAdmin from './components/Admin/showAdmin.js';
 import CreateAdmin from './components/Admin/CreateAdmin.js';
 import EditAdmin from './components/Admin/EditAdmin.js';
+
 import ShowUsuarios from './components/usuarios/ShowUsuarios.js';
 import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
 import EditUsuarios from './components/usuarios/EditUsuarios.js';
+
 import ImportCliente from './components/Clientes/ImportClient.js';
+import CreateClient from './components/Clientes/CreateClient.js';
+import EditClient from './components/Clientes/EditClient.js';
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -23,6 +30,9 @@ export default function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/clientes" element={<ImportCliente/>} />
+        <Route path="/createC" element={<CreateClient />} />
+        <Route path="/editC/:id" element={<EditClient />} />
+
         
         <Route path="/supAdmins" element={<ShowSupAdmin />} />
         <Route path="/create" element={<CreateSupAdmin />} />

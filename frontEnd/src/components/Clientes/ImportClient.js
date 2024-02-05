@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-//import axios from "axios";
+import axios from "axios";
 import Papa from 'papaparse';
+import { Link } from "react-router-dom";
 
 export default function ImportClient() {
-  const [clientes] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const endpoint = 'http://localhost:8000/api/clientes/import';
-  //const endpointdata = 'http://localhost:8000/api/clientes';
+  const endpointdata = 'http://localhost:8000/api/clientes';
   const [contenido, setContenido] = useState(null);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [clientesFromDB, setClientesFromDB] = useState([]);
 
   useEffect(() => {
     // Llamamos a la función para obtener los clientes
@@ -18,7 +19,14 @@ export default function ImportClient() {
 
   const getAllClientes = async () => {
     try {
-    } catch (error) {
+      const response = await fetch(endpointdata);
+      if (response.ok) {
+        const data = await response.json();
+        setClientesFromDB(data);
+      } else {
+        console.error(`Error fetching data from ${endpointdata}: ${response.statusText}`);
+      }
+      } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
@@ -127,13 +135,16 @@ export default function ImportClient() {
             </div>
           </div>
           <div className="col-md-2">
-            <form action={`${endpoint}/clientes/export`} method="get" encType="multipart/form-data">
+            <form action={`${endpointdata}/export`}method="get" encType="multipart/form-data">
               <button className="btn btn-success">Exportar</button>
             </form>
           </div>
         </div>
+        <div style={{marginLeft:'4%', marginTop:'2%'}}>
+            <Link to='/createC' className='btn btn-primary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
+        </div>
         <div className="row">
-          {clientes.length > 0 && (
+          {clientesFromDB.length > 0 && (
             <table className="table table-striped">
               <thead>
                 <tr>
@@ -146,7 +157,7 @@ export default function ImportClient() {
                 </tr>
               </thead>
               <tbody>
-                {clientes.map((cliente, index) => (
+                {clientesFromDB.map((cliente, index) => (
                   <tr key={index}>
                     <td>{cliente['cc/nit']}</td>
                     <td>{cliente.nombre_completo}</td>
@@ -154,6 +165,7 @@ export default function ImportClient() {
                     <td>{cliente.ciudad}</td>
                     <td>{cliente.telefono}</td>
                     <td>{cliente.correo_electronico}</td>
+                    
                   </tr>
                 ))}
               </tbody>

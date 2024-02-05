@@ -15,7 +15,7 @@ class ImportController extends Controller
     // Función principal
     public function index()
     {
-        $clientes = cliente::all();
+        $clientes = Cliente::all();
         return  $clientes;
     }
 
@@ -48,12 +48,44 @@ class ImportController extends Controller
     public function exportar()
     {
 
-        $cliente = Cliente::all();
+        $clientes = Cliente::all();
 
-        Excel::create('cliente', function ($excel) use ($cliente) {
-            $excel->sheet('Exportar', function ($sheet) use ($cliente) {
-                $sheet->fromArray($cliente);
-            });
-        })->export('xls');
+        return response()->json(['clientes' => $clientes], 200);
+    }
+
+    // Creación de usuarios (Create)
+    public function store(Request $request)
+    {
+        $clientes = new Cliente();
+        $clientes->cc_nit = $request->cc_nit;
+        $clientes->nombre_completo = $request->nombre_completo;
+        $clientes->direccion = $request->direccion;
+        $clientes->ciudad = $request->ciudad;
+        $clientes->telefono = $request->telefono;
+        $clientes->correo_electronico = $request->correo_electronico;
+
+        $clientes->save();
+    }
+
+    // Actualizar (Update)
+    public function update(Request $request, string $id)
+    {
+        $clientes = Cliente::findOrFail($request->id);
+        $clientes->cc_nit = $request->cc_nit;
+        $clientes->nombre_completo = $request->nombre_completo;
+        $clientes->direccion = $request->direccion;
+        $clientes->ciudad = $request->ciudad;
+        $clientes->telefono = $request->telefono;
+        $clientes->correo_electronico = $request->correo_electronico;
+
+        $clientes->save();
+        return $clientes;
+    }
+
+    // Eliminar (Delete)
+    public function destroy(string $id)
+    {
+        $clientes = Cliente::destroy($id);
+        return $clientes;
     }
 }
