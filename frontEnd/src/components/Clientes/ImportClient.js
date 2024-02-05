@@ -1,22 +1,59 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Papa from 'papaparse';
 import { Link } from "react-router-dom";
 
 export default function ImportClient() {
+  // Selección de archivos
   const [selectedFile, setSelectedFile] = useState(null);
+
+  // Rutas BackEnd
   const endpoint = 'http://localhost:8000/api/clientes/import';
   const endpointdata = 'http://localhost:8000/api/clientes';
+
+  // Datos del Archivo Excel
   const [contenido, setContenido] = useState(null);
+
+  // Manejo de errores
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+
+  // Datos de clientes de la base de datos
   const [clientesFromDB, setClientesFromDB] = useState([]);
+
+  // Búsqueda por correo
+  const [search, setSearch] = useState('');
+
+  // Paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(8);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  // Modelo Clientes
+  const [clientes, setClientes] = useState([]);
+
+  // Filtrando clientes por Correo Electrónico
+  const filteredClientes = search
+    ? clientesFromDB.filter((cliente) =>
+      cliente.correo_electronico.toLowerCase().includes(search.toLowerCase())
+     ) 
+    : clientesFromDB;
+
+  
+  const currentClientes = filteredClientes.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     // Llamamos a la función para obtener los clientes
     getAllClientes();
   }, []);
 
+  // Búsqueda y paginación
+  const searcher = (e) => {
+    setSearch(e.target.value);
+    setCurrentPage(1);
+  };
+
+  // Obteniendo clientes de la base de datos
   const getAllClientes = async () => {
     try {
       const response = await fetch(endpointdata);
@@ -31,6 +68,7 @@ export default function ImportClient() {
     }
   };
 
+  // Importación del Archivo Excel
   const handleFileChange = (event) => {
 
     const file = event.target.files[0];
@@ -102,7 +140,6 @@ export default function ImportClient() {
 
   }
 
-
   return (
     <div>
       <div className="container">
@@ -141,10 +178,11 @@ export default function ImportClient() {
           </div>
         </div>
         <div style={{marginLeft:'4%', marginTop:'2%'}}>
+            <input value={search} style={{borderRadius:5}} onChange={searcher} type='text' placeholder='Buscar por Email' className='form'></input>
             <Link to='/createC' className='btn btn-primary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
         </div>
         <div className="row">
-          {clientesFromDB.length > 0 && (
+          {currentClientes.length > 0 && (
             <table className="table table-striped">
               <thead>
                 <tr>
@@ -157,7 +195,7 @@ export default function ImportClient() {
                 </tr>
               </thead>
               <tbody>
-                {clientesFromDB.map((cliente, index) => (
+                {currentClientes.map((cliente, index) => (
                   <tr key={index}>
                     <td>{cliente['cc/nit']}</td>
                     <td>{cliente.nombre_completo}</td>
@@ -171,6 +209,29 @@ export default function ImportClient() {
               </tbody>
             </table>
           )}
+          <footer>
+          <div style={{ marginLeft: '44.5%', marginTop: 'auto' }}>
+            <ul className="pagination">
+              <li className="page-item" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+                <a className="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              {Array.from({ length: Math.ceil(clientes.length / itemsPerPage) }, (_, index) => (
+                <li className={`page-item ${currentPage === index + 1 && 'active'}`} key={index + 1} onClick={() => setCurrentPage(index + 1)}>
+                  <a className="page-link" href="#">
+                    {index + 1}
+                  </a>
+                </li>
+              ))}
+              <li className="page-item" onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(clientes.length / itemsPerPage)}>
+                <a className="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </footer>  
         </div>
       </div>
     </div>
