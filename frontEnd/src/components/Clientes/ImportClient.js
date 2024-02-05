@@ -34,11 +34,11 @@ export default function ImportClient() {
 
   // Filtrando clientes por Correo Electrónico
   const filteredClientes = search
-    ? clientesFromDB.filter((cliente) =>
-      cliente.correo_electronico.toLowerCase().includes(search.toLowerCase())
-     ) 
+  ? clientesFromDB.filter((cliente) =>
+      cliente.correo_electronico.toLowerCase().includes(search.toLowerCase()) ||
+      (cliente.telefono && cliente.telefono.toString().includes(search.toString()))
+    )
     : clientesFromDB;
-
   
   const currentClientes = filteredClientes.slice(indexOfFirstItem, indexOfLastItem);
 
