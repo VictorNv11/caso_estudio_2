@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { BsSearch } from "react-icons/bs";
 
 const endpoint = 'http://localhost:8000/api';
 
@@ -73,7 +74,7 @@ const ShowSupAdmin = () => {
           <h1 className='text-center'  style={{color:"#E7DFDD"}}>Listado de Super Administradores</h1>  
         </div>
             <div style={{marginLeft:'4%', marginTop:'2%'}}>
-              <input value={search} style={{borderRadius:5}} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input>
+              <input value={search} style={{borderRadius:5}} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input><BsSearch style={{ marginLeft: 5, color: 'white' }} />
               <Link to='/create' className='btn btn-primary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
             </div>
        <div>

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Papa from 'papaparse';
 import { Link } from "react-router-dom";
+import { BsArrowDownSquareFill } from "react-icons/bs";
+import { BsArrowUpSquareFill } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 
 export default function ImportClient() {
   // Selección de archivos
@@ -176,7 +179,7 @@ export default function ImportClient() {
                 </div>
                 <div className="col-md-6">
                   <button className="btn btn-primary" type="submit">
-                    Importar
+                    <BsArrowUpSquareFill /> Cargar Archivos
                   </button>
                   {error && (
                     <div className="alert alert-danger" role="alert">
@@ -193,14 +196,33 @@ export default function ImportClient() {
             </div>
           </div>
           <div className="col-md-2">
-         
-              <button className="btn btn-success" onClick={handleExportExcelClick}>Exportar a Excel</button>
-            
+            <button
+              className="btn btn-success"
+              onClick={handleExportExcelClick}
+            >
+              <BsArrowDownSquareFill /> Extraer a Excel
+            </button>
           </div>
         </div>
-        <div style={{marginLeft:'4%', marginTop:'2%', paddingBottom:'30px'}}>
-            <input value={search} style={{borderRadius:5}} onChange={searcher} type='text' placeholder='Buscar por Email' className='form'></input>
-            <Link to='/createC' className='btn btn-primary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
+        <div
+          style={{ marginLeft: "4%", marginTop: "2%", paddingBottom: "30px" }}
+        >
+          <input
+    value={search}
+    style={{ borderRadius: 5 }}
+    onChange={searcher}
+    type="text"
+    placeholder="Buscar por Email"
+    className="form"
+  />
+  <BsSearch style={{ marginLeft: 5, color: 'white' }} />
+          <Link
+            to="/createC"
+            className="btn btn-primary btn-sm"
+            style={{ marginLeft: "71%" }}
+          >
+            Crear
+          </Link>{" "}
         </div>
         <div className="row">
           {currentClientes.length > 0 && (
@@ -218,41 +240,59 @@ export default function ImportClient() {
               <tbody>
                 {currentClientes.map((cliente, index) => (
                   <tr key={index}>
-                    <td>{cliente['cc/nit']}</td>
+                    <td>{cliente["cc/nit"]}</td>
                     <td>{cliente.nombre_completo}</td>
                     <td>{cliente.direccion}</td>
                     <td>{cliente.ciudad}</td>
                     <td>{cliente.telefono}</td>
                     <td>{cliente.correo_electronico}</td>
-                    
                   </tr>
                 ))}
               </tbody>
             </table>
           )}
           <footer>
-          <div style={{ marginLeft: '44.5%', marginTop: 'auto' }}>
-            <ul className="pagination">
-              <li className="page-item" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
-                <a className="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              {Array.from({ length: Math.ceil(clientes.length / itemsPerPage) }, (_, index) => (
-                <li className={`page-item ${currentPage === index + 1 && 'active'}`} key={index + 1} onClick={() => setCurrentPage(index + 1)}>
-                  <a className="page-link" href="#">
-                    {index + 1}
+            <div style={{ marginLeft: "44.5%", marginTop: "auto" }}>
+              <ul className="pagination">
+                <li
+                  className="page-item"
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  <a className="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
-              ))}
-              <li className="page-item" onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(clientes.length / itemsPerPage)}>
-                <a className="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </footer>  
+                {Array.from(
+                  { length: Math.ceil(clientes.length / itemsPerPage) },
+                  (_, index) => (
+                    <li
+                      className={`page-item ${
+                        currentPage === index + 1 && "active"
+                      }`}
+                      key={index + 1}
+                      onClick={() => setCurrentPage(index + 1)}
+                    >
+                      <a className="page-link" href="#">
+                        {index + 1}
+                      </a>
+                    </li>
+                  )
+                )}
+                <li
+                  className="page-item"
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  disabled={
+                    currentPage === Math.ceil(clientes.length / itemsPerPage)
+                  }
+                >
+                  <a className="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </footer>
         </div>
       </div>
     </div>
