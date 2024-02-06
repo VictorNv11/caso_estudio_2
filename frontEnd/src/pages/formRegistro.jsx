@@ -50,7 +50,7 @@ const CreateUsuario = () => {
  
     return(
         <div>
-          <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#4717F6 '}}>
+          <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#0E0B16 '}}>
             <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:'#E7DFDD'}}>Mis Usuarios </a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
@@ -66,7 +66,7 @@ const CreateUsuario = () => {
             </div>
         </nav>
         <div>
-            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%',  color:'#E7DFDD'}}>Regitro Usuario</h1>
+            <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%',  color:'#E7DFDD'}}>Registro Usuario</h1>
         </div>
         <div style={{ marginTop:'5%', backgroundColor: '', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
       <form onSubmit={store}>
@@ -90,7 +90,7 @@ const CreateUsuario = () => {
         </div>
         {missingFieldsError && <div className="alert alert-danger" role="alert">{missingFieldsError}</div>}
         {error && <div className="alert alert-danger" role="alert">{error}</div>}
-        <button type="submit" className="btn btn-primary" style={{backgroundcolor:'#4717F6'}} >
+        <button type="submit" className="btn btn-dark" style={{backgroundcolor:'#4717F6'}} >
           Enviar
         </button>     
       </form>

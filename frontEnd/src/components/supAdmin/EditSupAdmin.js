@@ -43,25 +43,25 @@ const EditSupAdmin = () => {
             <div>
             <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%', color:"#E7DFDD"}}>Editando Usuario</h1>
         </div>
-        <div style={{ marginTop:'5%', backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
+        <div style={{ marginTop:'5%', backgroundColor: '#0E0B16 ', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
               <form onSubmit={update} >
                   <div className="mb-3">
-                      <label htmlFor="nombre" className="form-label">Nombre completo</label>
+                      <label htmlFor="nombre" className="form-label" style={{color:"#E7DFDD" }}>Nombre completo</label>
                       <input value={name} onChange={(e)=> setName(e.target.value)} type='text' className='form-control'required />
                   </div>
                   <div className="mb-3">
-                      <label htmlFor="email" className="form-label">Email</label>
+                      <label htmlFor="email" className="form-label" style={{color:"#E7DFDD" }}>Email</label>
                       <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' className='form-control'required />
                   </div>
                   <div className="mb-3">
-                      <label htmlFor="password" className="form-label">Contraseña</label>
+                      <label htmlFor="password" className="form-label" style={{color:"#E7DFDD" }}>Contraseña</label>
                       <input value={password} onChange={(e)=>setPass(e.target.value)} type='text' className='form-control'required />
                   </div>
                   <div className="mb-3">
-                      <label htmlFor="phone" className="form-label">Telefono</label>
+                      <label htmlFor="phone" className="form-label" style={{color:"#E7DFDD" }}>Telefono</label>
                       <input value={phone} onChange={(e)=> setPhone(e.target.value)} type='phone' className='form-control'required />
                   </div>
-                  <button type="submit" className="btn btn-primary">Editar</button>       
+                  <button type="submit" className="btn btn-dark">Editar</button>       
               </form>
           </div>
       </div>

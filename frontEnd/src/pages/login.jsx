@@ -14,7 +14,7 @@ export default function login() {
 <div style={{estiloSeccion}}>
     <div>
     <div>
-    <nav className="navbar navbar-expand-lg " style={{backgroundColor:'#4717F6',borderRadius:7}}>
+    <nav className="navbar navbar-expand-lg " style={{backgroundColor:'#0E0B16 ',borderRadius:7}}>
           <a className="navbar-brand"style={{paddingLeft: 20, color:'#E7DFDD'}}>Mis Usuarios </a>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">

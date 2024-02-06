@@ -60,7 +60,7 @@ const ShowAdmin = () => {
 
   return (
     <div>
-         <nav className="navbar navbar-expand-lg "style={{backgroundColor:"#4717F6", borderRadius:5}}>
+         <nav className="navbar navbar-expand-lg "style={{backgroundColor:"#0E0B16 ", borderRadius:5}}>
             <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:"#E7DFDD"}}>Super Administrador </a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">
@@ -86,7 +86,7 @@ const ShowAdmin = () => {
 
         <div style={{marginLeft:'4%', marginTop:'2%'}}>
             <input value={search} style={{borderRadius:5}} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input><BsSearch style={{ marginLeft: 5, color: 'white' }} />
-            <Link to='/createA' className='btn btn-primary btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
+            <Link to='/createA' className='btn btn-dark btn-sm' style={{marginLeft:'71%'}}>Crear</Link>{' '}
         </div>
         
        <div>
