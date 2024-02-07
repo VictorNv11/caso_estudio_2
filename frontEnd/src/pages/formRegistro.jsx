@@ -15,6 +15,7 @@ const CreateUsuario = () => {
   const [error, setError] = useState(null);
   const [missingFieldsError, setMissingFieldsError] = useState(null);
 
+
   // Limpia el mensaje de error
   useEffect(() => {
     setMissingFieldsError(null);

@@ -4,8 +4,14 @@ import { Link } from "react-router-dom";
 import { BsArrowDownSquareFill } from "react-icons/bs";
 import { BsArrowUpSquareFill } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
-
+import ExportExcel from "react-export-excel";
 export default function ImportClient() {
+
+const ExcelFile = ExportExcel.ExcelFile;
+const ExcelSheet= ExportExcel.ExcelSheet;
+const ExcelColumn= ExportExcel.ExcelColumn;
+
+
   // Selección de archivos
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -166,6 +172,18 @@ export default function ImportClient() {
 
   return (
     <div>
+      <div>
+        <ExcelFile element={<button>exportar a Excel</button>} fileName= 'Excel tutorial'>
+          <ExcelSheet data={fileContent} name='datos de clientes' >
+              <ExcelColumn label='cc/nit' value= 'cc/nit'/>
+              <ExcelColumn label='nombre completo'  value= 'nombre_completo'/>
+              <ExcelColumn label='direccion'  value= 'direccion'/>
+              <ExcelColumn label='ciudad'  value= 'ciudad'/>
+              <ExcelColumn label='telefono'  value= 'telefono'/>
+              <ExcelColumn label='correo electronico'  value= 'correo_electronico'/>
+            </ExcelSheet> 
+          </ExcelFile> 
+      </div>
       <div className="container">
         <title>Importar/Exportar - Excel</title>
         <br />

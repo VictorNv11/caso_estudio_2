@@ -21,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignorar directorios generados por npm/yarn
+node_modules/
+# Ignorar archivos de configuración específicos de npm/yarn
+package-lock.json
+yarn.lock
+# Ignorar archivos de configuración de npm
+npm-debug.log
+.env
