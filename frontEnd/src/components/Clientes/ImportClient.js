@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Papa from 'papaparse';
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import { BsArrowDownSquareFill } from "react-icons/bs";
 import { BsArrowUpSquareFill } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
-import ExportExcel from "react-export-excel";
+import BotonExcelDefault from "./BotonExcelDefault";
+import BotonExcelEstilizado from "./BotonExcelEstilizado";
 export default function ImportClient() {
-
-const ExcelFile = ExportExcel.ExcelFile;
-const ExcelSheet= ExportExcel.ExcelSheet;
-const ExcelColumn= ExportExcel.ExcelColumn;
 
 
   // Selección de archivos
@@ -40,7 +37,6 @@ const ExcelColumn= ExportExcel.ExcelColumn;
 
   // Modelo Clientes
   const [clientes, setClientes] = useState([]);
-
   // Filtrando clientes por Correo Electrónico y Número de Teléfono
   const filteredClientes = search
   ? clientesFromDB.filter((cliente) =>
@@ -68,6 +64,7 @@ const ExcelColumn= ExportExcel.ExcelColumn;
       const response = await fetch(endpointdata);
       if (response.ok) {
         const data = await response.json();
+        setClientes (data);
         setClientesFromDB(data);
       } else {
         console.error(`Error fetching data from ${endpointdata}: ${response.statusText}`);
@@ -172,18 +169,6 @@ const ExcelColumn= ExportExcel.ExcelColumn;
 
   return (
     <div>
-      <div>
-        <ExcelFile element={<button>exportar a Excel</button>} fileName= 'Excel tutorial'>
-          <ExcelSheet data={fileContent} name='datos de clientes' >
-              <ExcelColumn label='cc/nit' value= 'cc/nit'/>
-              <ExcelColumn label='nombre completo'  value= 'nombre_completo'/>
-              <ExcelColumn label='direccion'  value= 'direccion'/>
-              <ExcelColumn label='ciudad'  value= 'ciudad'/>
-              <ExcelColumn label='telefono'  value= 'telefono'/>
-              <ExcelColumn label='correo electronico'  value= 'correo_electronico'/>
-            </ExcelSheet> 
-          </ExcelFile> 
-      </div>
       <div className="container">
         <title>Importar/Exportar - Excel</title>
         <br />
@@ -241,6 +226,10 @@ const ExcelColumn= ExportExcel.ExcelColumn;
           >
             Crear
           </Link>{" "}
+        </div>
+        <div>
+          <BotonExcelDefault clientes= {clientes}/> 
+          <BotonExcelEstilizado clientes= {clientes}/>
         </div>
         <div className="row">
           {currentClientes.length > 0 && (
