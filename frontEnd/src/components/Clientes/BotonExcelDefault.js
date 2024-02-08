@@ -27,12 +27,14 @@ const BotonExcelDefault = ({ clientes }) => {
       setTimeout(() => {
         XLSX.writeFile(libro, 'ClientesDefault.xlsx');
         setLoading(false);
-        setNoData(true); // Establecer el estado para indicar que no hay datos
+        setNoData(false); // Establecer el estado para indicar que no hay datos
         console.log('Descarga completa.');
       }, 1000);
     } catch (error) {
       // Manejo de errores al exportar
       console.error('Error al exportar a Excel:', error);
+      setNoData(false); // Asegurar que se restablezca en caso de error
+      setLoading(false);
       throw new Error('Error al exportar a Excel. Inténtalo de nuevo.');
     }
   };
