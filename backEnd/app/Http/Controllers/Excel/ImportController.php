@@ -54,21 +54,6 @@ class ImportController extends Controller
 
         return response()->json(['clientes' => $clientes], 200);
     }
-
-    public function exportarExcel()
-{
-    try {
-        $clientes = Cliente::all();
-        return Excel::download(new ClienteExport($clientes), 'clientes.xlsx');
-    } catch (\Exception $e) {
-        // Registra el mensaje de error en los registros del servidor
-        Log::error('Error al exportar a Excel: ' . $e->getMessage());
-        return response()->json(['error' => 'Error interno del servidor'], 500);
-    }
-}
-
-
-
     // Creación de usuarios (Create)
     public function store(Request $request)
     {

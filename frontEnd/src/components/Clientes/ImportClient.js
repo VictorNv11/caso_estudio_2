@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Papa from 'papaparse';
-import { Link, json } from "react-router-dom";
-import { BsArrowDownSquareFill } from "react-icons/bs";
 import { BsArrowUpSquareFill } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import BotonExcelDefault from "./BotonExcelDefault";
-import BotonExcelEstilizado from "./BotonExcelEstilizado";
 export default function ImportClient() {
 
 
@@ -146,27 +143,6 @@ export default function ImportClient() {
 
   }
 
-  const handleExportExcelClick = async () => {
-    try {
-      const response = await fetch(`${endpointdata}/export/excel`);
-      if (response.ok) {
-        // Aquí puedes descargar el archivo Excel, por ejemplo, utilizando Blob y URL.createObjectURL
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'clientes.xlsx';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      } else {
-        console.error(`Error fetching data from ${endpointdata}/export/excel: ${response.statusText}`);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
   return (
     <div>
       <div className="container">
@@ -199,12 +175,7 @@ export default function ImportClient() {
             </div>
           </div>
           <div className="col-md-2">
-            <button
-              className="btn btn-success"
-              onClick={handleExportExcelClick}
-            >
-              <BsArrowDownSquareFill /> Extraer a Excel
-            </button>
+          <BotonExcelDefault clientes= {clientes} /> 
           </div>
         </div>
         <div
@@ -219,17 +190,6 @@ export default function ImportClient() {
     className="form"
   />
   <BsSearch style={{ marginLeft: 5, color: 'white' }} />
-          <Link
-            to="/createC"
-            className="btn btn-primary btn-sm"
-            style={{ marginLeft: "71%" }}
-          >
-            Crear
-          </Link>{" "}
-        </div>
-        <div>
-          <BotonExcelDefault clientes= {clientes}/> 
-          <BotonExcelEstilizado clientes= {clientes}/>
         </div>
         <div className="row">
           {currentClientes.length > 0 && (
