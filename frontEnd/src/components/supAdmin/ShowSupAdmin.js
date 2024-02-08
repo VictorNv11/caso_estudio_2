@@ -1,8 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsSearch } from "react-icons/bs";
+import Cookies from 'js-cookie';
+
 
 const endpoint = 'http://localhost:8000/api';
 
@@ -11,6 +13,10 @@ const ShowSupAdmin = () => {
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
+
+  
+
+
 
   const showData = async () => {
     try {
@@ -26,6 +32,10 @@ const ShowSupAdmin = () => {
   };
 
   useEffect(() => {
+    console.log(Cookies.get("token"))
+    if (Cookies.get("token")===undefined) {
+       window.location.href = "/";
+    }
     showData();
   }, [currentPage]);
 
@@ -49,6 +59,12 @@ const ShowSupAdmin = () => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentAdmins = filteredSupAdmins.slice(indexOfFirstItem, indexOfLastItem);
 
+    const salir =() =>{
+      console.log("Entro")
+      Cookies.remove("token")
+      window.location.href = "/";
+    }
+
   return (
     <div>
         <nav className="navbar navbar-expand-lg " style={{backgroundColor:"#0E0B16 ", borderRadius:5}}>
@@ -67,7 +83,7 @@ const ShowSupAdmin = () => {
               </ul>
             </div>
             <div className="ml-auto" style={{paddingRight: 30}}>
-              <Link to='/' className='btn btn-dark'>Salir</Link>
+              <button onClick={salir}  className='btn btn-dark'>Salir</button>
             </div>
           </nav>
         <div style={{marginTop:'5%'}}>
