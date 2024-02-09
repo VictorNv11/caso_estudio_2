@@ -4,13 +4,14 @@ use App\Http\Controllers\Api\SupAdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UsuariosController;
 use App\Http\Controllers\Excel\ImportController;
+use Illuminate\Support\Facades\Auth;
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::controller(SupAdminController::class)->group(function () {
     Route::get('/supAdmins','index');                 //SIRVE
@@ -42,4 +43,20 @@ Route::prefix('clientes')->group(function () {
     Route::get('/', [ImportController::class, 'index']); // SIRVE
     Route::post('/import', [ImportController::class, 'importar']); // SIRVE
     Route::get('/export', [ImportController::class, 'exportar']); // SIRVE
+
+    Route::get('/export/excel', [ImportController::class, 'exportarExcel']);
 });
+
+//__________________PRUEBA LOGIN__________________________
+
+Route::post('register',[AuthController::class, 'register']);
+Route::post('login',[AuthController::class, 'login']);
+
+Route::group(['middleware'=>['auth:sanctum']], function(){
+    Route::get('user-profile', [AuthController::class, 'userProfile']);
+    Route::post('logout', [AuthController::class, 'logout']);
+});
+Route::get('users',[AuthController::class,'allUsers']);
+
+
+
