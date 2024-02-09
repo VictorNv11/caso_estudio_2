@@ -46,7 +46,7 @@ Route::prefix('clientes')->group(function () {
     Route::get('/export/excel', [ImportController::class, 'exportarExcel']);
 });
 
-//__________________PRUEBA LOGIN__________________________
+//__________________PRUEBA LOGIN Y REGISTRO__________________________
 
 Route::post('register',[AuthController::class, 'register']);
 Route::post('login',[AuthController::class, 'login']);
