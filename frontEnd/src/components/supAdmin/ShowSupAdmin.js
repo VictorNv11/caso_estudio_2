@@ -4,7 +4,10 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { BsSearch } from "react-icons/bs";
 import Cookies from 'js-cookie';
-import Logo from '..//..//assets/img/planetas.png';
+import Logo from '..//..//assets/img/planetas.png'
+import { Navbar, Nav, Dropdown, Button } from 'react-bootstrap';
+import { BsList } from 'react-icons/bs';
+
 
 
 const endpoint = 'http://localhost:8000/api';
@@ -68,29 +71,35 @@ const ShowSupAdmin = () => {
 
   return (
     <div>
-        <nav className="navbar navbar-expand-lg " style={{backgroundColor:"#0E0B16 ", borderRadius:5}}>
-    <a className="navbar-brand" href="#">
-      <img src={Logo} alt="Logo" title='Logo de la Pagina'  style={{paddingLeft: 20,  width:50, height:30}}/>
-    </a>
+              <Navbar className="navbar navbar-expand-lg " style={{ backgroundColor: "#0E0B16 ", borderRadius: 5 }}>
+        <a className="navbar-brand" href="#">
+          <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
+        </a>
 
-            <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:"#E7DFDD"}}>Super Administrador </a>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ml-auto">
-              <li className="nav-item active" style={{paddingRight: 20}}>
-                  <Link to='/supAdmins' className='nav-link' style={{color:"#E7DFDD"}}>Super Administrador</Link>
-                </li>
-                <li className="nav-item active" style={{paddingRight: 20}}>
-                  <Link to='/Admin' className='nav-link'  style={{color:"#E7DFDD"}}>Administradores</Link>
-                </li>
-                <li className="nav-item active" style={{paddingRight: 20}}>
-                  <Link to='/usuarios' className='nav-link'  style={{color:"#E7DFDD"}}>Usuarios</Link>
-                </li>
-              </ul>
-            </div>
-            <div className="ml-auto" style={{paddingRight: 30}}>
-              <button onClick={salir}  className='btn btn-dark'>Salir</button>
-            </div>
-          </nav>
+        <a className="navbar-brand" href="#" style={{ paddingLeft: 20, color: "#E7DFDD" }}>Super Administrador </a>
+
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ml-auto">
+           
+            {/* Menú desplegable */}
+            <Dropdown>
+              <Dropdown.Toggle variant="dark" id="dropdown-basic">
+              <BsList size={20} /> {/* Utiliza el icono BsList */}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item href="/supAdmins">Super Administrador</Dropdown.Item>
+                <Dropdown.Item href="/Admin">Administradores</Dropdown.Item>
+                <Dropdown.Item href="/usuarios">Usuarios</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </ul>
+        </div>
+
+        <div className="ml-auto" style={{ paddingRight: 30 }}>
+          <button onClick={salir} className='btn btn-dark'>Salir</button>
+        </div>
+      </Navbar>
+
         <div style={{marginTop:'5%'}}>
           <h1 className='text-center'  style={{color:"#E7DFDD"}}>Listado de Super Administradores</h1>  
         </div>
