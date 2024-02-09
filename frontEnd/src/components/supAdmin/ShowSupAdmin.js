@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { BsSearch } from "react-icons/bs";
 import Cookies from 'js-cookie';
+import Logo from '..//..//assets/img/planetas.png';
 
 
 const endpoint = 'http://localhost:8000/api';
@@ -68,6 +69,10 @@ const ShowSupAdmin = () => {
   return (
     <div>
         <nav className="navbar navbar-expand-lg " style={{backgroundColor:"#0E0B16 ", borderRadius:5}}>
+    <a className="navbar-brand" href="#">
+      <img src={Logo} alt="Logo" title='Logo de la Pagina'  style={{paddingLeft: 20,  width:50, height:30}}/>
+    </a>
+
             <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:"#E7DFDD"}}>Super Administrador </a>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ml-auto">

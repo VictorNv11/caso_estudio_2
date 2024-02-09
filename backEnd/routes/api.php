@@ -43,8 +43,6 @@ Route::prefix('clientes')->group(function () {
     Route::get('/', [ImportController::class, 'index']); // SIRVE
     Route::post('/import', [ImportController::class, 'importar']); // SIRVE
     Route::get('/export', [ImportController::class, 'exportar']); // SIRVE
-
-    Route::get('/export/excel', [ImportController::class, 'exportarExcel']);
 });
 
 //__________________PRUEBA LOGIN__________________________

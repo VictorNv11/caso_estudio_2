@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import usuarios from '../assets/img/img_home.jpg';
+import Logo from '../assets/img/planetas.png';
 export default function Homepage() {
 
   
     return (
         <div>
         <nav className="navbar navbar-expand-lg" style={{backgroundColor:"#0E0B16 ", borderRadius:5}}>
+        <a className="navbar-brand" href="#">
+        <img src={Logo} alt="Logo" title='Logo de la Pagina'  style={{paddingLeft: 20,  width:50, height:30}}/>
+        </a>
           <a className="navbar-brand"  style={{paddingLeft: 20, color:"#E7DFDD"}}>Mis Usuarios </a>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">
