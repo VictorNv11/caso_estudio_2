@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 import Logo from '..//..//assets/img/planetas.png'
 import { Navbar, Nav, Dropdown, Button } from 'react-bootstrap';
 import { BsList } from 'react-icons/bs';
-
+import { AiTwotoneBell } from 'react-icons/ai';
 
 
 const endpoint = 'http://localhost:8000/api';
@@ -94,7 +94,9 @@ const ShowSupAdmin = () => {
             </Dropdown>
           </ul>
         </div>
-
+        <div className='ml-auto' style={{paddingRight:10, fontSize:'25px'}}>
+          <AiTwotoneBell style={{color:'white'}} />
+        </div>
         <div className="ml-auto" style={{ paddingRight: 30 }}>
           <button onClick={salir} className='btn btn-dark'>Salir</button>
         </div>
