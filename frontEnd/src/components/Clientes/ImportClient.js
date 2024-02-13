@@ -3,6 +3,10 @@ import Papa from 'papaparse';
 import { BsArrowUpSquareFill } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import BotonExcelDefault from "./BotonExcelDefault";
+import { Link } from "react-router-dom";
+
+
+
 export default function ImportClient() {
 
 
@@ -190,6 +194,19 @@ export default function ImportClient() {
     className="form"
   />
   <BsSearch style={{ marginLeft: 5, color: 'white' }} />
+
+          <Link
+            to="/createC"
+            className="btn btn-primary btn-sm"
+            style={{ marginLeft: "71%" }}
+          >
+            Crear
+          </Link>{" "}
+        </div>
+        <div>
+          <BotonExcelDefault clientes= {clientes}/> 
+ 
+
         </div>
         <div className="row">
           {currentClientes.length > 0 && (

@@ -18,6 +18,7 @@ import EditUsuarios from './components/usuarios/EditUsuarios.js';
 
 import ImportCliente from './components/Clientes/ImportClient.js';
 
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -28,6 +29,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/clientes" element={<ImportCliente/>} />
+
+
 
         
         <Route path="/supAdmins" element={<ShowSupAdmin />} />
