@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Auth;
 Route::controller(SupAdminController::class)->group(function () {
     Route::get('/supAdmins','index');                 //SIRVE
     Route::post('/supAdmin', 'store');               //SIRVE
-    Route::get('/supAdmin/{id}','show');            //SIRVE
-    Route::put('/supAdmin/{id}','update');         //SIRVE
-    Route::delete('/supAdmin/{id}','destroy');    //SIRVE
+    Route::get('/User/{id}','show');            //SIRVE
+    Route::put('/User/{id}','update');         //SIRVE
+    Route::delete('/User/{id}','destroy');    //SIRVE
 });
 
 Route::controller(AdminController::class)->group(function () {
@@ -50,6 +50,7 @@ Route::prefix('clientes')->group(function () {
 
 Route::post('register',[AuthController::class, 'register']);
 Route::post('login',[AuthController::class, 'login']);
+//Route::put('edit',[AuthController::class, 'edit']);
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::get('user-profile', [AuthController::class, 'userProfile']);

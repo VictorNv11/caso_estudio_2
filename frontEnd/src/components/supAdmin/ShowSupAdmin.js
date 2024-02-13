@@ -42,7 +42,7 @@ const ShowSupAdmin = () => {
   const deleteUsers = async (id) => {
     try {
       const token = Cookies.get("token");
-      await axios.delete(`${endpoint}/..../${id}`, {
+      await axios.delete(`${endpoint}/User/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -79,7 +79,7 @@ const ShowSupAdmin = () => {
             <Link to='/supAdmins' className='nav-link' style={{ color: "#E7DFDD" }}>Super Administrador</Link>
           </li>
           <li className="nav-item active" style={{ paddingRight: 20 }}>
-            <Link to='/Admin' className='nav-link disabled' style={{ color: "#E7DFDD" }}>Administradores</Link>
+            <Link to='/Admin' className='nav-link' style={{ color: "#E7DFDD" }}>Administradores</Link>
           </li>
           <li className="nav-item active" style={{ paddingRight: 20 }}>
             <Link to='/usuarios' className='nav-link disabled' style={{ color: "#E7DFDD" }}>Usuarios</Link>
@@ -95,7 +95,8 @@ const ShowSupAdmin = () => {
     </div>
     <div style={{ marginLeft: '4%', marginTop: '2%' }}>
       <input value={search} style={{ borderRadius: 5 }} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input><BsSearch style={{ marginLeft: 5, color: 'white' }} />
-      <Link to='/create' className='btn btn-dark btn-sm' style={{ marginLeft: '71%' }}>Crear</Link>{' '}
+      <Link className='btn btn-success btn-sm' to={'/Clientes'} style={{ marginLeft: '65.5%' }}>importar</Link>{' '}
+      <Link to='/create' className='btn btn-dark btn-sm'>Crear</Link>{' '}
     </div>
     <div>
       <table className='table table-striped  container' style={{ marginTop: '2%', border: '1px solid black', borderRadius: 5 }}>

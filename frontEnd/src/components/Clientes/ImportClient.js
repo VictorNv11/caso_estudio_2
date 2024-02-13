@@ -5,7 +5,7 @@ import { BsArrowDownSquareFill } from "react-icons/bs";
 import { BsArrowUpSquareFill } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import BotonExcelDefault from "./BotonExcelDefault";
-import BotonExcelEstilizado from "./BotonExcelEstilizado";
+
 export default function ImportClient() {
 
 
@@ -229,7 +229,7 @@ export default function ImportClient() {
         </div>
         <div>
           <BotonExcelDefault clientes= {clientes}/> 
-          <BotonExcelEstilizado clientes= {clientes}/>
+ 
         </div>
         <div className="row">
           {currentClientes.length > 0 && (

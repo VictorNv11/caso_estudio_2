@@ -23,7 +23,7 @@ const EditAdmin = () => {
             phone:phone,
             rol: rol
         })
-        navigate('/Admin')
+        navigate('/(Admin)')
     }
     useEffect(  () =>{
         const getAdminById = async () =>{
