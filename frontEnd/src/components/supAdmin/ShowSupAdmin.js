@@ -59,10 +59,10 @@ const ShowSupAdmin = () => {
   };
 
   const filteredUsers = search
-    ? Users.filter((users) =>
-        users.email.toLowerCase().includes(search.toLowerCase())
-      )
-    : Users;
+  ? supAdmins.filter((admin) =>
+      admin.email.toLowerCase().includes(search.toLowerCase())
+    )
+  : supAdmins;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
