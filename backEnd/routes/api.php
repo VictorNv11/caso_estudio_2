@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Auth;
 Route::controller(SupAdminController::class)->group(function () {
     Route::get('/supAdmins','index');                 //SIRVE
     Route::post('/supAdmin', 'store');               //SIRVE
-    Route::get('/supAdmin/{id}','show');            //SIRVE
-    Route::put('/supAdmin/{id}','update');         //SIRVE
-    Route::delete('/supAdmin/{id}','destroy');    //SIRVE
+    Route::get('/User/{id}','show');            //SIRVE
+    Route::put('/User/{id}','update');         //SIRVE
+    Route::delete('/User/{id}','destroy');    //SIRVE
 });
 
 Route::controller(AdminController::class)->group(function () {
@@ -43,12 +43,15 @@ Route::prefix('clientes')->group(function () {
     Route::get('/', [ImportController::class, 'index']); // SIRVE
     Route::post('/import', [ImportController::class, 'importar']); // SIRVE
     Route::get('/export', [ImportController::class, 'exportar']); // SIRVE
+
+    Route::get('/export/excel', [ImportController::class, 'exportarExcel']);
 });
 
-//__________________PRUEBA LOGIN__________________________
+//__________________PRUEBA LOGIN Y REGISTRO__________________________
 
 Route::post('register',[AuthController::class, 'register']);
 Route::post('login',[AuthController::class, 'login']);
+//Route::put('edit',[AuthController::class, 'edit']);
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::get('user-profile', [AuthController::class, 'userProfile']);
