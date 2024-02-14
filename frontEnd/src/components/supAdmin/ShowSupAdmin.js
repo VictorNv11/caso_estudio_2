@@ -36,6 +36,8 @@ const ShowSupAdmin = () => {
   };
 
   useEffect(() => {
+    if (Cookies.get("token") === undefined) {
+      window.location.href = "/";
     console.log(Cookies.get("token"))
     if (Cookies.get("token")===undefined) {
        window.location.href = "/";
