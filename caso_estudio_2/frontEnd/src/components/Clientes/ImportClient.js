@@ -78,11 +78,25 @@ export default function ImportClient() {
 
 
     if (file) {
+      const fileNameParts = file.name.split('.');
+      const fileExtension = fileNameParts[fileNameParts.length - 1].toLowerCase();
+  
+      if (fileExtension !== 'csv') {
+        setError('El formato del archivo no es compatible. Selecciona un archivo CSV.');
+        return;
+      }
+
       setSelectedFile(file);
       const reader = new FileReader();
 
       reader.onload = function (e) {
         const fileContent = e.target.result;
+
+        // Verificar si el contenido está vacío o solo contiene espacios en blanco y saltos de línea
+      if (/^\s*$/.test(fileContent)) {
+        setError('El archivo está vacío. Selecciona un archivo válido.');
+        return;
+      }
 
         Papa.parse(fileContent, {
           complete: function (result) {
@@ -106,6 +120,7 @@ export default function ImportClient() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError(null);
+    
     if (selectedFile) {
       console.log('cont', contenido)
       const formData = JSON.stringify({ contenido });
