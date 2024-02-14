@@ -62,7 +62,7 @@ export default function Login() {
                                             />
                                             <label className="form-label" htmlFor="typePasswordX">Password</label>
                                         </div>
-                                        <button type="submit" className="btn btn-outline-light btn-lg px-5">Ingresar</button>
+                                        <button type="submit" className="btn btn-outline-primary btn-lg px-5">Ingresar</button>
                                     </form>
                                     {error && <p className="text-danger mt-3">{error}</p>}
                                 </div>

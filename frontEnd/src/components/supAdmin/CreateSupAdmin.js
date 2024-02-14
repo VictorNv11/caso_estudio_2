@@ -2,20 +2,19 @@ import axios from 'axios';
 import React,{useState}from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-const endpoint = 'http://localhost:8000/api/register'
+const endpoint = 'http://localhost:8000/api/supAdmin'
 const CreateSupAdmin = () => {
     const [name, setName] = useState('')
-    const [documento, setDocumento] = useState('')
-    const[telefono, setTelefono] = useState ('')
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
-    const [roles, setRoles] = useState('')
+    const[phone, setPhone] = useState ('')
+    const [rol, setRol] = useState('3')
     
     const navigate = useNavigate()
     
     const store = async (e) =>{
         e.preventDefault()
-         await axios.post(endpoint, {name: name, documento:documento ,telefono:telefono, email:email, password:password, roles:roles })
+         await axios.post(endpoint, {name: name, email:email, password:password, phone:phone,rol:rol})
         .then(res =>{
             console.log(res)
             navigate('/supAdmins')
@@ -50,14 +49,6 @@ const CreateSupAdmin = () => {
                     <input value={name} onChange={(e)=> setName(e.target.value)} type='text' className='form-control'required />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="nombre" className="form-label"  style={{color:"#E7DFDD" }}>Documento</label>
-                    <input value={documento} onChange={(e)=> setDocumento(e.target.value)} type='text' className='form-control'required />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label"  style={{color:"#E7DFDD" }}>Telefono</label>
-                    <input value={telefono} onChange={(e)=>setTelefono(e.target.value)} type='text' className='form-control'required />
-                </div>
-                <div className="mb-3">
                     <label htmlFor="email" className="form-label"  style={{color:"#E7DFDD" }}>Email</label>
                     <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' className='form-control'required />
                 </div>
@@ -65,16 +56,10 @@ const CreateSupAdmin = () => {
                     <label htmlFor="password" className="form-label"  style={{color:"#E7DFDD" }}>Contraseña</label>
                     <input value={password} onChange={(e)=>setPass(e.target.value)} type='text' className='form-control'required />
                 </div>
-                
-                <div>
-                  <label htmlFor='password' className='form-label' style={{color:"#E7DFDD", padding:'1%' }}>Roles</label>
-                  <select class="form-select" aria-label="seleccione un rol" value={roles} onChange={(e)=>setRoles(e.target.value)}>
-                    <option selected>Seleccione un Rol</option>
-                    <option value="1">Super Administrador</option>
-                    <option value="2">Administrador</option>
-                    <option value="3">Usuario</option>
-                  </select>
-                </div>
+                <div className="mb-3">
+                    <label htmlFor="password" className="form-label"  style={{color:"#E7DFDD" }}>Telefono</label>
+                    <input value={phone} onChange={(e)=>setPhone(e.target.value)} type='text' className='form-control'required />
+                </div>              
                 <button type="submit" className="btn btn-dark">Enviar</button>       
             </form>
         </div>

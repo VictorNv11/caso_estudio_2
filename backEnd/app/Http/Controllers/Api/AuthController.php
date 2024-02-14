@@ -18,26 +18,22 @@ class AuthController extends Controller
         //validacion de los datos
         $request->validate([
             'name' => 'required',
-            'documento' => 'required',
-            'telefono'=>'required',
             'email' => 'required|email|unique:users',
-            'password' =>'required',
-            'roles' => 'required'
-        
-
+            'password' =>'required|confirmed'
 
         ]);
         //usuario
             $user = new User();
             $user->name = $request->name;
-            $user->documento = $request->documento;
-            $user->telefono = $request->telefono;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->roles = $request->roles;
             $user->save();
 
-        //respuesta 
+        //respouesta
+    
+        // return response()->json([
+        //     "message" => "Vas por buen camino register"
+        // ]);
         return response($user, Response::HTTP_CREATED);
     }
     

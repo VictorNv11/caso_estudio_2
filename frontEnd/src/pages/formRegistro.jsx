@@ -43,6 +43,7 @@ const CreateUsuario = () => {
   };
 
     return(
+
       <div>
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
          <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
@@ -87,6 +88,25 @@ const CreateUsuario = () => {
          </form>
      </div>
  </div>
+        // <div>
+        //   <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#0E0B16 '}}>
+        //     <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:'#E7DFDD'}}>Mis Usuarios </a>
+        //     <div className="collapse navbar-collapse" id="navbarNav">
+        //       <ul className="navbar-nav ml-auto">
+        //         <li className="nav-item">
+        //         <Link to="/" className="nav-link" style={{ color:'#E7DFDD'}}>
+        //           Inicio   
+        //         </Link>
+        //         </li>
+        //       </ul>
+        //     </div>
+        //     <div className="ml-auto" style={{paddingRight: 30}}>
+        //       <Link to='/Login' className='btn btn-dark'>Ingresar</Link>
+        //     </div>
+        // </nav>
+     
+        // </div>
+
     )
 }
 export default  CreateUsuario
