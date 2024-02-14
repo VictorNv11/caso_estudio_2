@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BsSearch } from "react-icons/bs";
 import Cookies from 'js-cookie';
 import Logo from '..//..//assets/img/planetas.png'
@@ -10,22 +10,24 @@ import { BsList } from 'react-icons/bs';
 import { AiTwotoneBell } from 'react-icons/ai';
 
 
-const endpoint = 'http://localhost:8000/api';
+
 
 const ShowSupAdmin = () => {
-  const [supAdmins, setSupAdmins] = useState([]);
+  const [Users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
-
-  
-
-
+  const endpoint = 'http://localhost:8000/api';
 
   const showData = async () => {
     try {
-      const response = await axios.get(`${endpoint}/supAdmins`);
-      setSupAdmins(response.data);
+      const token = Cookies.get("token");
+      const response = await axios.get(`${endpoint}/users`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setUsers(response.data.users);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -38,9 +40,6 @@ const ShowSupAdmin = () => {
   useEffect(() => {
     if (Cookies.get("token") === undefined) {
       window.location.href = "/";
-    console.log(Cookies.get("token"))
-    if (Cookies.get("token")===undefined) {
-       window.location.href = "/";
     }
     showData();
   }, [currentPage]);
@@ -61,10 +60,10 @@ const ShowSupAdmin = () => {
   };
 
   const filteredUsers = search
-  ? supAdmins.filter((admin) =>
-      admin.email.toLowerCase().includes(search.toLowerCase())
-    )
-  : supAdmins;
+    ? Users.filter((users) =>
+        users.email.toLowerCase().includes(search.toLowerCase())
+      )
+    : Users;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -77,7 +76,10 @@ const ShowSupAdmin = () => {
 
   return (
     <div>
-    <nav className="navbar navbar-expand-lg " style={{ backgroundColor: "#0E0B16 " }}>
+    <nav className="navbar navbar-expand-lg " style={{ backgroundColor: "#0E0B16 ", borderRadius: 5 }}>
+    <a className="navbar-brand" href="#">
+          <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
+        </a>
       <a className="navbar-brand" href="#" style={{ paddingLeft: 20, color: "#E7DFDD" }}>Super Administrador </a>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
@@ -92,6 +94,9 @@ const ShowSupAdmin = () => {
           </li>
         </ul>
       </div>
+      <div className='ml-auto' style={{paddingRight:10, fontSize:'25px'}}>
+          <AiTwotoneBell style={{color:'white'}} />
+        </div>
       <div className="ml-auto" style={{ paddingRight: 30 }}>
         <button onClick={salir} className='btn btn-light'>Salir</button>
       </div>
