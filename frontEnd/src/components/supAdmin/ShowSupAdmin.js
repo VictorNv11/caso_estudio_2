@@ -1,28 +1,31 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsSearch } from "react-icons/bs";
 import Cookies from 'js-cookie';
+import Logo from '..//..//assets/img/planetas.png'
+import { Navbar, Nav, Dropdown, Button } from 'react-bootstrap';
+import { BsList } from 'react-icons/bs';
+import { AiTwotoneBell } from 'react-icons/ai';
 
 
+const endpoint = 'http://localhost:8000/api';
 
 const ShowSupAdmin = () => {
-  const [Users, setUsers] = useState([]);
+  const [supAdmins, setSupAdmins] = useState([]);
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
-  const endpoint = 'http://localhost:8000/api';
+
+  
+
+
 
   const showData = async () => {
     try {
-      const token = Cookies.get("token");
-      const response = await axios.get(`${endpoint}/users`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      setUsers(response.data.users);
+      const response = await axios.get(`${endpoint}/supAdmins`);
+      setSupAdmins(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -33,8 +36,9 @@ const ShowSupAdmin = () => {
   };
 
   useEffect(() => {
-    if (Cookies.get("token") === undefined) {
-      window.location.href = "/";
+    console.log(Cookies.get("token"))
+    if (Cookies.get("token")===undefined) {
+       window.location.href = "/";
     }
     showData();
   }, [currentPage]);
