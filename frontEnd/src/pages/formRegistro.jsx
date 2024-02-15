@@ -2,6 +2,7 @@ import React,{useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Logo from '../assets/img/planetas.png';
 
 
 const endpoint = 'http://localhost:8000/api/register'
@@ -44,69 +45,54 @@ const CreateUsuario = () => {
 
     return(
 
-      <div>
-      <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
-         <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
-         <div className="collapse navbar-collapse" id="navbarNav">
-           <ul className="navbar-nav ml-auto">
-             <li className="nav-item active" style={{paddingRight: 20}}>
-               <Link to='/supAdmins' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
-             </li>
-           </ul>
-         </div>
-         <div className="ml-auto" style={{paddingRight: 30}}>
-           <Link to='/' className='btn btn-dark'>Salir</Link>
-         </div>
-     </nav>
-     <div>
-         <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%', color:'#E7DFDD'}}>Creando SuperAdministrador</h1>
-     </div>
-   <div style={{ marginTop:'5%', backgroundColor: '#0E0B16', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
-         <form onSubmit={store} >
-             <div className="mb-3">
-                 <label htmlFor="nombre" className="form-label"  style={{color:"#E7DFDD" }}>Nombre completo</label>
-                 <input value={name} onChange={(e)=> setName(e.target.value)} type='text' className='form-control'required />
-             </div>
-             <div className="mb-3">
-                 <label htmlFor="nombre" className="form-label"  style={{color:"#E7DFDD" }}>Documento</label>
-                 <input value={documento} onChange={(e)=> setDocumento(e.target.value)} type='text' className='form-control'required />
-             </div>
-             <div className="mb-3">
-                 <label htmlFor="password" className="form-label"  style={{color:"#E7DFDD" }}>Telefono</label>
-                 <input value={telefono} onChange={(e)=>setTelefono(e.target.value)} type='text' className='form-control'required />
-             </div>
-             <div className="mb-3">
-                 <label htmlFor="email" className="form-label"  style={{color:"#E7DFDD" }}>Email</label>
-                 <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' className='form-control'required />
-             </div>
-             <div className="mb-3">
-                 <label htmlFor="password" className="form-label"  style={{color:"#E7DFDD" }}>Contraseña</label>
-                 <input value={password} onChange={(e)=>setPass(e.target.value)} type='password' className='form-control'required />
-             </div>
-
-             <button type="submit" className="btn btn-dark">Enviar</button>       
-         </form>
-     </div>
+  <div>
+    <header className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <div className="container">
+              <a className="navbar-brand" href="#">
+                <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
+              </a>
+              <a className="navbar-brand">Mi Sitio</a>
+              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span className="navbar-toggler-icon" />
+              </button>
+              <div className="collapse navbar-collapse" id="navbarCollapse">
+                  <ul className="navbar-nav me-auto mb-2 mb-md-0">
+                      <li class="nav-item">
+                          <Link to='/'class="nav-link active">Volver</Link>
+                      </li>
+                  </ul>
+              </div>            
+          </div>
+    </header>
+    <div>
+        <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Registro</h1>
+    </div>
+    <div style={{border:'solid 1px', padding: '20px', borderRadius: '10px', maxWidth: '600px', marginTop:'4%', marginLeft:'35%' }}>
+        <form onSubmit={store} >
+            <div className="mb-3">
+                <label htmlFor="nombre" className="form-label">Nombre completo</label>
+                <input value={name} onChange={(e)=> setName(e.target.value)} type='text' className='form-control'required />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="nombre" className="form-label">Documento</label>
+                <input value={documento} onChange={(e)=> setDocumento(e.target.value)} type='text' className='form-control'required />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="password" className="form-label">Telefono</label>
+                <input value={telefono} onChange={(e)=>setTelefono(e.target.value)} type='text' className='form-control'required />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="email" className="form-label">Email</label>
+                <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' className='form-control'required />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="password" className="form-label">Contraseña</label>
+                <input value={password} onChange={(e)=>setPass(e.target.value)} type='password' className='form-control'required />
+            </div>
+            <button type="submit" className="btn btn-dark">Enviar</button>       
+        </form>
+    </div>
  </div>
-        // <div>
-        //   <nav className="navbar navbar-expand-lg" style={{backgroundColor:'#0E0B16 '}}>
-        //     <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:'#E7DFDD'}}>Mis Usuarios </a>
-        //     <div className="collapse navbar-collapse" id="navbarNav">
-        //       <ul className="navbar-nav ml-auto">
-        //         <li className="nav-item">
-        //         <Link to="/" className="nav-link" style={{ color:'#E7DFDD'}}>
-        //           Inicio   
-        //         </Link>
-        //         </li>
-        //       </ul>
-        //     </div>
-        //     <div className="ml-auto" style={{paddingRight: 30}}>
-        //       <Link to='/Login' className='btn btn-dark'>Ingresar</Link>
-        //     </div>
-        // </nav>
-     
-        // </div>
-
     )
 }
 export default  CreateUsuario
