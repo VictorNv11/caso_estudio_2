@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Papa from 'papaparse';
-import { BsArrowUpSquareFill } from "react-icons/bs";
+import { BsFillCloudArrowUpFill } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import BotonExcelDefault from "./BotonExcelDefault";
 import { Link } from "react-router-dom";
@@ -84,9 +84,14 @@ export default function ImportClient() {
     if (file) {
       const fileNameParts = file.name.split('.');
       const fileExtension = fileNameParts[fileNameParts.length - 1].toLowerCase();
-  
+
+
       if (fileExtension !== 'csv') {
         setError('El formato del archivo no es compatible. Selecciona un archivo CSV.');
+        // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
         return;
       }
 
@@ -96,9 +101,13 @@ export default function ImportClient() {
       reader.onload = function (e) {
         const fileContent = e.target.result;
 
-        // Verificar si el contenido está vacío o solo contiene espacios en blanco y saltos de línea
+          // Verificar si el contenido está vacío o solo contiene espacios en blanco y saltos de línea
       if (/^\s*$/.test(fileContent)) {
         setError('El archivo está vacío. Selecciona un archivo válido.');
+         // Configurar el temporizador para limpiar el error después de 5 segundos
+         setTimeout(() => {
+          setError(null);
+        }, 5000);
         return;
       }
 
@@ -124,7 +133,6 @@ export default function ImportClient() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError(null);
-    
     if (selectedFile) {
       console.log('cont', contenido)
       const formData = JSON.stringify({ contenido });
@@ -146,6 +154,10 @@ export default function ImportClient() {
         .then(data => {
           console.log('Archivo enviado con éxito', data);
           setSuccessMessage('Archvio enviado con exito');
+          // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 5000);
 
           alert('Archivo enviado con éxito');
         })
@@ -153,17 +165,31 @@ export default function ImportClient() {
         .catch(error => {
           console.error('Error al enviar el archivo:', error);
 
-          setError('Error al enviar el archivo: ${error.message}');
+          setError(`Error al enviar el archivo. Por favor, verifica el formato y contenido del archivo.`);
+          // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
         });
 
     } else {
       setError('Selecciona un archivo antes de subirlo');
+       // Configurar el temporizador para limpiar el error después de 5 segundos
+       setTimeout(() => {
+        setError(null);
+      }, 5000);
     }
 
   }
 
   return (
     <div>
+      <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
+         <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
+         <div className="ml-auto" style={{paddingRight: 30}}>
+           <Link to='/' className='btn btn-dark'>Salir</Link>
+         </div>
+     </nav>
       <div className="container">
         <title>Importar/Exportar - Excel</title>
         <br />
@@ -176,9 +202,21 @@ export default function ImportClient() {
                   <input type="file" onChange={handleFileChange} />
                 </div>
                 <div className="col-md-6">
-                  <button className="btn btn-primary" type="submit">
-                    <BsArrowUpSquareFill /> Cargar Archivos
-                  </button>
+                  <button className="btn btn-primary" type="submit" style={{ 
+   
+    
+      background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)',
+      border: 'none',
+      borderRadius: '5px',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Agregamos una sombra sutil
+      cursor: 'pointer',
+      padding: '8px 16px',
+      color: 'white',
+    }}
+    onMouseOver={(e) => e.target.style.background = 'linear-gradient(to right, rgb(58, 36, 118, 1), #752694)'}
+    onMouseOut={(e) => e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)'}>
+      <BsFillCloudArrowUpFill style={{ color: 'white', marginRight: '8px' }} /> Cargar Archivos
+    </button>
                   {error && (
                     <div className="alert alert-danger" role="alert">
                       {error}
@@ -217,11 +255,6 @@ export default function ImportClient() {
           >
             Crear
           </Link>{" "}
-        </div>
-        <div>
-          <BotonExcelDefault clientes= {clientes}/> 
- 
-
         </div>
         <div className="row">
           {currentClientes.length > 0 && (

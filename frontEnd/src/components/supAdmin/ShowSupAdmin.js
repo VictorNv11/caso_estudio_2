@@ -4,6 +4,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { BsSearch } from "react-icons/bs";
 import Cookies from 'js-cookie';
+import Logo from '..//..//assets/img/planetas.png'
+import { Navbar, Nav, Dropdown, Button } from 'react-bootstrap';
+import { BsList } from 'react-icons/bs';
+import { AiTwotoneBell } from 'react-icons/ai';
+
 
 
 
@@ -13,6 +18,7 @@ const ShowSupAdmin = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
   const endpoint = 'http://localhost:8000/api';
+  
 
   const showData = async () => {
     try {
@@ -56,7 +62,8 @@ const ShowSupAdmin = () => {
 
   const filteredUsers = search
     ? Users.filter((users) =>
-        users.email.toLowerCase().includes(search.toLowerCase())
+        users.email.toLowerCase().includes(search.toLowerCase()) ||
+        (users.telefono && users.telefono.toString().includes(search.toString()))
       )
     : Users;
 
@@ -71,7 +78,10 @@ const ShowSupAdmin = () => {
 
   return (
     <div>
-    <nav className="navbar navbar-expand-lg " style={{ backgroundColor: "#0E0B16 " }}>
+    <nav className="navbar navbar-expand-lg " style={{ backgroundColor: "#0E0B16 ", borderRadius: 5 }}>
+    <a className="navbar-brand" href="#">
+          <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
+        </a>
       <a className="navbar-brand" href="#" style={{ paddingLeft: 20, color: "#E7DFDD" }}>Super Administrador </a>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
@@ -86,8 +96,11 @@ const ShowSupAdmin = () => {
           </li>
         </ul>
       </div>
+      <div className='ml-auto' style={{paddingRight:10, fontSize:'25px'}}>
+          <AiTwotoneBell style={{color:'white'}} />
+        </div>
       <div className="ml-auto" style={{ paddingRight: 30 }}>
-        <button onClick={salir} className='btn btn-light'>Salir</button>
+        <button onClick={salir} className='btn btn-dark'>Salir</button>
       </div>
     </nav>
     <div style={{ marginTop: '5%' }}>
@@ -152,6 +165,48 @@ const ShowSupAdmin = () => {
         </div>
       </footer>
     </div>
+    <footer style={{ position: 'static', bottom: 0, width: '100%', backgroundColor: '#0E0B16' }}>
+                <div className="container-fluid">
+                    <div className="row p-5 pb-2  text-white">
+                        <div className="col-xs-12 col-md-6 col-lg-3">
+                            <p className="h3">Gestión de Usuarios</p>
+                           
+                        </div>
+                        <div className="col-xs-12 col-md-6 col-lg-3">
+                            <p className="h5 mb-3">Contactos</p>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Facebook</a>
+                            </div>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">GitHub</a>
+                            </div>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Gmail</a>
+                            </div>
+
+                        </div>
+
+                        <div className="col-xs-12 col-md-6 col-lg-3">
+                            <p className="h5">Enlaces</p>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Terms & Conditions</a>
+                            </div>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Private Policy</a>
+                            </div>
+                        </div>
+                        <div className="col-xs-12 col-md-6 col-lg-3">
+                            <p className="h5">Acerca De</p>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Documentos</a>
+                            </div>
+                        </div>
+                        <div className="col-xs-12 pt-4">
+                        <p className='text-white text-center'>Copyright - All rights reserved © 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
   </div>
   )
 }

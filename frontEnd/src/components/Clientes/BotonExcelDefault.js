@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Spinner, Alert } from "reactstrap";
 import * as XLSX from "xlsx";
-import { BsArrowDownSquareFill } from "react-icons/bs";
+import { BsFillCloudArrowDownFill } from "react-icons/bs";
 
 const BotonExcelDefault = ({ clientes }) => {
   const [loading, setLoading] = useState(false);
@@ -49,11 +49,21 @@ const BotonExcelDefault = ({ clientes }) => {
         </Alert>
       )}
         {!loading ? (
-          <Button color="success" onClick={handleDownload}>
-           <BsArrowDownSquareFill /> Extraer a Excel 
+          <Button color="secondary"  style={{ 
+            background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)',
+            border: 'none',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Agregamos una sombra sutil
+          }}
+          onMouseOver={(e) => e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 1), #590d77)'}
+          onMouseOut={(e) => e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)'}
+           onClick={handleDownload} className=" d-lg-block">
+        <BsFillCloudArrowDownFill style={{ color: 'white', marginRight: '8px' }} />Extraer a Excel 
           </Button>
+     
+        
+         
         ) : (
-          <Button color="success" disabled>
+          <Button color="secondary"  style= {{background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)'}} disabled>
             <Spinner size="sm">Loading...</Spinner>
             <span> Generando...</span>
           </Button>
