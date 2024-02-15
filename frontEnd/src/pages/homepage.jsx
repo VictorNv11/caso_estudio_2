@@ -51,7 +51,7 @@ const Homepage = () => {
                 target="_blank"
                 title="Síguenos en  Twitter"
               >
-                <FaTwitter style={{color: 'white', fontSize:25, padding:'0 4 10 10' }}/>
+                <FaTwitter style={{color: 'white', fontSize:35, padding:'0 4 0 10' }}/>
                 <p className="d-lg-none d-xl-none">Twitter</p>
               </NavLink>
             </NavItem>
@@ -63,7 +63,7 @@ const Homepage = () => {
                 target="_blank"
                 title="Síguenos en  Facebook"
               >
-                <FaFacebookSquare style={{color: 'white', fontSize:25, padding:'0 4 10 10' }}/>
+                <FaFacebookSquare style={{color: 'white', fontSize:35, padding:'0 4 0 10' }}/>
                 <p className="d-lg-none d-xl-none">Facebook</p>
               </NavLink>
             </NavItem>
@@ -75,7 +75,7 @@ const Homepage = () => {
                 target="_blank"
                 title="Síguenos en Instagram"
               >
-               <FaInstagram style={{color: 'white', fontSize:63, padding:'0 4 10 10', paddingRight:40 }}/>
+               <FaInstagram style={{color: 'white', fontSize:92, padding:'0 4 0 10', paddingRight:60 }}/>
                 <p className="d-lg-none d-xl-none">Instagram</p>
               </NavLink>
             </NavItem>

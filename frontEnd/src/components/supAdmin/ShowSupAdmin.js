@@ -165,7 +165,7 @@ const ShowSupAdmin = () => {
         </div>
       </footer>
     </div>
-    <footer style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: '#0E0B16' }}>
+    <footer style={{ position: 'static', bottom: 0, width: '100%', backgroundColor: '#0E0B16' }}>
                 <div className="container-fluid">
                     <div className="row p-5 pb-2  text-white">
                         <div className="col-xs-12 col-md-6 col-lg-3">
