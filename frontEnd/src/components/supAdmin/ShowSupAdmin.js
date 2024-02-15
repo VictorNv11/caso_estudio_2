@@ -18,6 +18,7 @@ const ShowSupAdmin = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
   const endpoint = 'http://localhost:8000/api';
+  
 
   const showData = async () => {
     try {
@@ -61,7 +62,8 @@ const ShowSupAdmin = () => {
 
   const filteredUsers = search
     ? Users.filter((users) =>
-        users.email.toLowerCase().includes(search.toLowerCase())
+        users.email.toLowerCase().includes(search.toLowerCase()) ||
+        (users.telefono && users.telefono.toString().includes(search.toString()))
       )
     : Users;
 
@@ -98,7 +100,7 @@ const ShowSupAdmin = () => {
           <AiTwotoneBell style={{color:'white'}} />
         </div>
       <div className="ml-auto" style={{ paddingRight: 30 }}>
-        <button onClick={salir} className='btn btn-light'>Salir</button>
+        <button onClick={salir} className='btn btn-dark'>Salir</button>
       </div>
     </nav>
     <div style={{ marginTop: '5%' }}>

@@ -88,6 +88,10 @@ export default function ImportClient() {
 
       if (fileExtension !== 'csv') {
         setError('El formato del archivo no es compatible. Selecciona un archivo CSV.');
+        // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
         return;
       }
 
@@ -100,6 +104,10 @@ export default function ImportClient() {
           // Verificar si el contenido está vacío o solo contiene espacios en blanco y saltos de línea
       if (/^\s*$/.test(fileContent)) {
         setError('El archivo está vacío. Selecciona un archivo válido.');
+        // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
         return;
       }
 
@@ -145,19 +153,31 @@ export default function ImportClient() {
         })
         .then(data => {
           console.log('Archivo enviado con éxito', data);
-          setSuccessMessage('Archvio enviado con exito');
-
+          setSuccessMessage('Archivo enviado con éxito');
+          // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 5000);
+        
           alert('Archivo enviado con éxito');
         })
 
         .catch(error => {
           console.error('Error al enviar el archivo:', error);
 
-          setError(`Error al enviar el archivo: ${error.message}`);
+          setError(`Error al enviar el archivo. Por favor, verifica el formato y contenido del archivo.`);
+          // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
         });
 
     } else {
       setError('Selecciona un archivo antes de subirlo');
+       // Configurar el temporizador para limpiar el error después de 5 segundos
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
     }
 
   }

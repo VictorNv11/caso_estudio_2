@@ -28,6 +28,31 @@ const CreateUsuario = () => {
   const store = async (e) => {
     e.preventDefault();
 
+        // Validación de correo electrónico con una expresión regular simple
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Por favor, ingrese un correo electrónico válido");
+            return;
+        }
+
+        // Validación de documento: solo números y al menos 8 caracteres
+        if (!/^\d{5,10}$/.test(documento)) {
+            alert("Por favor, ingrese un documento válido (al menos de 5 a 10 dígitos)");
+            return;
+        }
+
+        // Validación de teléfono: solo números y al menos 7 caracteres
+       if (!/^\d{10,}$/.test(telefono)) {
+           alert("Por favor, ingrese un número de teléfono válido (al menos 10 dígitos)");
+           return;
+        }
+            // Validación de contraseña: al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número
+    /* if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)) {
+       alert("La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula y un número");
+       return;
+   }*/
+
+
     if (!name || !documento || !telefono ||!email || !password ) {
       setMissingFieldsError("Completa todos los campos, gracias.");
       return;
@@ -59,7 +84,7 @@ const CreateUsuario = () => {
          </div>
      </nav>
      <div>
-         <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%', color:'#E7DFDD'}}>Creando SuperAdministrador</h1>
+         <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%', color:'#E7DFDD'}}>Formulario de Registro</h1>
      </div>
    <div style={{ marginTop:'5%', backgroundColor: '#0E0B16', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
          <form onSubmit={store} >
