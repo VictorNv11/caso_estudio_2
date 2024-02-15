@@ -163,6 +163,48 @@ const ShowSupAdmin = () => {
         </div>
       </footer>
     </div>
+    <footer style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: '#0E0B16' }}>
+                <div className="container-fluid">
+                    <div className="row p-5 pb-2  text-white">
+                        <div className="col-xs-12 col-md-6 col-lg-3">
+                            <p className="h3">Gestión de Usuarios</p>
+                           
+                        </div>
+                        <div className="col-xs-12 col-md-6 col-lg-3">
+                            <p className="h5 mb-3">Contactos</p>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Facebook</a>
+                            </div>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">GitHub</a>
+                            </div>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Gmail</a>
+                            </div>
+
+                        </div>
+
+                        <div className="col-xs-12 col-md-6 col-lg-3">
+                            <p className="h5">Enlaces</p>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Terms & Conditions</a>
+                            </div>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Private Policy</a>
+                            </div>
+                        </div>
+                        <div className="col-xs-12 col-md-6 col-lg-3">
+                            <p className="h5">Acerca De</p>
+                            <div className="mb-2">
+                                <a className='text-secondary text-decoration-none' href="#">Documentos</a>
+                            </div>
+                        </div>
+                        <div className="col-xs-12 pt-4">
+                        <p className='text-white text-center'>Copyright - All rights reserved © 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
   </div>
   )
 }

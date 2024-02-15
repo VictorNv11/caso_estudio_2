@@ -164,6 +164,12 @@ export default function ImportClient() {
 
   return (
     <div>
+      <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
+         <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
+         <div className="ml-auto" style={{paddingRight: 30}}>
+           <Link to='/' className='btn btn-dark'>Salir</Link>
+         </div>
+     </nav>
       <div className="container">
         <title>Importar/Exportar - Excel</title>
         <br />
