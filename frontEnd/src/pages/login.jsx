@@ -33,6 +33,19 @@ export default function Login() {
 
     return (
         <section className="vh-100 gradient-custom">
+               <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
+            <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item active" style={{paddingRight: 20}}>
+                  <Link to='/supAdmins' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
+                </li>
+              </ul>
+            </div>
+            <div className="ml-auto" style={{paddingRight: 30}}>
+              <Link to='/' className='btn btn-dark'>Salir</Link>
+            </div>
+        </nav>
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">

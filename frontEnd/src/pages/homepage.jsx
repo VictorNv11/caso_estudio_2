@@ -2,6 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import usuarios from '../assets/img/img_home.jpg';
 import Logo from '../assets/img/planetas.png';
+import {
+  Button,
+  Collapse,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+  NavbarBrand,
+  Navbar,
+  NavItem,
+  NavLink,
+  Nav,
+  Container,
+  Row,
+  Col,
+  UncontrolledTooltip,
+} from "reactstrap";
+import { FaTwitter } from "react-icons/fa";
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 
 const Homepage = () => {
     return (
@@ -19,9 +39,46 @@ const Homepage = () => {
                         <li className="nav-item">
                             <Link to="/pricing" className="nav-link" style={{ color: "#E7DFDD" }}>Precios</Link>
                         </li>
-                    </ul>
+                      </ul>
+         
                 </div>
-                <div className="ml-auto" style={{ paddingRight: 30 }}>
+                <div className="ml-auto" style={{ paddingRight: 30, display:'flex', justifyContent:'center', alignItems:'center' }}>
+                <NavItem className="p-0" style={{listStyle:'none'}}>
+              <NavLink
+                data-placement="bottom"
+                href="https://twitter.com/CreativeTim"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Síguenos en  Twitter"
+              >
+                <FaTwitter style={{color: 'white', fontSize:35, padding:'0 4 10 10' }}/>
+                <p className="d-lg-none d-xl-none">Twitter</p>
+              </NavLink>
+            </NavItem>
+            <NavItem className="p-0"  style={{listStyle:'none'}}>
+              <NavLink
+                data-placement="bottom"
+                href="https://www.facebook.com/CreativeTim"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Síguenos en  Facebook"
+              >
+                <FaFacebookSquare style={{color: 'white', fontSize:35, padding:'0 4 10 10' }}/>
+                <p className="d-lg-none d-xl-none">Facebook</p>
+              </NavLink>
+            </NavItem>
+            <NavItem className="p-0"  style={{listStyle:'none'}}>
+              <NavLink
+                data-placement="bottom"
+                href="https://www.instagram.com/CreativeTimOfficial"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Síguenos en Instagram"
+              >
+               <FaInstagram style={{color: 'white', fontSize:72, padding:'0 4 10 10', paddingRight:40 }}/>
+                <p className="d-lg-none d-xl-none">Instagram</p>
+              </NavLink>
+            </NavItem>
                     <Link to="/login" className="btn btn-dark">Ingresar</Link>
                 </div>
             </nav>
