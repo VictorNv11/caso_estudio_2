@@ -57,7 +57,7 @@ const BotonExcelDefault = ({ clientes }) => {
           onMouseOver={(e) => e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 1), #590d77)'}
           onMouseOut={(e) => e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)'}
            onClick={handleDownload} className=" d-lg-block">
-        <BsFillCloudArrowDownFill style={{ color: 'rgba(173, 134, 201, 0.8)', marginRight: '8px' }} />Extraer a Excel 
+        <BsFillCloudArrowDownFill style={{ color: 'white', marginRight: '8px' }} />Extraer a Excel 
           </Button>
      
         
