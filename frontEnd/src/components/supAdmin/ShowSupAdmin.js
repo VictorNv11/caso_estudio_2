@@ -83,7 +83,7 @@ const ShowSupAdmin = () => {
           <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
         </a>
       <a className="navbar-brand" href="#" style={{ paddingLeft: 20, color: "#E7DFDD" }}>Super Administrador </a>
-      <div className="collapse navbar-collapse" id="navbarNav">
+      {/*<div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item active" style={{ paddingRight: 20 }}>
             <Link to='/supAdmins' className='nav-link' style={{ color: "#E7DFDD" }}>Super Administrador</Link>
@@ -95,7 +95,7 @@ const ShowSupAdmin = () => {
             <Link to='/usuarios' className='nav-link disabled' style={{ color: "#E7DFDD" }}>Usuarios</Link>
           </li>
         </ul>
-      </div>
+      </div>*/}
       <div className='ml-auto' style={{paddingRight:10, fontSize:'25px'}}>
           <AiTwotoneBell style={{color:'white'}} />
         </div>
@@ -104,7 +104,7 @@ const ShowSupAdmin = () => {
       </div>
     </nav>
     <div style={{ marginTop: '5%' }}>
-      <h1 className='text-center'>Listado de Super Administradores</h1>
+      <h1 className='text-center' style={{color:'#E7DFDD'}}>Listado de Super Administradores</h1>
     </div>
     <div style={{ marginLeft: '4%', marginTop: '2%' }}>
       <input value={search} style={{ borderRadius: 5 }} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input><BsSearch style={{ marginLeft: 5, color: 'white' }} />
@@ -142,7 +142,7 @@ const ShowSupAdmin = () => {
         </tbody>
       </table>
       <footer>
-        <div style={{ marginLeft: '44.5%', marginTop: 'auto' }}>
+        <div style={{ marginLeft: '46.5%', marginTop: 'auto' }}>
           <ul className="pagination">
             <li className="page-item" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
               <a className="page-link" href="#" aria-label="Previous">

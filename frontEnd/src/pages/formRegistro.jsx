@@ -90,33 +90,34 @@ const CreateUsuario = () => {
           </div>
     </header>
     <div>
-        <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%'}}>Registro</h1>
-    </div>
-    <div style={{border:'solid 1px', padding: '20px', borderRadius: '10px', maxWidth: '600px', marginTop:'4%', marginLeft:'35%' }}>
+        <h1 className="title-1" style={{textAlign:'center',  marginTop: '6%', color:'#E7DFDD'}}>Formulario de Registro</h1>
+   </div>
+    <div style={{border:'solid 1px', padding: '20px', borderRadius: '10px', maxWidth: '600px', marginTop:'4%', marginLeft:'35%', backgroundColor:'#0E0B16'}}>
         <form onSubmit={store} >
             <div className="mb-3">
-                <label htmlFor="nombre" className="form-label">Nombre completo</label>
+                <label htmlFor="nombre" className="form-label" style={{color:'#E7DFDD'}}>Nombre completo</label>
                 <input value={name} onChange={(e)=> setName(e.target.value)} type='text' className='form-control'required />
             </div>
             <div className="mb-3">
-                <label htmlFor="nombre" className="form-label">Documento</label>
+                <label htmlFor="nombre" className="form-label" style={{color:'#E7DFDD'}}>Documento</label>
                 <input value={documento} onChange={(e)=> setDocumento(e.target.value)} type='text' className='form-control'required />
             </div>
             <div className="mb-3">
-                <label htmlFor="password" className="form-label">Telefono</label>
+                <label htmlFor="password" className="form-label" style={{color:'#E7DFDD'}}>Telefono</label>
                 <input value={telefono} onChange={(e)=>setTelefono(e.target.value)} type='text' className='form-control'required />
             </div>
             <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
+                <label htmlFor="email" className="form-label" style={{color:'#E7DFDD'}}>Email</label>
                 <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' className='form-control'required />
             </div>
             <div className="mb-3">
-                <label htmlFor="password" className="form-label">Contraseña</label>
+                <label htmlFor="password" className="form-label" style={{color:'#E7DFDD'}}>Contraseña</label>
                 <input value={password} onChange={(e)=>setPass(e.target.value)} type='password' className='form-control'required />
             </div>
             <button type="submit" className="btn btn-dark">Enviar</button>       
         </form>
     </div>
+    
  </div>
     )
 }
