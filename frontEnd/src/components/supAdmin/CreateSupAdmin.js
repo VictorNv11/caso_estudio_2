@@ -25,10 +25,10 @@ const CreateSupAdmin = () => {
     }
 
            // Validación de correo electrónico con una expresión regular simple
-           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+           const emailRegex = /^[^\s@]+@(?:mail|gmail|outlook|hotmail)\.[^\s@]+$/i
            if (!emailRegex.test(email)) {
-               alert("Por favor, ingrese un correo electrónico válido");
-               return;
+            alert("Por favor, ingrese un correo electrónico válido con un dominio permitido (ej. mail, gmail, outlook, hotmail)");
+            return;
            }
    
            // Validación de documento: solo números y al menos 8 caracteres
