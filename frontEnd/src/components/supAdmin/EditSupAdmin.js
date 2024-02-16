@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import { useNavigate, useParams} from 'react-router-dom'
+import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
 
 const endpoint = 'http://localhost:8000/api/User/'
 
@@ -14,6 +15,8 @@ const EditSupAdmin = () => {
     const [roles, setRoles] = useState(3)
     const navigate = useNavigate()
     const {id} = useParams()
+    const [showPassword, setShowPassword] = useState(false);
+
 
      const update = async (e) =>{
         e.preventDefault()
@@ -64,9 +67,20 @@ const EditSupAdmin = () => {
                       <label htmlFor="email" className="form-label" style={{color:"#E7DFDD" }}>Email</label>
                       <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' className='form-control'required />
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-3 position-relative">
                       <label htmlFor="password" className="form-label" style={{color:"#E7DFDD" }}>Contraseña</label>
-                      <input value={password} onChange={(e)=>setPass(e.target.value)} type='text' label className='form-control'required />
+                      <div className="input-group">
+                      <input value={password} onChange={(e)=>setPass(e.target.value)} type={showPassword ? 'text' : 'password'} label className='form-control'required />
+                      
+                    <button
+                        className="btn btn-outline-dark"
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{ zIndex: 2 }}
+                    >
+                        {showPassword ? <IoEyeSharp  style={{ color:'white'  }} /> : <IoEyeOffSharp  style={{ color:'white'  }} />}
+                    </button>
+                    </div>
                   </div>
                   <div>
                   <label className='form-label' style={{color:"#E7DFDD", padding:'1%' }}>Roles</label>

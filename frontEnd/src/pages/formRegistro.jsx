@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Logo from '../assets/img/planetas.png';
+import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
+
 
 
 const endpoint = 'http://localhost:8000/api/register'
@@ -16,6 +18,8 @@ const CreateUsuario = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [missingFieldsError, setMissingFieldsError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
 
 
   // Limpia el mensaje de error
@@ -114,9 +118,22 @@ const CreateUsuario = () => {
                 <label htmlFor="email" className="form-label" style={{color:'#E7DFDD'}}>Email</label>
                 <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' className='form-control'required />
             </div>
-            <div className="mb-3">
-                <label htmlFor="password" className="form-label" style={{color:'#E7DFDD'}}>Contraseña</label>
-                <input value={password} onChange={(e)=>setPass(e.target.value)} type='password' className='form-control'required />
+            <div className="mb-3 position-relative">
+                <label htmlFor="password" className="form-label" style={{ color: '#E7DFDD', marginBottom: '0.5rem' }}>Contraseña</label>
+                <div className="input-group">
+                    <input value={password} onChange={(e)=>setPass(e.target.value)} type={showPassword ? 'text' : 'password'}
+                        className='form-control'
+                        required/>
+                 
+                    <button
+                        className="btn btn-outline-dark"
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{ zIndex: 2 }}
+                    >
+                        {showPassword ? <IoEyeSharp  style={{ color:'white'  }} /> : <IoEyeOffSharp  style={{ color:'white'  }} />}
+                    </button>
+                </div>
             </div>
             <button type="submit" className="btn btn-dark">Enviar</button>       
         </form>
