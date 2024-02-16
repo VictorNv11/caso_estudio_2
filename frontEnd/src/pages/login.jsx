@@ -4,12 +4,14 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import img_home from "../assets/img/img_home.png"
 import Logo from '../assets/img/planetas.png';
+import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
 
 export default function Login() {
     
    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const endpoint = 'http://localhost:8000/api/';
 
@@ -72,15 +74,25 @@ export default function Login() {
                                         />
                                         <label className="form-label" htmlFor="typeEmailX">Correo</label>
                                     </div>
-                                    <div className="form-outline form-white mb-4">
+                                    <div className="form-outline form-white mb-4 position-relative">
+                                    <div className="input-group">
                                         <input
-                                            type="password"
+                                            type={showPassword ? 'text' : 'password'}
                                             id="typePasswordX"
                                             className="form-control form-control-lg"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
-                                        <label className="form-label" htmlFor="typePasswordX">Password</label>
+                                           <button
+                        className="btn btn-outline-dark"
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{ zIndex: 2 }}
+                    >
+                        {showPassword ? <IoEyeSharp  style={{ color:'white'  }} /> : <IoEyeOffSharp  style={{ color:'white'  }} />}
+                    </button>
+                    </div>
+                                        <label className="form-label" htmlFor="typePasswordX">Contraseña</label>
                                     </div>
                                     <button type="submit" className="btn btn-outline-light btn-lg px-5">Ingresar</button>
                                 </form>
