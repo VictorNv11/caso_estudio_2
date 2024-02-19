@@ -43,8 +43,14 @@ Route::prefix('clientes')->group(function () {
     Route::get('/', [ImportController::class, 'index']); // SIRVE
     Route::post('/import', [ImportController::class, 'importar']); // SIRVE
     Route::get('/export', [ImportController::class, 'exportar']); // SIRVE
+    
 
     Route::get('/export/excel', [ImportController::class, 'exportarExcel']);
+    Route::post('/create',[ImportController::class, 'store']);  
+    Route::get('/{id}', [ImportController::class,'show']);
+    Route::put('/{id}',[ImportController::class,'update']);         //SIRVE
+    Route::delete('/delete/{id}',[ImportController::class,'destroy']); 
+    
 });
 
 //__________________PRUEBA LOGIN Y REGISTRO__________________________

@@ -24,7 +24,7 @@ const ShowSupAdmin = () => {
     try {
       const token = Cookies.get("token");
       const response = await axios.get(`${endpoint}/users`, {
-        headers: {
+        headers: {  
           Authorization: `Bearer ${token}`
         }
       });
@@ -43,7 +43,7 @@ const ShowSupAdmin = () => {
       window.location.href = "/";
     }
     showData();
-  }, [currentPage]);
+  }, []);
 
   const deleteUsers = async (id) => {
     try {
@@ -69,7 +69,11 @@ const ShowSupAdmin = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentAdmins = filteredUsers.slice(indexOfFirstItem, indexOfLastItem);
+  const currentUsers = filteredUsers.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const salir = () => {
     Cookies.remove("token")
@@ -112,6 +116,10 @@ const ShowSupAdmin = () => {
       <Link to='/create' className='btn btn-dark btn-sm'>Crear</Link>{' '}
     </div>
     <div>
+    <a className="navbar-brand" href="#" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ width: 70, height: 60 }} />
+</a>
+
       <table className='table table-striped  container' style={{ marginTop: '2%', border: '1px solid black', borderRadius: 5 }}>
         <thead className='bg-dark text-white'>
           <tr>
@@ -125,7 +133,7 @@ const ShowSupAdmin = () => {
         </thead>
         <tbody>
           {
-            currentAdmins.map(users => (
+            currentUsers.map(users => (
               <tr key={users._id}>
                 <td>{users.name}</td>
                 <td>{users.email}</td>
@@ -149,12 +157,12 @@ const ShowSupAdmin = () => {
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            {Array.from({ length: Math.ceil(Users.length / itemsPerPage) }, (_, index) => (
-              <li className={`page-item ${currentPage === index + 1 && 'active'}`} key={index + 1} onClick={() => setCurrentPage(index + 1)}>
-                <a className="page-link" href="#">
-                  {index + 1}
-                </a>
-              </li>
+            {Array.from({ length: Math.ceil(filteredUsers.length / itemsPerPage) }, (_, index) => (
+              <li key={index + 1} className={`page-item ${currentPage === index + 1 && 'active'}`}>
+              <a className="page-link" href="#" onClick={() => paginate(index + 1)}>
+                {index + 1}
+              </a>
+            </li>
             ))}
             <li className="page-item" onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(Users.length / itemsPerPage)}>
               <a className="page-link" href="#" aria-label="Next">

@@ -4,6 +4,8 @@ import { BsFillCloudArrowUpFill } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import BotonExcelDefault from "./BotonExcelDefault";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 
 
@@ -181,17 +183,33 @@ export default function ImportClient() {
     }
 
   }
-
+  const deleteCliente = async (id) => {
+    try {
+      const token = Cookies.get("token");
+      await axios.delete(`${endpointdata}/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      getAllClientes();
+      alert('Cliente eliminado con éxito');
+    } catch (error) {
+      console.error('Error deleting Cliente:', error);
+    }
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
          <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
          <div className="ml-auto" style={{paddingRight: 30}}>
-           <Link to='/' className='btn btn-dark'>Salir</Link>
+            <Link to='/supAdmins' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
          </div>
      </nav>
       <div className="container">
-        <title>Importar/Exportar - Excel</title>
+      <div style={{ marginTop: '5%' }}>
+      <h1 className='text-center' style={{color:'#E7DFDD'}}>Listado de Clientes</h1>
+    </div>
+        <h1 className='text-center' style={{color:'#E7DFDD'}}>Importar/Exportar - Excel</h1>
         <br />
         <div className="row">
           <div className="col-md-4"></div>
@@ -202,21 +220,28 @@ export default function ImportClient() {
                   <input type="file" onChange={handleFileChange} />
                 </div>
                 <div className="col-md-6">
-                  <button className="btn btn-primary" type="submit" style={{ 
-   
-    
-      background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)',
-      border: 'none',
-      borderRadius: '5px',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Agregamos una sombra sutil
-      cursor: 'pointer',
-      padding: '8px 16px',
-      color: 'white',
-    }}
-    onMouseOver={(e) => e.target.style.background = 'linear-gradient(to right, rgb(58, 36, 118, 1), #752694)'}
-    onMouseOut={(e) => e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)'}>
-      <BsFillCloudArrowUpFill style={{ color: 'white', marginRight: '8px' }} /> Cargar Archivos
-    </button>
+               <button
+        className="btn btn-primary"
+        type="submit"
+        style={{
+          background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)',
+          border: 'none',
+          borderRadius: '5px',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          cursor: 'pointer',
+          padding: '8px 16px',
+          color: 'white',
+          marginRight: '10px',
+        }}
+        onMouseOver={(e) =>
+          (e.target.style.background = 'linear-gradient(to right, rgb(58, 36, 118, 1), #752694)')
+        }
+        onMouseOut={(e) =>
+          (e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)')
+        }
+      >
+        <BsFillCloudArrowUpFill style={{ color: 'white', marginRight: '8px' }} /> Cargar Archivos
+      </button>
                   {error && (
                     <div className="alert alert-danger" role="alert">
                       {error}
@@ -231,12 +256,18 @@ export default function ImportClient() {
               </form>
             </div>
           </div>
-          <div className="col-md-2">
-          <BotonExcelDefault clientes= {clientes} /> 
-          </div>
+          <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+  <BotonExcelDefault clientes={clientes} />
+</div>
         </div>
         <div
-          style={{ marginLeft: "4%", marginTop: "2%", paddingBottom: "30px" }}
+         style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginLeft: "4%",
+          marginTop: "2%",
+          paddingBottom: "30px",
+        }}
         >
           <input
     value={search}
@@ -248,36 +279,41 @@ export default function ImportClient() {
   />
   <BsSearch style={{ marginLeft: 5, color: 'white' }} />
 
-          <Link
-            to="/createC"
-            className="btn btn-primary btn-sm"
-            style={{ marginLeft: "71%" }}
-          >
-            Crear
-          </Link>{" "}
+  <Link
+  to="/createC"
+  className="btn btn-primary btn-sm"
+  style={{ marginLeft: 'auto', marginRight: 0 }}
+>
+  Crear
+</Link>{" "}
         </div>
         <div className="row">
           {currentClientes.length > 0 && (
             <table className="table table-striped">
               <thead>
                 <tr>
-                  <td>CC/NIT</td>
-                  <td>NOMBRE COMPLETO</td>
-                  <td>DIRECCION</td>
-                  <td>CIUDAD</td>
-                  <td>TELEFONO</td>
-                  <td>CORREO ELECTRONICO</td>
+                  <th>CC/NIT</th>
+                  <th>NOMBRE COMPLETO</th>
+                  <th>DIRECCION</th>
+                  <th>CIUDAD</th>
+                  <th>TELEFONO</th>
+                  <th>CORREO ELECTRONICO</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 {currentClientes.map((cliente, index) => (
                   <tr key={index}>
-                    <td>{cliente["cc/nit"]}</td>
+                    <td>{cliente.cc_nit}</td>
                     <td>{cliente.nombre_completo}</td>
                     <td>{cliente.direccion}</td>
                     <td>{cliente.ciudad}</td>
                     <td>{cliente.telefono}</td>
                     <td>{cliente.correo_electronico}</td>
+                    <td>
+                  <Link className='btn btn-primary btn-sm' to={`/editC/${cliente.id}`}>Editar</Link>{' '}
+                  <button className='btn btn-danger btn-sm' onClick={() => deleteCliente(cliente.id)}>Eliminar</button>
+                </td>
                   </tr>
                 ))}
               </tbody>

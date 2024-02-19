@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
-import { useNavigate, useParams} from 'react-router-dom'
+import { Link, useNavigate, useParams} from 'react-router-dom'
 import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
+
 
 const endpoint = 'http://localhost:8000/api/User/'
 
@@ -91,7 +92,14 @@ const EditSupAdmin = () => {
                     <option value="3">Usuario</option>
                   </select>
                 </div>
-                  <button type="submit" className="btn btn-dark">Editar</button>       
+                <div style={{ paddingTop:'10px', display: 'flex', flexDirection: 'column', alignItems: 'right' }}>
+                  <button type="submit" className="btn btn-primary">Editar</button> 
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'right', paddingTop:'5px' }}>
+    {/* ... (otro contenido) */}
+    {/* <button className='btn btn-secondary' style={{margin:'1px', marginTop: '1px 0' }}>Cancelar</button> */}
+    <Link to='/supAdmins' className='btn btn-secondary'  style={{color:'#E7DFDD'}}>Cancelar</Link>
+</div>      
               </form>
           </div>
       </div>
