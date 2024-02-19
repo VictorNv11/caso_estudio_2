@@ -17,6 +17,8 @@ import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
 import EditUsuarios from './components/usuarios/EditUsuarios.js';
 
 import ImportCliente from './components/Clientes/ImportClient.js';
+import CreateCliente from './components/Clientes/CreateCliente.js';
+import EditCliente from './components/Clientes/EditCliente.js';
 
 
 export default function App() {
@@ -29,6 +31,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/clientes" element={<ImportCliente/>} />
+        <Route path="/createC" element={<CreateCliente />} />
+        <Route path="/editC/:id" element={<EditCliente />} />
 
 
 

@@ -9,7 +9,7 @@ class Cliente extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'cc/nit',
+        'cc_nit',
         'nombre_completo',
         'direccion',
         'ciudad',
