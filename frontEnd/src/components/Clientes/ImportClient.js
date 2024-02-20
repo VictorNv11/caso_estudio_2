@@ -1,8 +1,18 @@
+// Hooks de react para variables de estado y sincronización externa
 import React, { useState, useEffect } from "react";
+
+// Analizador CSV
 import Papa from 'papaparse';
+
+// Iconos de reactstrap
 import { BsFillCloudArrowUpFill } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
+import { IoClose } from "react-icons/io5";
+
+// Importando el componente para la exportación del archivo Excel
 import BotonExcelDefault from "./BotonExcelDefault";
+
+// Enrutamiento
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -38,8 +48,12 @@ export default function ImportClient() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
+  // Agrega un estado para almacenar temporalmente el cliente que se va a eliminar
+  const [clienteToDelete, setClienteToDelete] = useState(null);
+
   // Modelo Clientes
   const [clientes, setClientes] = useState([]);
+
   // Filtrando clientes por Correo Electrónico y Número de Teléfono
   const filteredClientes = search
   ? clientesFromDB.filter((cliente) =>
@@ -47,9 +61,9 @@ export default function ImportClient() {
       (cliente.telefono && cliente.telefono.toString().includes(search.toString()))
     )
     : clientesFromDB;
-  
   const currentClientes = filteredClientes.slice(indexOfFirstItem, indexOfLastItem);
 
+  // Manejo de estados
   useEffect(() => {
     // Llamamos a la función para obtener los clientes
     getAllClientes();
@@ -69,6 +83,7 @@ export default function ImportClient() {
         const data = await response.json();
         setClientes (data);
         setClientesFromDB(data);
+        // Manejo de errores
       } else {
         console.error(`Error fetching data from ${endpointdata}: ${response.statusText}`);
       }
@@ -82,12 +97,13 @@ export default function ImportClient() {
 
     const file = event.target.files[0];
 
-
+    // Verifica si se selecciono un archivo
     if (file) {
       const fileNameParts = file.name.split('.');
+      // Extrae la extensión del archivo
       const fileExtension = fileNameParts[fileNameParts.length - 1].toLowerCase();
 
-
+      // Verifica el formato del archivo
       if (fileExtension !== 'csv') {
         setError('El formato del archivo no es compatible. Selecciona un archivo CSV.');
         // Configurar el temporizador para limpiar el error después de 5 segundos
@@ -97,13 +113,15 @@ export default function ImportClient() {
         return;
       }
 
+      // Lee el contenido del archivo
       setSelectedFile(file);
       const reader = new FileReader();
 
+      // Recarga al terminar de leer el archivo 
       reader.onload = function (e) {
         const fileContent = e.target.result;
 
-          // Verificar si el contenido está vacío o solo contiene espacios en blanco y saltos de línea
+      // Verificar si el contenido está vacío o solo contiene espacios en blanco y saltos de línea
       if (/^\s*$/.test(fileContent)) {
         setError('El archivo está vacío. Selecciona un archivo válido.');
          // Configurar el temporizador para limpiar el error después de 5 segundos
@@ -132,18 +150,20 @@ export default function ImportClient() {
     }
   }
 
+  // Envío del archivo al servidor
   const handleSubmit = (e) => {
     e.preventDefault();
     setError(null);
-    if (selectedFile) {
+    if (selectedFile) { // Verifica que se haya seleccionado un archivo
       console.log('cont', contenido)
-      const formData = JSON.stringify({ contenido });
+      const formData = JSON.stringify({ contenido }); // Convierte el contenido del archivo a JSON
       console.log(formData)
       fetch(endpoint, {
         method: 'POST',
         body: formData,
 
-      })
+      }) 
+        // Respuestas 
         .then(response => {
           console.log(response)
           if (!response.ok) {
@@ -183,7 +203,20 @@ export default function ImportClient() {
     }
 
   }
+
+  // Función para mostrar el mensaje de confirmación
+  const confirmDelete = (cliente) => {
+    setClienteToDelete(cliente);
+  };
+
+  // Función para cancelar la eliminación
+  const cancelDelete = () => {
+    setClienteToDelete(null);
+  };
+
+  // Función para eliminar un cliente después de la confirmación
   const deleteCliente = async (id) => {
+    if (clienteToDelete && clienteToDelete.id === id) {
     try {
       const token = Cookies.get("token");
       await axios.delete(`${endpointdata}/delete/${id}`, {
@@ -193,22 +226,26 @@ export default function ImportClient() {
       });
       getAllClientes();
       alert('Cliente eliminado con éxito');
+      setClienteToDelete(null); // Limpia el registro del cliente después de ser eliminado
     } catch (error) {
       console.error('Error deleting Cliente:', error);
     }
+  }
   };
   return (
     <div>
+      {/* NavBar */}
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
          <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
          <div className="ml-auto" style={{paddingRight: 30}}>
             <Link to='/supAdmins' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
          </div>
      </nav>
+
       <div className="container">
-      <div style={{ marginTop: '5%' }}>
-      <h1 className='text-center' style={{color:'#E7DFDD'}}>Listado de Clientes</h1>
-    </div>
+        <div style={{ marginTop: '5%' }}>
+          <h1 className='text-center' style={{color:'#E7DFDD'}}>Listado de Clientes</h1>
+        </div>
         <h1 className='text-center' style={{color:'#E7DFDD'}}>Importar/Exportar - Excel</h1>
         <br />
         <div className="row">
@@ -220,28 +257,28 @@ export default function ImportClient() {
                   <input type="file" onChange={handleFileChange} />
                 </div>
                 <div className="col-md-6">
-               <button
-        className="btn btn-primary"
-        type="submit"
-        style={{
-          background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)',
-          border: 'none',
-          borderRadius: '5px',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          cursor: 'pointer',
-          padding: '8px 16px',
-          color: 'white',
-          marginRight: '10px',
-        }}
-        onMouseOver={(e) =>
-          (e.target.style.background = 'linear-gradient(to right, rgb(58, 36, 118, 1), #752694)')
-        }
-        onMouseOut={(e) =>
-          (e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)')
-        }
-      >
-        <BsFillCloudArrowUpFill style={{ color: 'white', marginRight: '8px' }} /> Cargar Archivos
-      </button>
+                  <button
+                    className="btn btn-primary"
+                    type="submit"
+                    style={{
+                      background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)',
+                      border: 'none',
+                      borderRadius: '5px',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                      cursor: 'pointer',
+                      padding: '8px 16px',
+                      color: 'white',
+                      marginRight: '10px',
+                    }}
+                    onMouseOver={(e) =>
+                      (e.target.style.background = 'linear-gradient(to right, rgb(58, 36, 118, 1), #752694)')
+                    }
+                    onMouseOut={(e) =>
+                      (e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)')
+                    }
+                  >
+                    <BsFillCloudArrowUpFill style={{ color: 'white', marginRight: '8px' }} /> Cargar Archivos
+                  </button>
                   {error && (
                     <div className="alert alert-danger" role="alert">
                       {error}
@@ -257,8 +294,8 @@ export default function ImportClient() {
             </div>
           </div>
           <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-  <BotonExcelDefault clientes={clientes} />
-</div>
+            <BotonExcelDefault clientes={clientes} />
+          </div>
         </div>
         <div
          style={{
@@ -270,22 +307,21 @@ export default function ImportClient() {
         }}
         >
           <input
-    value={search}
-    style={{ borderRadius: 5 }}
-    onChange={searcher}
-    type="text"
-    placeholder="Buscar por Email"
-    className="form"
-  />
-  <BsSearch style={{ marginLeft: 5, color: 'white' }} />
+            value={search}
+            style={{ borderRadius: 5 }}
+            onChange={searcher}
+            type="text"
+            placeholder="Buscar por Email"
+            className="form"
+          />
+          <BsSearch style={{ marginLeft: 5, color: 'white' }} />
 
-  <Link
-  to="/createC"
-  className="btn btn-primary btn-sm"
-  style={{ marginLeft: 'auto', marginRight: 0 }}
->
-  Crear
-</Link>{" "}
+          <Link
+            to="/createC"
+            className="btn btn-primary btn-sm"
+            style={{ marginLeft: 'auto', marginRight: 0 }}
+          > Crear
+          </Link>{" "}
         </div>
         <div className="row">
           {currentClientes.length > 0 && (
@@ -311,9 +347,30 @@ export default function ImportClient() {
                     <td>{cliente.telefono}</td>
                     <td>{cliente.correo_electronico}</td>
                     <td>
-                  <Link className='btn btn-primary btn-sm' to={`/editC/${cliente.id}`}>Editar</Link>{' '}
-                  <button className='btn btn-danger btn-sm' onClick={() => deleteCliente(cliente.id)}>Eliminar</button>
-                </td>
+                    <Link className='btn btn-primary btn-sm' to={`/editC/${cliente.id}`}>Editar</Link>{' '}
+                    <button className='btn btn-danger btn-sm' onClick={() => confirmDelete(cliente)}>Eliminar</button>             
+                {clienteToDelete && (
+                  <div className="modal fade show" style={{ display: 'block' }}>
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title">Confirmar eliminación</h5>
+                          <button type="button" className="close" onClick={cancelDelete}>
+                            <IoClose />
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          <p>¿Estás seguro de que deseas eliminar este cliente?</p>
+                        </div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-secondary" onClick={cancelDelete}>Cancelar</button>
+                          <button type="button" className="btn btn-danger" onClick={() => deleteCliente(clienteToDelete.id)}>Eliminar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                  </td>
                   </tr>
                 ))}
               </tbody>
