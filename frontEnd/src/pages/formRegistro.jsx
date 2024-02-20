@@ -32,7 +32,11 @@ const CreateUsuario = () => {
   // Verifica que todos los datos se completen
   const store = async (e) => {
     e.preventDefault();
-
+        // Validación del nombre: no debe estar vacío y solo debe contener caracteres válidos
+       if (!name || !/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/.test(name)) {
+        alert("Por favor, ingrese un nombre válido");
+        return;
+    }
         // Validación de correo electrónico con una expresión regular simple
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
