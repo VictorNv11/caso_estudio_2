@@ -6,6 +6,7 @@ import BotonExcelDefault from "./BotonExcelDefault";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import Logo from '..//..//assets/img/planetas.png'
 
 
 
@@ -200,6 +201,9 @@ export default function ImportClient() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
+      <a className="navbar-brand" href="#">
+          <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
+        </a>
          <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
          <div className="ml-auto" style={{paddingRight: 30}}>
             <Link to='/supAdmins' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
