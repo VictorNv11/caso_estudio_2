@@ -2,23 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import img_home from '../assets/img/img_home.png';
 import Logo from '../assets/img/planetas.png';
-import {
-  Button,
-  Collapse,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
-  Row,
-  Col,
-  UncontrolledTooltip,
-} from "reactstrap";
+import { NavItem, NavLink,} from "reactstrap";
 import { FaTwitter } from "react-icons/fa";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
@@ -39,51 +23,50 @@ const Homepage = () => {
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <ul className="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page">Inicio</a>
+            <a class="nav-link active" aria-current="page" href='#'>Inicio</a>
           </li>
               <li className="nav-item">
               <a class="nav-link disabled" aria-disabled="true">Contacto</a>
               </li>
             </ul>
           </div>
-          <div className="ml-auto" style={{ paddingRight: 30, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-    <NavItem className="p-0" style={{ listStyle: 'none' }}>
-        <NavLink
-            data-placement="bottom"
-            href="https://twitter.com/CreativeTim"
-            rel="noopener noreferrer"
-            target="_blank"
-            title="Síguenos en  Twitter"
-        >
-            <FaTwitter style={{ color: 'white', fontSize: 45, padding: '0 10px' }} />
-            <p className="d-lg-none d-xl-none">Twitter</p>
-        </NavLink>
-    </NavItem>
-    <NavItem className="p-0" style={{ listStyle: 'none' }}>
-        <NavLink
-            data-placement="bottom"
-            href="https://www.facebook.com/CreativeTim"
-            rel="noopener noreferrer"
-            target="_blank"
-            title="Síguenos en  Facebook"
-        >
-            <FaFacebookSquare style={{ color: 'white', fontSize: 40, padding: '0 10px' }} />
-            <p className="d-lg-none d-xl-none">Facebook</p>
-        </NavLink>
-    </NavItem>
-    <NavItem className="p-0" style={{ listStyle: 'none' }}>
-        <NavLink
-            data-placement="bottom"
-            href="https://www.instagram.com/CreativeTimOfficial"
-            rel="noopener noreferrer"
-            target="_blank"
-            title="Síguenos en Instagram"
-        >
-            <FaInstagram style={{ color: 'white', fontSize: 43, padding: '0 10px' }} />
-            <p className="d-lg-none d-xl-none">Instagram</p>
-        </NavLink>
-    </NavItem>
-</div>
+          <div className="ml-auto" style={{ paddingRight: 30, display:'flex', justifyContent:'center', alignItems:'center' }}>
+              <NavItem className="p-0" style={{listStyle:'none'}}>
+                <NavLink
+                  data-placement="bottom"
+                  // href="https://twitter.com/CreativeTim"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  title="Síguenos en  Twitter">
+                  <FaTwitter style={{ color: 'white', fontSize: 45, padding: '0 10px' }}/>
+                  <p className="d-lg-none d-xl-none">Twitter</p>
+                </NavLink>
+            </NavItem>
+            <NavItem className="p-0"  style={{listStyle:'none'}}>
+              <NavLink
+                data-placement="bottom"
+                // href="https://www.facebook.com/CreativeTim"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Síguenos en  Facebook"
+              >
+                <FaFacebookSquare style={{ color: 'white', fontSize: 40, padding: '0 10px' }} />
+                <p className="d-lg-none d-xl-none">Facebook</p>
+              </NavLink>
+            </NavItem>
+            <NavItem className="p-0"  style={{listStyle:'none'}}>
+              <NavLink
+                data-placement="bottom"
+                // href="https://www.instagram.com/CreativeTimOfficial"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Síguenos en Instagram"
+              >
+               <FaInstagram style={{ color: 'white', fontSize: 43, padding: '0 10px' }}/>
+                <p className="d-lg-none d-xl-none">Instagram</p>
+              </NavLink>
+            </NavItem>
+                </div>
           <div className="ml-auto" style={{ paddingRight: 30 }}>
           
             <Link to="/login" className="btn btn-primary">Ingresar</Link>
@@ -99,7 +82,7 @@ const Homepage = () => {
         </div>
       </section>
 
-      <section className="py-5 text-center" id="about" style={{background: 'linear-gradient( to right,#0E0B16 , #A239CA )'}}>
+      <section className="py-5 text-" id="about" style={{background: 'linear-gradient( to right,#0E0B16 , #A239CA )'}}>
         <div className="container">
         <h3 className='mb-3' style={{ color: "#E7DFDD" }}>Sobre Nosotros</h3>
         <p style={{ textAlign: 'left', color: "#828081" }}>Descubre una nueva forma de gestionar tus usuarios. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate deserunt fugit recusandae earum perferendis quaerat? Eaque repudiandae vero quas fuga, praesentium inventore tempora maxime, atque neque illum molestias ducimus pariatur?
@@ -112,7 +95,7 @@ const Homepage = () => {
         </div>
       </section>
       {/* Footer */}
-      <footer style={{ position: 'static', bottom: 0, width: '100%', backgroundColor: '#0E0B16' }}>
+      <footer style={{ position: 'static', bottom: 0, width: '100%', backgroundColor: 'black' }}>
                 <div className="container-fluid">
                     <div className="row p-5 pb-2  text-white">
                         <div className="col-xs-12 col-md-6 col-lg-3">
