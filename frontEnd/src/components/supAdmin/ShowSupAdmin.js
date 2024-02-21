@@ -87,19 +87,6 @@ const ShowSupAdmin = () => {
           <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
         </a>
       <a className="navbar-brand" href="#" style={{ paddingLeft: 20, color: "#E7DFDD" }}>Super Administrador </a>
-      {/*<div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item active" style={{ paddingRight: 20 }}>
-            <Link to='/supAdmins' className='nav-link' style={{ color: "#E7DFDD" }}>Super Administrador</Link>
-          </li>
-          <li className="nav-item active" style={{ paddingRight: 20 }}>
-            <Link to='/Admin' className='nav-link' style={{ color: "#E7DFDD" }}>Administradores</Link>
-          </li>
-          <li className="nav-item active" style={{ paddingRight: 20 }}>
-            <Link to='/usuarios' className='nav-link disabled' style={{ color: "#E7DFDD" }}>Usuarios</Link>
-          </li>
-        </ul>
-      </div>*/}
       <div className='ml-auto' style={{paddingRight:10, fontSize:'25px'}}>
           <AiTwotoneBell style={{color:'white'}} />
         </div>
@@ -115,12 +102,12 @@ const ShowSupAdmin = () => {
       <Link className='btn btn-success btn-sm' to={'/Clientes'} style={{ marginLeft: '65.5%' }}>importar</Link>{' '}
       <Link to='/create' className='btn btn-dark btn-sm'>Crear</Link>{' '}
     </div>
-    <div>
+    <div style={{ minHeight: 'calc(100vh - 190px)', position: 'relative ' }}>
     <a className="navbar-brand" href="#" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
     <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ width: 70, height: 60 }} />
 </a>
 
-      <table className='table table-striped  container' style={{ marginTop: '2%', border: '1px solid black', borderRadius: 5 }}>
+      <table className='table table-striped container' style={{ marginTop: '2%', border: '1px solid black', borderRadius: 5 }}>
         <thead className='bg-dark text-white'>
           <tr>
             <th>Nombre</th>
@@ -173,7 +160,7 @@ const ShowSupAdmin = () => {
         </div>
       </footer>
     </div>
-    <footer style={{ position: 'static', bottom: 0, width: '100%', backgroundColor: '#0E0B16' }}>
+    <footer style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: '#0E0B16', color: 'white', padding: '20px' }}>
                 <div className="container-fluid">
                     <div className="row p-5 pb-2  text-white">
                         <div className="col-xs-12 col-md-6 col-lg-3">
