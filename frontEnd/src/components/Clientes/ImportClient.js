@@ -354,21 +354,19 @@ export default function ImportClient() {
                     <Link className='btn btn-primary btn-sm' to={`/editC/${cliente.id}`}>Editar</Link>{' '}
                     <button className='btn btn-danger btn-sm' onClick={() => confirmDelete(cliente)}>Eliminar</button>             
                 {clienteToDelete && (
-                  <div className="modal fade show" style={{ display: 'block' }}>
+                  <div className="modal fade show " style={{ display: 'block' }}>
                     <div className="modal-dialog">
-                      <div className="modal-content">
+                      <div className="modal-content bg-dark">
                         <div className="modal-header">
-                          <h5 className="modal-title">Confirmar eliminación</h5>
-                          <button type="button" className="close" onClick={cancelDelete}>
-                            <IoClose />
-                          </button>
+                          <h5 className="modal-title text-white">Confirmar eliminación</h5>
+                          
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body text-white">
                           <p>¿Estás seguro de que deseas eliminar este cliente?</p>
                         </div>
                         <div className="modal-footer">
-                          <button type="button" className="btn btn-secondary" onClick={cancelDelete}>Cancelar</button>
-                          <button type="button" className="btn btn-danger" onClick={() => deleteCliente(clienteToDelete.id)}>Eliminar</button>
+                          <button type="button" className="btn btn-dark border border-primary border-2" onClick={cancelDelete}>Cancelar</button>
+                          <button type="button" className="btn btn-danger border border-white border-2" onClick={() => deleteCliente(clienteToDelete.id)}>Eliminar</button>
                         </div>
                       </div>
                     </div>

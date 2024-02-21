@@ -115,11 +115,11 @@ const ShowSupAdmin = () => {
       <Link className='btn btn-success btn-sm' to={'/Clientes'} style={{ marginLeft: '65.5%' }}>importar</Link>{' '}
       <Link to='/create' className='btn btn-dark btn-sm'>Crear</Link>{' '}
     </div>
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
     <a className="navbar-brand" href="#" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
     <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ width: 70, height: 60 }} />
 </a>
-
+<div style={{ flex: 1, boxSizing: 'border-box', paddingBottom: '60px' }}>
       <table className='table table-striped  container' style={{ marginTop: '2%', border: '1px solid black', borderRadius: 5 }}>
         <thead className='bg-dark text-white'>
           <tr>
@@ -149,6 +149,7 @@ const ShowSupAdmin = () => {
           }
         </tbody>
       </table>
+     
       <footer>
         <div style={{ marginLeft: '46.5%', marginTop: 'auto' }}>
           <ul className="pagination">
@@ -173,7 +174,8 @@ const ShowSupAdmin = () => {
         </div>
       </footer>
     </div>
-    <footer style={{ position: 'static', bottom: 0, width: '100%', backgroundColor: '#0E0B16' }}>
+     </div>
+    <footer className="fixed-bottom" style={{ backgroundColor: '#0E0B16', zIndex: 1 }}>
                 <div className="container-fluid">
                     <div className="row p-5 pb-2  text-white">
                         <div className="col-xs-12 col-md-6 col-lg-3">
