@@ -19,6 +19,7 @@ import EditUsuarios from './components/usuarios/EditUsuarios.js';
 import ImportCliente from './components/Clientes/ImportClient.js';
 import CreateCliente from './components/Clientes/CreateCliente.js';
 import EditCliente from './components/Clientes/EditCliente.js';
+import { TodoList } from './components/Clientes/TodoList.jsx';
 
 
 export default function App() {
@@ -34,7 +35,7 @@ export default function App() {
         <Route path="/createC" element={<CreateCliente />} />
         <Route path="/editC/:id" element={<EditCliente />} />
 
-
+        <Route path="lista" element={<TodoList/>} />
 
         
         <Route path="/supAdmins" element={<ShowSupAdmin />} />
