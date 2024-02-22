@@ -32,6 +32,16 @@ const CreateUsuario = () => {
   // Verifica que todos los datos se completen
   const store = async (e) => {
     e.preventDefault();
+
+    if (!name || !documento || !telefono || !email || !password) {
+        setMissingFieldsError("Completa todos los campos, gracias.");
+        // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+            setMissingFieldsError(null);
+          }, 5000);
+        return;
+      }
+
         // Validación del nombre: no debe estar vacío y solo debe contener caracteres válidos
        if (!name || !/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/.test(name)) {
         alert("Por favor, ingrese un nombre válido");
@@ -61,21 +71,21 @@ const CreateUsuario = () => {
        return;
    }*/
 
-
-    if (!name || !documento || !telefono ||!email || !password ) {
-      setMissingFieldsError("Completa todos los campos, gracias.");
-      return;
+   try {
+    await axios.post(endpoint, { name, documento, telefono, email, password, roles });
+    console.log("Usuario creado exitosamente");
+    navigate('/Login');
+  } catch (err) {
+    console.error("Error al crear el usuario", err);
+    if (err.response && err.response.data && err.response.data.message) {
+      setError(err.response.data.message);
+    } else {
+      setError("Error al crear el usuario. Por favor, inténtelo nuevamente.");
+      
     }
-    try {
-      await axios.post(endpoint, {name, documento ,telefono ,email, password, roles});
-      console.log("Usuario creado exitosamente");
-      navigate('/Login'); // Cambio aquí
-    } catch (err) {
-      console.error("Error al crear el usuario", err);
-      setError("Error al crear el usuario. Mire los datos e intentelo nuevamente.")
-    }
+  }
+     
   };
-
     return(
 
   <div>
@@ -101,29 +111,31 @@ const CreateUsuario = () => {
         <h1 className="title-1" style={{textAlign:'center',  marginTop: '6%', color:'#E7DFDD'}}>Formulario de Registro</h1>
    </div>
     <div style={{border:'solid 1px', padding: '20px', borderRadius: '10px', maxWidth: '600px', marginTop:'4%', marginLeft:'35%', backgroundColor:'#0E0B16'}}>
+        {error && <div className="alert alert-danger">{error}</div>}
+        {missingFieldsError && <div className="alert alert-danger">{missingFieldsError}</div>}
         <form onSubmit={store} >
             <div className="mb-3">
                 <label htmlFor="nombre" className="form-label" style={{color:'#E7DFDD'}}>Nombre completo</label>
-                <input value={name} onChange={(e)=> setName(e.target.value)} type='text' className='form-control'required />
+                <input value={name} onChange={(e)=> setName(e.target.value)} type='text' className='form-control' />
             </div>
             <div className="mb-3">
                 <label htmlFor="nombre" className="form-label" style={{color:'#E7DFDD'}}>Documento</label>
-                <input value={documento} onChange={(e)=> setDocumento(e.target.value)} type='text' className='form-control'required />
+                <input value={documento} onChange={(e)=> setDocumento(e.target.value)} type='text' className='form-control'/>
             </div>
             <div className="mb-3">
                 <label htmlFor="password" className="form-label" style={{color:'#E7DFDD'}}>Telefono</label>
-                <input value={telefono} onChange={(e)=>setTelefono(e.target.value)} type='text' className='form-control'required />
+                <input value={telefono} onChange={(e)=>setTelefono(e.target.value)} type='text' className='form-control' />
             </div>
             <div className="mb-3">
                 <label htmlFor="email" className="form-label" style={{color:'#E7DFDD'}}>Email</label>
-                <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' className='form-control'required />
+                <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' className='form-control' />
             </div>
             <div className="mb-3 position-relative">
                 <label htmlFor="password" className="form-label" style={{ color: '#E7DFDD', marginBottom: '0.5rem' }}>Contraseña</label>
                 <div className="input-group">
                     <input value={password} onChange={(e)=>setPass(e.target.value)} type={showPassword ? 'text' : 'password'}
                         className='form-control'
-                        required/>
+                        />
                  
                     <button
                         className="btn btn-outline-dark"

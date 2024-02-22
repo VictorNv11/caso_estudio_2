@@ -18,6 +18,7 @@ const ShowSupAdmin = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
   const endpoint = 'http://localhost:8000/api';
+  const [userIdToDelete, setUserIdToDelete] = useState(null);
   
 
   const showData = async () => {
@@ -45,7 +46,17 @@ const ShowSupAdmin = () => {
     showData();
   }, []);
 
+  const confirmDelete = (id) => {
+    setUserIdToDelete(id);
+  };
+
+  const cancelDelete = () => {
+    setUserIdToDelete(null);
+  };
+
+
   const deleteUsers = async (id) => {
+    if (userIdToDelete && userIdToDelete.id === id) {
     try {
       const token = Cookies.get("token");
       await axios.delete(`${endpoint}/User/${id}`, {
@@ -55,9 +66,11 @@ const ShowSupAdmin = () => {
       });
       showData();
       alert('Usuario eliminado con éxito');
+      setUserIdToDelete(null); // Limpia el registro del cliente después de ser eliminado
     } catch (error) {
       console.error('Error deleting Usuraio:', error);
     }
+  }
   };
 
   const filteredUsers = search
@@ -129,7 +142,26 @@ const ShowSupAdmin = () => {
                 <td>{users.roles}</td>
                 <td>
                   <Link className='btn btn-primary btn-sm' to={`/edit/${users.id}`}>Editar</Link>{' '}
-                  <button className='btn btn-danger btn-sm' onClick={() => deleteUsers(users.id)}>Eliminar</button>
+                  <button className='btn btn-danger btn-sm' onClick={() => confirmDelete(users)}>Eliminar</button>
+                  {userIdToDelete && (
+                  <div className="modal fade show " style={{ display: 'block' }}>
+                    <div className="modal-dialog">
+                      <div className="modal-content bg-dark">
+                        <div className="modal-header">
+                          <h5 className="modal-title text-white">Confirmar eliminación</h5>
+                          
+                        </div>
+                        <div className="modal-body text-white">
+                          <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+                        </div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-dark border border-primary border-2" onClick={cancelDelete}>Cancelar</button>
+                          <button type="button" className="btn btn-danger border border-white border-2" onClick={() => deleteUsers(userIdToDelete.id)}>Eliminar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 </td>
               </tr>
             ))
