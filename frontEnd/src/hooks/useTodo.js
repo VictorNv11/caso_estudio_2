@@ -8,7 +8,10 @@ export const useTodo=() => {
         return JSON.parse(localStorage.getItem('todos')) || []
     }
 
-    const[state, dispatch] =useReducer(todoReducer, initialState, init)
+    const[todos, dispatch] =useReducer(todoReducer, initialState, init)
+
+    const todosCount= todos.length
+    const pendingTodosCount= todos.filter(todo => !todo.done).length
 
     useEffect(()=>{
         localStorage.setItem('todos', JSON.stringify(todos))
@@ -40,7 +43,7 @@ export const useTodo=() => {
 
     const handleUpdateTodo =(id, description) =>{
         const action ={
-            type:'Complete Todo',
+            type:'Update Todo',
             payload:{
                 id,
                 description
@@ -50,6 +53,9 @@ export const useTodo=() => {
     };
 
     return{
+        todos,
+        todosCount,
+        pendingTodosCount,
         handleNewTodo,
         handleDeleteTodo,
         handleCompleteTodo,
