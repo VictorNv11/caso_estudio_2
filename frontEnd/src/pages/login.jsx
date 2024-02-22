@@ -40,6 +40,11 @@ export default function Login() {
         } catch (error) {
             // Si hay un error en la solici;tud, muestra el mensaje de error
             setError("Credenciales inválidas");
+            // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+            setError(null);
+          }, 5000);
+          return;
         }
     };
 
