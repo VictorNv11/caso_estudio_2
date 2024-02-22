@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { BsSearch } from "react-icons/bs";
 import Cookies from 'js-cookie';
 import Logo from '..//..//assets/img/planetas.png'
-import { Navbar, Nav, Dropdown, Button } from 'react-bootstrap';
-import { BsList } from 'react-icons/bs';
 import { AiTwotoneBell } from 'react-icons/ai';
 
 

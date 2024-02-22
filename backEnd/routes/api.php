@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UsuariosController;
 use App\Http\Controllers\Excel\ImportController;
+use App\Http\Controllers\Api\TaskController;
 use Illuminate\Support\Facades\Auth;
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -37,6 +38,14 @@ Route::controller(UsuariosController::class)->group(function () {
     Route::delete('/Usuarios/{id}','destroy');    //SIRVE
 });
 
+// Rutas de Servicios
+Route::prefix('servicios')->group(function (){
+    Route::get('/', [TaskController::class, 'index']); 
+    Route::post('/crear',[TaskController::class, 'store']);               //SIRVE
+    Route::get('/{id}',[TaskController::class, 'show']);            //SIRVE
+    Route::put('/{id}',[TaskController::class, 'update']);         //SIRVE
+    Route::delete('/delete/{id}',[TaskController::class, 'destroy']);    //SIRVE
+});
 
 // Rutas del módulo de clientes
 Route::prefix('clientes')->group(function () {
@@ -45,9 +54,9 @@ Route::prefix('clientes')->group(function () {
     Route::get('/export', [ImportController::class, 'exportar']); // SIRVE
     
 
-    Route::get('/export/excel', [ImportController::class, 'exportarExcel']);
-    Route::post('/create',[ImportController::class, 'store']);  
-    Route::get('/{id}', [ImportController::class,'show']);
+    Route::get('/export/excel', [ImportController::class, 'exportarExcel']); // SIRVE
+    Route::post('/create',[ImportController::class, 'store']);  // SIRVE
+    Route::get('/{id}', [ImportController::class,'show']); // SIRVE
     Route::put('/{id}',[ImportController::class,'update']);         //SIRVE
     Route::delete('/delete/{id}',[ImportController::class,'destroy']); 
     
