@@ -1,5 +1,7 @@
 import React from 'react'
 import { useForm } from '../../hooks/useForm'
+import axios from 'axios';
+
 
 const estilos ={
 
@@ -53,7 +55,8 @@ export const TodoAdd = ({handleNewTodo}) => {
     description: '',
   });
 
-  const onFormSubmit = e =>{
+
+  const onFormSubmit  = async e =>{
     e.preventDefault();
 
     if(description.length <= 1) return
@@ -63,6 +66,15 @@ export const TodoAdd = ({handleNewTodo}) => {
       description: description,
       done: false
     }
+    try {
+      const url = 'http://localhost:8000/api/servicios/crear';
+      const response = await axios.post(url, newTodo);
+      console.log("Al peludo:", response.data);
+    } catch (error) {
+      console.error('La cagamos aqui:', error.message);
+    }
+
+
 
     handleNewTodo(newTodo);
     onResetForm();
