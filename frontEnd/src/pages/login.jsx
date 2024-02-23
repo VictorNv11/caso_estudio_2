@@ -34,8 +34,17 @@ export default function Login() {
             console.log(response)
             // Si la solicitud es exitosa, redirige al usuario a la página de inicio
             if (response.status === 200) {
-                Cookies.set("token",response.data['token'])
-                window.location.href = "/supAdmins";
+                Cookies.set("token", response.data.token);
+                const role = response.data.role;
+                console.log(role)
+                // Comparar el nombre del rol para redirigir al usuario
+                    if (role === 1) {
+                        window.location.href = "/supAdmins";
+                    } else if (role ===2) {
+                        window.location.href = "/Admin";
+                    } else if (role ===3) {
+                        window.location.href = "/usuarios"
+                    }
             }
         } catch (error) {
             // Si hay un error en la solici;tud, muestra el mensaje de error

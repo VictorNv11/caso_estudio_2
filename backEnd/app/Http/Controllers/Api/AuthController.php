@@ -23,7 +23,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' =>'required',
             'roles' => 'required'
-        
+
 
 
         ]);
@@ -37,11 +37,11 @@ class AuthController extends Controller
             $user->roles = $request->roles;
             $user->save();
 
-        //respuesta 
+        //respuesta
         return response($user, Response::HTTP_CREATED);
     }
-    
-    
+
+
 
     public function login (Request $request){
        $credentials = $request->validate([
@@ -54,7 +54,11 @@ class AuthController extends Controller
             $user = Auth::user();
             $token = $user->createToken('token')->plainTextToken;
             $cookie  = cookie('cookie_token', $token, 60 * 24);
-            return response(["token"=>$token], Response::HTTP_OK)->withoutCookie($cookie);
+            $role = $user->roles;
+            return response(
+                ["token"=>$token,
+                "role"=>$role
+            ], Response::HTTP_OK)->withoutCookie($cookie);
         }else{
             return response(["message"=>"Credenciales invalidas"],Response::HTTP_UNAUTHORIZED);
         }
