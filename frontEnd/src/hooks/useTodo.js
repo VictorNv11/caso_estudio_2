@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from "react"
 import { todoReducer } from "../todoreducer"
+import axios from 'axios';
 
 export const useTodo=() => {
     const initialState =[]
@@ -25,14 +26,7 @@ export const useTodo=() => {
         dispatch(action)
     };
 
-    const handleDeleteTodo = id =>{
-        const action ={
-            type: 'Delete Todo', 
-            payload: id
-        };
-        dispatch(action)
-    };
-
+ 
     const handleCompleteTodo = id =>{
         const action = {
             type:'Complete Todo',
@@ -57,7 +51,7 @@ export const useTodo=() => {
         todosCount,
         pendingTodosCount,
         handleNewTodo,
-        handleDeleteTodo,
+       // handleDeleteTodo,
         handleCompleteTodo,
         handleUpdateTodo
     }

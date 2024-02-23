@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { TodoUpdate } from './TodoUpdate';
+import axios from 'axios';
 
 const estilos = {
   root: {
@@ -88,7 +89,25 @@ const estilos = {
   },
 };
 
-export const TodoItem = ({ todo, handleUpdateTodo, handleDeleteTodo, handleCompleteTodo }) => {
+export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo }) => {
+
+  const handleDeleteTodo = async id =>{
+    //     const action ={
+    //         type: 'Delete Todo', 
+    //         payload: id
+    //     };
+    //     dispatch(action)
+    // };
+
+    try {
+        const url =`http://localhost:8000/api/servicios/delete/${id}`;
+        const response = await axios.delete(url);
+        console.log('eliminado:', response.data);
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    }
+
   return (
     <li style={estilos.listItem}>
       <span
