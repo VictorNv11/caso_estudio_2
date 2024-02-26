@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
+
 
 // Eventos
 use App\Events\UserRegistered;
@@ -21,17 +23,18 @@ use Illuminate\Support\Facades\Notification;
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {
+    {   
         //validacion de los datos
-        $request->validate([
-            'name' => 'required',
-            'documento' => 'required',
-            'telefono' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'roles' => 'required'
-        ]);
+    $request->validate([
+        'name' => 'required',
+        'documento' => 'required',
+        'telefono' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required',
+        'roles' => 'required'
+    ]);
 
+    try {
         // Crear el usuario
         $user = new User();
         $user->name = $request->name;
@@ -42,18 +45,24 @@ class AuthController extends Controller
         $user->roles = $request->roles;
         $user->save();
 
-        // Desencadena el evento de usuario registrado
+        // Desencadenar el evento de usuario registrado
         event(new UserRegistered($user));
 
-        // Envía la notificación al super administrador
+        // Enviar la notificación al superadministrador
         $superAdmin = User::where('roles', 1)->first();
 
         if ($superAdmin) {
             Notification::send($superAdmin, new NewUserRegisteredNotification($user));
+        } else {
+            throw new \Exception('No se pudo encontrar al superadministrador para enviar la notificación.');
         }
 
-        //respuesta 
+        // Respuesta 
         return response()->json(['user' => $user], 201);
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+        return response()->json(['error' => 'Error al registrar el usuario'], 500);
+    }
     }
 
     public function login(Request $request)

@@ -40,8 +40,9 @@ Route::controller(UsuariosController::class)->group(function () {
 });
 
 // Notificaciones
-Route::get('notifications', [NotificationController::class, 'getNotifications']);
-
+Route::prefix('notifications')->group(function (){
+    Route::get('/', [NotificationController::class, 'getNotifications']);
+});
 
 // Rutas de Servicios
 Route::prefix('servicios')->group(function (){

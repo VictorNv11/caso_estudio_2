@@ -24,9 +24,5 @@ class SendUserRegistrationNotification
     {
         $user = $event->user;
 
-
-        // Lógica para enviar notificaciones, correos electrónicos, etc.
-        // Por ejemplo, enviar un correo electrónico de notificación al usuario registrado.
-        $user->notify(new NewUserRegisteredNotification($user));
     }
 }
