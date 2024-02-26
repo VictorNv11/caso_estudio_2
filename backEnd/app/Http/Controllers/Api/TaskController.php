@@ -57,6 +57,32 @@ class TaskController extends Controller
         //
     }
 
+    public function completeServicio($id)
+    {
+        try {
+            // Busca el servicio en la base de datos
+            $task = Task::find($id);
+
+            if (!$task) {
+                return response()->json(['error' => 'Servicio no encontrado'], 404);
+            }
+
+           
+        // Si el servicio ya está completo, lo marca como incompleto (done a false), 
+        // de lo contrario, lo marca como completo (done a true)
+        $task->done = !$task->done;
+
+            // Guarda los cambios en la base de datos
+            $task->save();
+
+            // Respuesta exitosa
+            return response()->json(['message' => 'Servicio marcado como completo']);
+        } catch (\Exception $e) {
+            // Manejar errores
+            return response()->json(['error' => 'Error interno del servidor'], 500);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      */

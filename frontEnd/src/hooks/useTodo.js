@@ -27,31 +27,46 @@ export const useTodo=() => {
     };
 
  
-    const handleCompleteTodo = id =>{
-        const action = {
-            type:'Complete Todo',
+    const handleCompleteTodo = async (id) => {
+        try {
+          // Realiza la solicitud para marcar el servicio como completo
+          const url = `http://localhost:8000/api/servicios/complete/${id}`;
+          const response = await axios.put(url);
+      
+          // Despacha la acción para marcar el servicio como completo en el estado local
+          const action = {
+            type: 'Complete Todo',
             payload: id
-        };
-        dispatch(action)
-    };
+          };
+          dispatch(action);
+          
+        } catch (error) {
+          console.error('Error:', error.message);
+        }
+      };
 
-    const handleUpdateTodo =(id, description, done) =>{
-        const action ={
-            type:'Update Todo',
-            payload:{
-                id,
-                description,
-                done
+    const handleUpdateTodo = async (id, description, done) => {
+        try {
+          const url = `http://localhost:8000/api/servicios/${id}`;
+          const response = await axios.put(url, { description, done }); // Puedes ajustar esto según tu API
+      
+          const action = {
+            type: 'Update Todo',
+            payload: {
+              id,
+              description,
+              done
             }
-        };
-        dispatch(action)
-    };
-
+          };
+          dispatch(action);
+        } catch (error) {
+          console.error('Error:', error.message);
+        }
+      };
     const handleDeleteTodo = async id =>{
         try {
             const url = `http://localhost:8000/api/servicios/delete/${id}`;
             const response = await axios.delete(url);
-            console.log('eliminado:', response.data);
 
             const action = {
                 type: 'Delete Todo',

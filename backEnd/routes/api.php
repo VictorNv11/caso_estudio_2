@@ -45,6 +45,7 @@ Route::prefix('servicios')->group(function (){
     Route::get('/{id}',[TaskController::class, 'show']);            //SIRVE
     Route::put('/{id}',[TaskController::class, 'update']);         //SIRVE
     Route::delete('/delete/{id}',[TaskController::class, 'destroy']);    //SIRVE
+    Route::put('/complete/{id}', [TaskController::class, 'completeServicio']);
 });
 
 // Rutas del módulo de clientes
