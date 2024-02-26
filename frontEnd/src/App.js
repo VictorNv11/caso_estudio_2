@@ -20,6 +20,7 @@ import ImportCliente from './components/Clientes/ImportClient.js';
 import CreateCliente from './components/Clientes/CreateCliente.js';
 import EditCliente from './components/Clientes/EditCliente.js';
 import { TodoList } from './components/Clientes/TodoList.jsx';
+import Notifications from './components/Notifications/Notifications.jsx';
 
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
 
         <Route path="lista" element={<TodoList/>} />
 
+        <Route path="notifications" element={<Notifications />} />
         
         <Route path="/supAdmins" element={<ShowSupAdmin />} />
         <Route path="/create" element={<CreateSupAdmin />} />

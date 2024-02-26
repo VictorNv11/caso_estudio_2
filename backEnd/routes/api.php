@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UsuariosController;
 use App\Http\Controllers\Excel\ImportController;
 use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Support\Facades\Auth;
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -37,6 +38,10 @@ Route::controller(UsuariosController::class)->group(function () {
     Route::put('/usuarios/{id}','update');         //SIRVE
     Route::delete('/Usuarios/{id}','destroy');    //SIRVE
 });
+
+// Notificaciones
+Route::get('notifications', [NotificationController::class, 'getNotifications']);
+
 
 // Rutas de Servicios
 Route::prefix('servicios')->group(function (){
