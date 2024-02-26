@@ -9,7 +9,7 @@ export const useTodo=() => {
         return JSON.parse(localStorage.getItem('todos')) || []
     }
 
-    const[todos, dispatch] =useReducer(todoReducer, initialState, init)
+    const[todos, dispatch] = useReducer(todoReducer, initialState, init)
 
     const todosCount= todos.length
     const pendingTodosCount= todos.filter(todo => !todo.done).length
@@ -35,23 +35,40 @@ export const useTodo=() => {
         dispatch(action)
     };
 
-    const handleUpdateTodo =(id, description) =>{
+    const handleUpdateTodo =(id, description, done) =>{
         const action ={
             type:'Update Todo',
             payload:{
                 id,
-                description
+                description,
+                done
             }
         };
         dispatch(action)
     };
+
+    const handleDeleteTodo = async id =>{
+        try {
+            const url = `http://localhost:8000/api/servicios/delete/${id}`;
+            const response = await axios.delete(url);
+            console.log('eliminado:', response.data);
+
+            const action = {
+                type: 'Delete Todo',
+                payload: id
+            };
+            dispatch(action);
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    }
 
     return{
         todos,
         todosCount,
         pendingTodosCount,
         handleNewTodo,
-       // handleDeleteTodo,
+        handleDeleteTodo,
         handleCompleteTodo,
         handleUpdateTodo
     }

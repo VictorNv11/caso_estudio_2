@@ -69,9 +69,9 @@ export const TodoAdd = ({handleNewTodo}) => {
     try {
       const url = 'http://localhost:8000/api/servicios/crear';
       const response = await axios.post(url, newTodo);
-      console.log("Al peludo:", response.data);
+      console.log(response.data);
     } catch (error) {
-      console.error('La cagamos aqui:', error.message);
+      console.error(error.message);
     }
 
 

@@ -89,24 +89,7 @@ const estilos = {
   },
 };
 
-export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo }) => {
-
-  const handleDeleteTodo = async id =>{
-    //     const action ={
-    //         type: 'Delete Todo', 
-    //         payload: id
-    //     };
-    //     dispatch(action)
-    // };
-
-    try {
-        const url =`http://localhost:8000/api/servicios/delete/${id}`;
-        const response = await axios.delete(url);
-        console.log('eliminado:', response.data);
-      } catch (error) {
-        console.error('Error:', error.message);
-      }
-    }
+export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDeleteTodo }) => {
 
   return (
     <li style={estilos.listItem}>
