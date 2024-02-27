@@ -39,10 +39,6 @@ Route::controller(UsuariosController::class)->group(function () {
     Route::delete('/Usuarios/{id}','destroy');    //SIRVE
 });
 
-// Notificaciones
-Route::prefix('notifications')->group(function (){
-    Route::get('/', [NotificationController::class, 'getNotifications']);
-});
 
 // Rutas de Servicios
 Route::prefix('servicios')->group(function (){

@@ -39,12 +39,10 @@ class NewUserRegisteredNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
 
-        $url = url('/users/'.$this->user->id);
+        $url = url('api/usuarios/'.$this->user->id);
 
         return (new MailMessage)
         ->error()
-        ->subject('Invoice Payment Failed')
-        ->line('...')
         ->subject('¡Nuevo usuario registrado!')
         ->line('Se ha registrado un nuevo usuario en la plataforma.')
         ->line('Nombre: ' . $this->user->name)
@@ -62,7 +60,8 @@ class NewUserRegisteredNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'user_id' => $this->user->id,
+            'user_name' => $this->user->name,
         ];
     }
 }

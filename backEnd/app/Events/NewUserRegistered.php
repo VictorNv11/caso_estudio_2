@@ -5,13 +5,13 @@ namespace App\Events;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserRegistered
+/**
+ * Evento para notificar cuando un nuevo usuario se registra.
+ */
+class NewUserRegistered
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -31,9 +31,10 @@ class UserRegistered
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
     public function broadcastOn(): array
-    {
+    {   
+        // Cambiado a un canal público para que todos los Super Administradores reciban la notificación.
         return [
-            new PrivateChannel('channel-name'),
+            new Channel('new-user-channel'),
         ];
     }
 }

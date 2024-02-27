@@ -6,7 +6,7 @@ import { BsSearch } from "react-icons/bs";
 import Cookies from 'js-cookie';
 import Logo from '..//..//assets/img/planetas.png'
 import { AiTwotoneBell } from 'react-icons/ai';
-
+import Notification from '../Notifications/Notifications';
 
 
 
@@ -17,6 +17,8 @@ const ShowSupAdmin = () => {
   const [itemsPerPage] = useState(8);
   const endpoint = 'http://localhost:8000/api';
   const [userIdToDelete, setUserIdToDelete] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
   
 
   const showData = async () => {
@@ -71,6 +73,27 @@ const ShowSupAdmin = () => {
   }
   };
 
+  const notifySuperAdmin = async () => {
+    try {
+      const token = Cookies.get("token");
+      await axios.post(`${endpoint}/notifications/send`, {
+        // Puedes pasar cualquier dato adicional necesario para la notificación
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setNotifications([...notifications, {/* datos de la notificación */}]); // Actualiza el estado de las notificaciones
+      console.log('Notificación enviada al Super Administrador');
+    } catch (error) {
+      console.error('Error sending notification:', error);
+    }
+  };
+
+  // Manejador de eventos para mostrar/ocultar las notificaciones
+  const toggleNotifications = () => {
+    setShowNotifications(!showNotifications);
+  };
   const filteredUsers = search
     ? Users.filter((users) =>
         users.email.toLowerCase().includes(search.toLowerCase()) ||
@@ -91,6 +114,22 @@ const ShowSupAdmin = () => {
     window.location.href = "/";
   }
 
+  const [totalNotifications, setTotalNotifications] = useState(0);
+
+const fetchTotalNotifications = async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/api/notifications');
+    setTotalNotifications(response.data.totalNotifications);
+  } catch (error) {
+    console.error('Error fetching total notifications:', error);
+  }
+};
+
+useEffect(() => {
+  fetchTotalNotifications();
+}, []);
+
+
   return (
     <div>
     <nav className="navbar navbar-expand-lg " style={{ backgroundColor: "#0E0B16 ", borderRadius: 5 }}>
@@ -98,13 +137,16 @@ const ShowSupAdmin = () => {
           <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
         </a>
       <a className="navbar-brand" href="#" style={{ paddingLeft: 20, color: "#E7DFDD" }}>Super Administrador </a>
-      <div className='ml-auto' style={{paddingRight:10, fontSize:'25px'}}>
-          <AiTwotoneBell style={{color:'white'}} />
+      <div className='ml-auto' style={{paddingRight:10, fontSize:'25px'}} onClick={toggleNotifications}>
+          <AiTwotoneBell style={{color: notifications.length > 0 ? 'red' : 'white'}} />
+          {totalNotifications > 0 && <span className="badge badge-danger">{totalNotifications}</span>}
         </div>
       <div className="ml-auto" style={{ paddingRight: 30 }}>
         <button onClick={salir} className='btn btn-dark'>Salir</button>
       </div>
     </nav>
+    {/* Mostrar el componente de notificaciones si showNotifications es true */}
+    {showNotifications && <Notification notifications={notifications} />}
     <div style={{ marginTop: '5%' }}>
       <h1 className='text-center' style={{color:'#E7DFDD'}}>Listado de Super Administradores</h1>
     </div>

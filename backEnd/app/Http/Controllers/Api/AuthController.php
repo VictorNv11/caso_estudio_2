@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 
 // Eventos
-use App\Events\UserRegistered;
+use App\Events\NewUserRegistered;
 use App\Notifications\NewUserRegisteredNotification;
 
 // Importar la clase Notification
@@ -45,22 +45,19 @@ class AuthController extends Controller
         $user->roles = $request->roles;
         $user->save();
 
-        // Desencadenar el evento de usuario registrado
-        event(new UserRegistered($user));
 
         // Enviar la notificación al superadministrador
         $superAdmin = User::where('roles', 1)->first();
-
         if ($superAdmin) {
             Notification::send($superAdmin, new NewUserRegisteredNotification($user));
         } else {
-            throw new \Exception('No se pudo encontrar al superadministrador para enviar la notificación.');
+            Log::warning('No se pudo encontrar al superadministrador para enviar la notificación.');
         }
 
         // Respuesta 
         return response()->json(['user' => $user], 201);
     } catch (\Exception $e) {
-        Log::error($e->getMessage());
+        Log::error('Error al registrar el usuario: ' . $e->getMessage());
         return response()->json(['error' => 'Error al registrar el usuario'], 500);
     }
     }

@@ -21,6 +21,12 @@ import CreateCliente from './components/Clientes/CreateCliente.js';
 import EditCliente from './components/Clientes/EditCliente.js';
 import { TodoList } from './components/Clientes/TodoList.jsx';
 import Notifications from './components/Notifications/Notifications.jsx';
+import Pusher from 'pusher-js';
+
+// Configuración de Pusher
+const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
+  cluster: 'us2'
+});
 
 
 export default function App() {
