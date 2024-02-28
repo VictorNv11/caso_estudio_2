@@ -11,17 +11,18 @@ const Modal = ({ isOpen, onClose, title, children }) => {
                 <div className='modal-header'>
                     <h5 className='modal-title text-white'>{title}</h5>
                 </div>
-                <div className='modal-footer'>  
+                
+            <div >
+                <div className='modal-body text-white'>
+                    <p>{children}</p>
+      
+                </div>
+            </div>
+            <div className='modal-footer'>  
                     <button type='button' className='btn btn-dark border border-primary border-2' onClick={onClose}>
                       Cerrar
                     </button>
                 </div>
-            <div >
-                <div className='modal-body'>
-                    {children}
-      
-                </div>
-            </div>
             </div>
         </div>
     </div>

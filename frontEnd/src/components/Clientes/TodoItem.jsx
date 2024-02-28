@@ -12,7 +12,6 @@ const estilos = {
     '--verde': '#09a129',
   },
   body: {
-    fontFamily: 'Poppins',
     maxWidth: '1200px',
     margin: '40px auto',
     display: 'flex',
@@ -82,7 +81,6 @@ const estilos = {
     borderRadius: '50%',
     transition: 'all 0.3s',
     cursor: 'pointer',
-    fontFamily: 'inherit',
   },
   btnDeleteHover: {
     backgroundColor: '#e5383b',

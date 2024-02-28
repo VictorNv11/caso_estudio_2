@@ -14,7 +14,6 @@ const estilos ={
     '--verde': '#09a129',
   },
   body: {
-    fontFamily: 'Poppins',
     maxWidth: '1200px',
     margin: '40px auto',
     display: 'flex',
@@ -32,7 +31,7 @@ const estilos ={
     boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.15)',
     borderRadius: '20px',
     flex: '1',
-    fontFamily: 'inherit',
+
     fontSize: '17px',
     color: '#555',
   },
@@ -42,7 +41,6 @@ const estilos ={
     color: '#fff',
     padding: '5px 40px',
     borderRadius: '20px',
-    fontFamily: 'inherit',
     cursor: 'pointer',
     fontSize: '17px',
   },
@@ -59,41 +57,22 @@ const estilos ={
 
 export const TodoAdd = ({handleNewTodo}) => {
 
-  const [errors, setErrors] = useState([]);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [error, setError] = useState(null);
+
+
 
   const {description, price, onInputChange, onResetForm} = useForm({
     description: '', price:0
   });
 
-  useEffect(() => {
-    // Limpiar el error al abrir el modal
-    setErrors('');
-  }, [isModalOpen]);
-
 
   const onFormSubmit  = async e =>{
     e.preventDefault();
 
-      // Validar campos obligatorios
-      if (!description || price === null || price === undefined) {
-        setErrors(['Todos los campos son obligatorios']);
-        return;
-      }
-  
-      // Validar tipo de dato para price
-      if (typeof price !== 'number' || isNaN(price)) {
-        setErrors(['El campo de precio debe ser un número']);
-        return;
-      }
-        // Si hay errores, abrir el modal
-    if (errors.length > 0) {
-      setModalOpen(true);
+    if (!description || !price) {
+      setError('Por favor completa todos los campos.');
       return;
     }
-      // Restablecer error en caso de éxito
-      setErrors([]);
-  
 
     if(description.length <= 1) return
 
@@ -107,20 +86,18 @@ export const TodoAdd = ({handleNewTodo}) => {
       const url = 'http://localhost:8000/api/servicios/crear';
       const response = await axios.post(url, newTodo);
       console.log(response.data);
+        // Agrega el nuevo todo solo si la solicitud es exitosa
+      handleNewTodo(newTodo);
+      onResetForm();
     } catch (error) {
       console.error(error.message);
+      setError('Datos incorrectos. Por favor verifica e inténtalo de nuevo.');
     }
-
-
-
-    handleNewTodo(newTodo);
-    onResetForm();
 
   };
 
   const closeModal = () => {
-    setErrors([]);
-    setModalOpen(false);
+    setError(null);
   };
 
   return (
@@ -151,20 +128,12 @@ export const TodoAdd = ({handleNewTodo}) => {
         Agregar
       </button>
     </form>
-    <Modal isOpen={isModalOpen} onClose={closeModal} title="Completa todos los campos">
-        <ul>
-        {Array.isArray(errors) ? (
-          errors.map((error, index) => (
-            <li key={index} style={estilos.errorText}>
-              {error}
-            </li>
-             ))
-            ): (
-              <li style={estilos.errorText}>{errors}</li>
-            )}
-          
-        </ul>
-      </Modal> 
+    {/* Mostrar el modal de error si hay un error */}
+      {error && (
+        <Modal isOpen={true} onClose={closeModal} title="Error">
+          <p style={{ fontSize: '20px', margin: '5px 0' }}>{error}</p>
+        </Modal>
+      )} 
     </>
   );
 };

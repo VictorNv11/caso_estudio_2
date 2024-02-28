@@ -12,7 +12,6 @@ const estilos ={
     '--verde': '#09a129',
   },
   body: {
-    fontFamily: 'Poppins',
     maxWidth: '1200px',
     margin: '40px auto',
     display: 'flex',
@@ -21,7 +20,6 @@ const estilos ={
   inputUpdate: {
     border: 'none',
     fontWeight: '500',
-    fontFamily: 'inherit',
     fontSize: '18px',
     color: '#E7DFDD',
     width: '100%',
@@ -42,7 +40,6 @@ const estilos ={
     borderRadius: '50%',
     transition: 'all 0.3s',
     cursor: 'pointer',
-    fontFamily: 'inherit',
   },
   btnEditHover: {
     backgroundColor: '#48cae4',
