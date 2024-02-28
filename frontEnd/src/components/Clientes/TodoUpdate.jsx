@@ -97,7 +97,7 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
     />
 
 <input
-      type="number"
+      type="text"
       style={{ ...estilos.inputUpdate, ...(todo.done ? estilos.textDecorationDashed : {}) }}
       name="updatePrice"
       value={updatePrice}
@@ -105,6 +105,7 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
       placeholder="¿Cuánto cuesta?"
       readOnly={disabled}
       ref={focusInputRef}
+      inputMode="numeric"  // Agregado para quitar las flechas
     />
    <button style={{ ...estilos.btnEdit, ...(updateDescription && estilos.btnEditHover) }} type="submit">
   <FaEdit />
