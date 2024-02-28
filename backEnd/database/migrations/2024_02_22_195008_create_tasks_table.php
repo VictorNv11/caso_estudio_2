@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id()->unique;
             $table->string('description');
             $table->boolean('done');
+            $table->float('price');
             $table->timestamps();
         });
     }

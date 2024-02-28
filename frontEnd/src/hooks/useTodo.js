@@ -45,17 +45,18 @@ export const useTodo=() => {
         }
       };
 
-    const handleUpdateTodo = async (id, description, done) => {
+    const handleUpdateTodo = async (id, description, done, price) => {
         try {
           const url = `http://localhost:8000/api/servicios/${id}`;
-          const response = await axios.put(url, { description, done }); // Puedes ajustar esto según tu API
+          const response = await axios.put(url, { description, done, price }); // Puedes ajustar esto según tu API
       
           const action = {
             type: 'Update Todo',
             payload: {
               id,
               description,
-              done
+              done,
+              price
             }
           };
           dispatch(action);

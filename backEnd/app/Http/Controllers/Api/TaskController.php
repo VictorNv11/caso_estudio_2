@@ -34,6 +34,7 @@ class TaskController extends Controller
         $task->id = $request->id;
         $task->description = $request->description;
         $task->done = $request->done;
+        $task->price= $request->price;
   
 
 
@@ -91,6 +92,7 @@ class TaskController extends Controller
         $task = task::findOrFail($request->id);
         $task->description = $request->description;
         $task->done = $request->done;
+        $task->price= $request->price;
     
         $task->save();
         return $task;

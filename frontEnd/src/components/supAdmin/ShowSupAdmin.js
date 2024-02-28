@@ -6,6 +6,10 @@ import { BsSearch } from "react-icons/bs";
 import Cookies from 'js-cookie';
 import Logo from '..//..//assets/img/planetas.png'
 import { AiTwotoneBell } from 'react-icons/ai';
+import { Dropdown } from 'react-bootstrap';
+import { AiOutlineAppstore } from 'react-icons/ai';
+import { Servicios } from '../Clientes/Servicios';
+import { FaTools } from "react-icons/fa";
 
 
 
@@ -101,7 +105,19 @@ const ShowSupAdmin = () => {
       <div className='ml-auto' style={{paddingRight:10, fontSize:'25px'}}>
           <AiTwotoneBell style={{color:'white'}} />
         </div>
-      <div className="ml-auto" style={{ paddingRight: 30 }}>
+        <Dropdown>
+      <Dropdown.Toggle variant="dark" id="dropdown-basic">
+      <AiOutlineAppstore style={{ marginRight: '0.5em' }} /> {/* Ajusta el estilo según tus necesidades */}
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        {/* Agrega aquí los enlaces o componentes relacionados con los servicios */}
+        <Dropdown.Item href="/lista"><FaTools /> Servicios</Dropdown.Item>
+        <Dropdown.Item href="#"></Dropdown.Item>
+        {/* ... */}
+      </Dropdown.Menu>
+    </Dropdown>
+      <div className="ms-auto" style={{ paddingRight: 30 }}>
         <button onClick={salir} className='btn btn-dark'>Salir</button>
       </div>
     </nav>
@@ -112,6 +128,7 @@ const ShowSupAdmin = () => {
       <input value={search} style={{ borderRadius: 5 }} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input><BsSearch style={{ marginLeft: 5, color: 'white' }} />
       <Link className='btn btn-success btn-sm' to={'/Clientes'} style={{ marginLeft: '65.5%' }}>importar</Link>{' '}
       <Link to='/create' className='btn btn-dark btn-sm'>Crear</Link>{' '}
+
     </div>
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
     <a className="navbar-brand" href="#" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

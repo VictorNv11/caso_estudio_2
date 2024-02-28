@@ -60,6 +60,10 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
     updateDescription:todo.description,
   });
 
+  const {updatePrice,} =useForm({
+    updatePrice:todo.price,
+  });
+
   const [disabled, setDisabled] =useState(true)
   const focusInputRef =useRef()
 
@@ -70,8 +74,9 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
     const  id = todo.id
     const description = updateDescription;
     const done = true;
+    const price = updatePrice;
 
-    handleUpdateTodo(id, description, done);
+    handleUpdateTodo(id, description, done, price);
 
     setDisabled(!disabled);
 
@@ -90,6 +95,17 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
       value={updateDescription}
       onChange={onInputChange}
       placeholder="¿Qué hay que hacer?"
+      readOnly={disabled}
+      ref={focusInputRef}
+    />
+
+<input
+      type="number"
+      style={{ ...estilos.inputUpdate, ...(todo.done ? estilos.textDecorationDashed : {}) }}
+      name="updatePrice"
+      value={updatePrice}
+      onChange={onInputChange}
+      placeholder="¿Cuánto cuesta?"
       readOnly={disabled}
       ref={focusInputRef}
     />
