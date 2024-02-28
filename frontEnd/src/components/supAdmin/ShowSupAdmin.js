@@ -112,7 +112,7 @@ const ShowSupAdmin = () => {
 
       <Dropdown.Menu>
         {/* Agrega aquí los enlaces o componentes relacionados con los servicios */}
-        <Dropdown.Item href="/lista"><FaTools /> Servicios</Dropdown.Item>
+        <Dropdown.Item href="/servicios"><FaTools /> Servicios</Dropdown.Item>
         <Dropdown.Item href="#"></Dropdown.Item>
         {/* ... */}
       </Dropdown.Menu>

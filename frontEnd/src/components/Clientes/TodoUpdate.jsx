@@ -56,12 +56,9 @@ const estilos ={
 
 export const TodoUpdate = ({todo, handleUpdateTodo}) => {
   
-  const {updateDescription, onInputChange} =useForm({
-    updateDescription:todo.description,
-  });
-
-  const {updatePrice,} =useForm({
-    updatePrice:todo.price,
+  const {updateDescription, updatePrice, onInputChange} =useForm({
+    updateDescription:todo.description, 
+    updatePrice: todo.price,
   });
 
   const [disabled, setDisabled] =useState(true)
@@ -73,7 +70,7 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
 
     const  id = todo.id
     const description = updateDescription;
-    const done = true;
+    const done = todo.done;
     const price = updatePrice;
 
     handleUpdateTodo(id, description, done, price);
@@ -93,21 +90,22 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
       style={{ ...estilos.inputUpdate, ...(todo.done ? estilos.textDecorationDashed : {}) }}
       name="updateDescription"
       value={updateDescription}
-      onChange={onInputChange}
+      onChange={(e)=> onInputChange(e, "updateDescription")}
       placeholder="¿Qué hay que hacer?"
       readOnly={disabled}
       ref={focusInputRef}
     />
 
 <input
-      type="number"
+      type="text"
       style={{ ...estilos.inputUpdate, ...(todo.done ? estilos.textDecorationDashed : {}) }}
       name="updatePrice"
       value={updatePrice}
-      onChange={onInputChange}
+      onChange={(e)=> onInputChange(e, "updatePrice")}
       placeholder="¿Cuánto cuesta?"
       readOnly={disabled}
       ref={focusInputRef}
+      inputMode="numeric"  // Agregado para quitar las flechas
     />
    <button style={{ ...estilos.btnEdit, ...(updateDescription && estilos.btnEditHover) }} type="submit">
   <FaEdit />

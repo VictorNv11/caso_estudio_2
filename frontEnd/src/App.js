@@ -35,7 +35,7 @@ export default function App() {
         <Route path="/createC" element={<CreateCliente />} />
         <Route path="/editC/:id" element={<EditCliente />} />
 
-        <Route path="lista" element={<TodoList/>} />
+        <Route path="/servicios" element={<TodoList/>} />
 
         
         <Route path="/supAdmins" element={<ShowSupAdmin />} />
