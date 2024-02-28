@@ -2,7 +2,10 @@ import React from 'react'
 import { TodoAdd } from '../Clientes/TodoAdd'
 import { Servicios } from '../Clientes/Servicios'
 import { useTodo } from '../../hooks/useTodo'
-
+import Logo from '..//..//assets/img/planetas.png'
+import { AiTwotoneBell } from 'react-icons/ai';
+import Cookies from 'js-cookie';
+import { Link } from "react-router-dom";
 const estilos={
   
   root: {
@@ -68,7 +71,29 @@ export const TodoList = () => {
     handleUpdateTodo,
   } = useTodo();
 
+  const salir = () => {
+    Cookies.remove("token")
+    window.location.href = "/";
+  }
+
+
   return (
+    <div> 
+    <nav className="navbar navbar-expand-lg " style={{ backgroundColor: "#0E0B16 ", borderRadius: 5 }}>
+    <a className="navbar-brand" href="#">
+          <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
+        </a>
+      <a className="navbar-brand" href="#" style={{ paddingLeft: 20, color: "#E7DFDD" }}>Super Administrador </a>
+      <div className='ml-auto' style={{paddingRight:10, fontSize:'25px'}}>
+          <AiTwotoneBell style={{color:'white'}} />
+        </div>
+        <div className="ml-auto" style={{ paddingRight: 30, display: 'flex', alignItems: 'center' }}>
+            <Link to='/supAdmins' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
+         </div>
+      <div className="ms-auto " style={{ paddingRight:30}}>
+        <button onClick={salir} className='btn btn-dark'>Salir</button>
+      </div>
+    </nav>
     <div style={estilos.cardToDo}>
     <h1 style={estilos.h1}>Lista de Servicios</h1>
     <div style={estilos.counterTodos}>
@@ -79,12 +104,14 @@ export const TodoList = () => {
       <h3>Agregar Servicios</h3>
       <TodoAdd handleNewTodo={handleNewTodo} />
     </div>
+
     <Servicios
       todos={todos}
       handleUpdateTodo={handleUpdateTodo}
       handleDeleteTodo={handleDeleteTodo}
       handleCompleteTodo={handleCompleteTodo}
     />
+  </div>
   </div>
   )
 }

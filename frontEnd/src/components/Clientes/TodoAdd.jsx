@@ -21,6 +21,7 @@ const estilos ={
   },
   form: {
     display: 'flex',
+   // flexDirection: 'column',
     gap: '20px',
   },
   inputAdd: {
@@ -51,8 +52,8 @@ const estilos ={
 
 export const TodoAdd = ({handleNewTodo}) => {
 
-  const {description, onInputChange, onResetForm} = useForm({
-    description: '',
+  const {description, price, onInputChange, onResetForm} = useForm({
+    description: '', price:0
   });
 
 
@@ -64,14 +65,15 @@ export const TodoAdd = ({handleNewTodo}) => {
     let newTodo ={
       id: new Date().getTime(),
       description: description,
-      done: false
+      done: false,
+      price: price
     }
     try {
       const url = 'http://localhost:8000/api/servicios/crear';
       const response = await axios.post(url, newTodo);
-      console.log("Al peludo:", response.data);
+      console.log(response.data);
     } catch (error) {
-      console.error('La cagamos aqui:', error.message);
+      console.error(error.message);
     }
 
 
@@ -83,6 +85,7 @@ export const TodoAdd = ({handleNewTodo}) => {
 
   return (
     <form onSubmit={onFormSubmit} style={estilos.form}>
+      <div> 
       <input
         type="text"
         style={estilos.inputAdd}
@@ -91,6 +94,17 @@ export const TodoAdd = ({handleNewTodo}) => {
         onChange={onInputChange}
         placeholder="¿Qué hay que hacer?"
       />
+      </div>
+      <div> 
+       <input
+        type="number"
+        style={{...estilos.inputAdd, width: '100%'}}
+        name="price"
+        value={price}
+        onChange={onInputChange}
+        placeholder="¿Cuánto cuesta?"
+      />
+      </div>
       <button style={{ ...estilos.btnAdd, ...(description && estilos.btnAddHover) }} type="submit">
         Agregar
       </button>

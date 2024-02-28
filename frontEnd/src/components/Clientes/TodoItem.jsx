@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { TodoUpdate } from './TodoUpdate';
+import axios from 'axios';
 
 const estilos = {
   root: {
@@ -88,7 +89,8 @@ const estilos = {
   },
 };
 
-export const TodoItem = ({ todo, handleUpdateTodo, handleDeleteTodo, handleCompleteTodo }) => {
+export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDeleteTodo }) => {
+
   return (
     <li style={estilos.listItem}>
       <span

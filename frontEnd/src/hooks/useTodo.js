@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from "react"
 import { todoReducer } from "../todoreducer"
+import axios from 'axios';
 
 export const useTodo=() => {
     const initialState =[]
@@ -8,7 +9,7 @@ export const useTodo=() => {
         return JSON.parse(localStorage.getItem('todos')) || []
     }
 
-    const[todos, dispatch] =useReducer(todoReducer, initialState, init)
+    const[todos, dispatch] = useReducer(todoReducer, initialState, init)
 
     const todosCount= todos.length
     const pendingTodosCount= todos.filter(todo => !todo.done).length
@@ -25,32 +26,58 @@ export const useTodo=() => {
         dispatch(action)
     };
 
-    const handleDeleteTodo = id =>{
-        const action ={
-            type: 'Delete Todo', 
+ 
+    const handleCompleteTodo = async (id) => {
+        try {
+          // Realiza la solicitud para marcar el servicio como completo
+          const url = `http://localhost:8000/api/servicios/complete/${id}`;
+          const response = await axios.put(url);
+      
+          // Despacha la acción para marcar el servicio como completo en el estado local
+          const action = {
+            type: 'Complete Todo',
             payload: id
-        };
-        dispatch(action)
-    };
+          };
+          dispatch(action);
+          
+        } catch (error) {
+          console.error('Error:', error.message);
+        }
+      };
 
-    const handleCompleteTodo = id =>{
-        const action = {
-            type:'Complete Todo',
-            payload: id
-        };
-        dispatch(action)
-    };
-
-    const handleUpdateTodo =(id, description) =>{
-        const action ={
-            type:'Update Todo',
-            payload:{
-                id,
-                description
+    const handleUpdateTodo = async (id, description, done, price) => {
+        try {
+          const url = `http://localhost:8000/api/servicios/${id}`;
+          const response = await axios.put(url, { description, done, price }); // Puedes ajustar esto según tu API
+      
+          const action = {
+            type: 'Update Todo',
+            payload: {
+              id,
+              description,
+              done,
+              price
             }
-        };
-        dispatch(action)
-    };
+          };
+          dispatch(action);
+        } catch (error) {
+          console.error('Error:', error.message);
+        }
+      };
+    const handleDeleteTodo = async id =>{
+        try {
+            const url = `http://localhost:8000/api/servicios/delete/${id}`;
+            const response = await axios.delete(url);
+
+            const action = {
+                type: 'Delete Todo',
+                payload: id
+            };
+            dispatch(action);
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    }
 
     return{
         todos,
