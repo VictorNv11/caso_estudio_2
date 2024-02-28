@@ -70,7 +70,7 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
 
     const  id = todo.id
     const description = updateDescription;
-    const done = true;
+    const done = todo.done;
     const price = updatePrice;
 
     handleUpdateTodo(id, description, done, price);
