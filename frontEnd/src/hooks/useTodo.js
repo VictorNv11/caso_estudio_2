@@ -12,7 +12,7 @@ export const useTodo=() => {
 
     const todosCount= todos.length
     const pendingTodosCount= todos.filter(todo => !todo.done).length
-    const [serviceToDelete, setServiceToDelete] = useState(null);
+
     const [error, setError] = useState(null);
 
 
@@ -75,38 +75,13 @@ export const useTodo=() => {
                 type: 'Delete Todo',
                 payload: id
             };
-            setServiceToDelete(id);
             dispatch(action);
         } catch (error) {
           console.error('Error deleting todo:', error.message);
           setError('Error al eliminar el servicio. Por favor, inténtalo de nuevo.')
         }
     }
-    const handleConfirmDelete = async id => {
-      try {
-        // Realizar la solicitud para eliminar el servicio
-        const url = `http://localhost:8000/api/servicios/delete/${id}`;
-        const response = await axios.delete(url);
-  
-        // Despachar la acción para eliminar el servicio en el estado local
-        const action = {
-          type: 'Delete Todo',
-          payload: id
-        };
-        dispatch(action);
-  
-        // Limpiar el servicio a eliminar del estado
-        setServiceToDelete(null);
-      } catch (error) {
-        console.error('Error confirming delete:', error.message);
-    setError('Error al confirmar la eliminación. Por favor, inténtalo de nuevo.');
-      }
-    };
-  
-    const handleCancelDelete = () => {
-      // Limpiar el servicio a eliminar del estado si se cancela
-      setServiceToDelete(null);
-    };
+   
   
     return{
         todos,
@@ -116,7 +91,5 @@ export const useTodo=() => {
         handleDeleteTodo,
         handleCompleteTodo,
         handleUpdateTodo,
-        handleCancelDelete,
-        handleConfirmDelete
     }
 }

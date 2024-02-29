@@ -131,7 +131,7 @@ export const TodoAdd = ({handleNewTodo}) => {
     {/* Mostrar el modal de error si hay un error */}
       {error && (
         <Modal isOpen={true} onClose={closeModal} title="Error">
-          <p style={{ fontSize: '20px', margin: '5px 0' }}>{error}</p>
+          <p style={{ fontSize: '20px', margin: '5px 0'}}>{error}</p>
         </Modal>
       )} 
     </>

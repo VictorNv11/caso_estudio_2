@@ -10,6 +10,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
             <div className='modal-content bg-dark'>
                 <div className='modal-header'>
                     <h5 className='modal-title text-white'>{title}</h5>
+                    <button type='button' className='btn-close btn-close-white' style={{fontSize: '15px'}} aria-label='Close' onClick={onClose}></button>
                 </div>
                 
             <div >
@@ -18,11 +19,6 @@ const Modal = ({ isOpen, onClose, title, children }) => {
       
                 </div>
             </div>
-            <div className='modal-footer'>  
-                    <button type='button' className='btn btn-dark border border-primary border-2' onClick={onClose}>
-                      Cerrar
-                    </button>
-                </div>
             </div>
         </div>
     </div>

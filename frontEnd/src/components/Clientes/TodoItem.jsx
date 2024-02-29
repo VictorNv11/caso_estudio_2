@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { TodoUpdate } from './TodoUpdate';
 import axios from 'axios';
-import Modal from '../Modal/Modal'  ;
+import Modal from '../Modal/Modal';
 
 const estilos = {
   root: {
@@ -88,24 +88,21 @@ const estilos = {
   },
 };
 
-export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDeleteTodo, handleCancelDelete, handleConfirmDelete }) => {
+export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDeleteTodo }) => {
 
-  const [serviceToDelete, setServiceToDelete] = useState(null);
-  const [error, setError] = useState(null);
-  
-  
-  //funcion para mostrar el mensaje de confirmacion 
-  const confirmDelete = (service) =>{
-    setServiceToDelete(service);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false); // Estado para controlar la apertura/cierre del modal de confirmación
+
+  const openConfirmationModal = () => {
+    setIsConfirmationOpen(true);
   };
 
-  //funcion para cancelar la eliminacion
-  const cancelDelete =() =>{
-    setServiceToDelete(null);
+  const closeConfirmationModal = () => {
+    setIsConfirmationOpen(false);
   };
 
-  const closeModal = () => {
-    cancelDelete(null);
+  const confirmDeleteTodo = () => {
+    handleDeleteTodo(todo.id);
+    closeConfirmationModal(); // Cierra el modal de confirmación después de confirmar la eliminación
   };
 
   return (
@@ -119,27 +116,26 @@ export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDel
       </span>
       <TodoUpdate todo={todo} handleUpdateTodo={handleUpdateTodo} />
       <button
-        style={estilos.btnDelete}
-        onClick={() => handleDeleteTodo(todo.id)}
-        className={estilos.btnDelete}
-      >
+          style={estilos.btnDelete}
+          onClick={openConfirmationModal} // Abre el modal de confirmación al hacer clic en el botón de eliminar
+          className={estilos.btnDelete}
+        >
         <FaTrash />
       </button>
     </li>
-    {error && (
-  <Modal isOpen={true} onClose={() => setError(null)} title="Error">
-    <p style={{ fontSize: '20px', margin: '5px 0' }}>{error}</p>
-  </Modal>
-)}
-
-    {/* Mostrar el modal de confirmación si hay un servicio a eliminar */}
-    {serviceToDelete && (
-        <Modal isOpen={true} onClose={handleCancelDelete} title="Confirmar Eliminación">
-          <p style={{ fontSize: '20px', margin: '5px 0' }}>¿Estás seguro de que deseas eliminar este servicio?</p>
-          <button onClick={handleConfirmDelete}>Sí</button>
-          <button onClick={handleCancelDelete}>Cancelar</button>
-        </Modal>
-      )}
-     </>
+     {/* Modal de confirmación */}
+     <Modal
+     isOpen={isConfirmationOpen}
+     onClose={closeConfirmationModal}
+     title="Confirmar Eliminación"
+   >
+     <p>¿Estás seguro de que deseas eliminar este servicio?</p>
+     <div className="modal-footer">
+       <button type="button" className="btn btn-dark border border-primary border-2" onClick={closeConfirmationModal}>Cancelar</button>
+       <button type="button" className="btn btn-danger border border-white border-2" onClick={confirmDeleteTodo}>Eliminar</button>
+     </div>
+   </Modal>
+ </>
+    
   );
 };
