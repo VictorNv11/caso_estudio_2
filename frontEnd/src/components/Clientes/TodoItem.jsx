@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { TodoUpdate } from './TodoUpdate';
 import axios from 'axios';
+import Modal from '../Modal/Modal'  ;
 
 const estilos = {
   root: {
@@ -87,9 +88,28 @@ const estilos = {
   },
 };
 
-export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDeleteTodo }) => {
+export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDeleteTodo, handleCancelDelete, handleConfirmDelete }) => {
+
+  const [serviceToDelete, setServiceToDelete] = useState(null);
+  const [error, setError] = useState(null);
+  
+  
+  //funcion para mostrar el mensaje de confirmacion 
+  const confirmDelete = (service) =>{
+    setServiceToDelete(service);
+  };
+
+  //funcion para cancelar la eliminacion
+  const cancelDelete =() =>{
+    setServiceToDelete(null);
+  };
+
+  const closeModal = () => {
+    cancelDelete(null);
+  };
 
   return (
+    <>
     <li style={estilos.listItem}>
       <span
         onClick={() => handleCompleteTodo(todo.id)}
@@ -106,5 +126,20 @@ export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDel
         <FaTrash />
       </button>
     </li>
+    {error && (
+  <Modal isOpen={true} onClose={() => setError(null)} title="Error">
+    <p style={{ fontSize: '20px', margin: '5px 0' }}>{error}</p>
+  </Modal>
+)}
+
+    {/* Mostrar el modal de confirmación si hay un servicio a eliminar */}
+    {serviceToDelete && (
+        <Modal isOpen={true} onClose={handleCancelDelete} title="Confirmar Eliminación">
+          <p style={{ fontSize: '20px', margin: '5px 0' }}>¿Estás seguro de que deseas eliminar este servicio?</p>
+          <button onClick={handleConfirmDelete}>Sí</button>
+          <button onClick={handleCancelDelete}>Cancelar</button>
+        </Modal>
+      )}
+     </>
   );
 };

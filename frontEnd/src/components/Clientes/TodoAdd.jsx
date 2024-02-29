@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from '../../hooks/useForm'
 import axios from 'axios';
-import Modal from '../Modal/Modal'  ;
+import Modal from '../Modal/Modal';
 
 
 const estilos ={
