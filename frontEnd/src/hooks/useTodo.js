@@ -1,7 +1,6 @@
-import { useEffect, useReducer } from "react"
+import { useEffect, useReducer, useState } from "react"
 import { todoReducer } from "../todoreducer"
 import axios from 'axios';
-
 export const useTodo=() => {
     const initialState =[]
 
@@ -13,6 +12,9 @@ export const useTodo=() => {
 
     const todosCount= todos.length
     const pendingTodosCount= todos.filter(todo => !todo.done).length
+    const [serviceToDelete, setServiceToDelete] = useState(null);
+    const [error, setError] = useState(null);
+
 
     useEffect(()=>{
         localStorage.setItem('todos', JSON.stringify(todos))
@@ -73,12 +75,39 @@ export const useTodo=() => {
                 type: 'Delete Todo',
                 payload: id
             };
+            setServiceToDelete(id);
             dispatch(action);
         } catch (error) {
-            console.error('Error:', error.message);
+          console.error('Error deleting todo:', error.message);
+          setError('Error al eliminar el servicio. Por favor, inténtalo de nuevo.')
         }
     }
-
+    const handleConfirmDelete = async id => {
+      try {
+        // Realizar la solicitud para eliminar el servicio
+        const url = `http://localhost:8000/api/servicios/delete/${id}`;
+        const response = await axios.delete(url);
+  
+        // Despachar la acción para eliminar el servicio en el estado local
+        const action = {
+          type: 'Delete Todo',
+          payload: id
+        };
+        dispatch(action);
+  
+        // Limpiar el servicio a eliminar del estado
+        setServiceToDelete(null);
+      } catch (error) {
+        console.error('Error confirming delete:', error.message);
+    setError('Error al confirmar la eliminación. Por favor, inténtalo de nuevo.');
+      }
+    };
+  
+    const handleCancelDelete = () => {
+      // Limpiar el servicio a eliminar del estado si se cancela
+      setServiceToDelete(null);
+    };
+  
     return{
         todos,
         todosCount,
@@ -86,6 +115,8 @@ export const useTodo=() => {
         handleNewTodo,
         handleDeleteTodo,
         handleCompleteTodo,
-        handleUpdateTodo
+        handleUpdateTodo,
+        handleCancelDelete,
+        handleConfirmDelete
     }
 }

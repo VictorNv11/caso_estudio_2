@@ -12,7 +12,6 @@ const estilos ={
     '--verde': '#09a129',
   },
   body: {
-    fontFamily: 'Poppins',
     maxWidth: '1200px',
     margin: '40px auto',
     display: 'flex',
@@ -21,7 +20,6 @@ const estilos ={
   inputUpdate: {
     border: 'none',
     fontWeight: '500',
-    fontFamily: 'inherit',
     fontSize: '18px',
     color: '#E7DFDD',
     width: '100%',
@@ -42,7 +40,6 @@ const estilos ={
     borderRadius: '50%',
     transition: 'all 0.3s',
     cursor: 'pointer',
-    fontFamily: 'inherit',
   },
   btnEditHover: {
     backgroundColor: '#48cae4',
@@ -57,7 +54,7 @@ const estilos ={
 export const TodoUpdate = ({todo, handleUpdateTodo}) => {
   
   const {updateDescription, updatePrice, onInputChange} =useForm({
-    updateDescription:todo.description, 
+    updateDescription: todo.description,
     updatePrice: todo.price,
   });
 
@@ -90,7 +87,7 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
       style={{ ...estilos.inputUpdate, ...(todo.done ? estilos.textDecorationDashed : {}) }}
       name="updateDescription"
       value={updateDescription}
-      onChange={(e)=> onInputChange(e, "updateDescription")}
+      onChange={(e) => onInputChange(e, "updateDescription")}
       placeholder="¿Qué hay que hacer?"
       readOnly={disabled}
       ref={focusInputRef}
@@ -101,7 +98,7 @@ export const TodoUpdate = ({todo, handleUpdateTodo}) => {
       style={{ ...estilos.inputUpdate, ...(todo.done ? estilos.textDecorationDashed : {}) }}
       name="updatePrice"
       value={updatePrice}
-      onChange={(e)=> onInputChange(e, "updatePrice")}
+      onChange={(e) => onInputChange(e, "updatePrice")}
       placeholder="¿Cuánto cuesta?"
       readOnly={disabled}
       ref={focusInputRef}

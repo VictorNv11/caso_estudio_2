@@ -13,7 +13,6 @@ const estilos ={
 		'--verde': '#09a129',
 	  },
 	  body: {
-		fontFamily: 'Poppins',
 		maxWidth: '1200px',
 		margin: '40px auto',
 		display: 'flex',
