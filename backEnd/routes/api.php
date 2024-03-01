@@ -71,6 +71,9 @@ Route::post('register',[AuthController::class, 'register']);
 Route::post('login',[AuthController::class, 'login']);
 Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
 //Route::put('edit',[AuthController::class, 'edit']);
+Route::post('password/email', [AuthController::class, 'forgotPassword'])->name('password.email');
+Route::post('password/reset', [AuthController::class, 'resetPassword'])->name('password.reset');
+
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::get('user-profile', [AuthController::class, 'userProfile']);

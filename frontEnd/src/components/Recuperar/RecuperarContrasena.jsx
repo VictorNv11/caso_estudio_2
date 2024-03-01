@@ -8,17 +8,16 @@ export const RecuperarContrasena = () => {
 
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const endpoint = 'http://localhost:8000/api'
-    const handleSubmit=async (e) =>{
+    const endpoint = 'http://localhost:8000/api'; // URL de tu backend
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-            const response=await axios.post(`${endpoint}/forgot-password`, {email});
+        try {
+            const response = await axios.post(`${endpoint}/forgot-password`, { email });
             setMessage(response.data.message);
-        
-        } catch(error){
-            setMessage('Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.')
+        } catch (error) {
+            setMessage('Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.');
         }
-    
     };
 
 
