@@ -69,6 +69,7 @@ Route::prefix('clientes')->group(function () {
 
 Route::post('register',[AuthController::class, 'register']);
 Route::post('login',[AuthController::class, 'login']);
+Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
 //Route::put('edit',[AuthController::class, 'edit']);
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
