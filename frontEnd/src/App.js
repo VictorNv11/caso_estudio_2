@@ -40,7 +40,7 @@ export default function App() {
         <Route path="/formRegistro" element={<FormRegistro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
-        <Route path="/reset" element={<ReseteoContrasena/>}/>
+         {/*<Route path="/reset" element={<ReseteoContrasena/>}/> */}
 
         <Route path="/clientes" element={<ImportCliente/>} />
         <Route path="/createC" element={<CreateCliente />} />

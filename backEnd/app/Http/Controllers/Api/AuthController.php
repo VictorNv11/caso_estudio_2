@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Password;
 
 // Eventos
 use App\Events\NewUserRegistered;
@@ -23,44 +23,44 @@ use Illuminate\Support\Facades\Notification;
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {   
-        //validacion de los datos
-    $request->validate([
-        'name' => 'required',
-        'documento' => 'required',
-        'telefono' => 'required',
-        'email' => 'required|email|unique:users',
-        'password' => 'required',
-        'roles' => 'required'
-    ]);
-
-    try {
-        // Crear el usuario
-        $user = new User();
-        $user->name = $request->name;
-        $user->documento = $request->documento;
-        $user->telefono = $request->telefono;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->roles = $request->roles;
-        $user->save();
-
-
-        // Enviar la notificación al superadministrador
-        $superAdmin = User::where('roles', 1)->first();
-        if ($superAdmin) {
-            Notification::send($superAdmin, new NewUserRegisteredNotification($user));
-        } else {
-            Log::warning('No se pudo encontrar al superadministrador para enviar la notificación.');
+    {
+        // Validación de los datos
+        $validator = $request->validate([
+            'name' => 'required',
+            'documento' => 'required',
+            'telefono' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'roles' => 'required',
+        ]);
+    
+        try {
+            // Crear el usuario
+            $user = new User();
+            $user->name = $request->name;
+            $user->documento = $request->documento;
+            $user->telefono = $request->telefono;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->roles = $request->roles;
+            $user->save();
+    
+            // Enviar la notificación al superadministrador
+            $superAdmin = User::where('roles', 1)->first();
+            if ($superAdmin) {
+                Notification::send($superAdmin, new NewUserRegisteredNotification($user));
+            } else {
+                Log::warning('No se pudo encontrar al superadministrador para enviar la notificación.');
+            }
+    
+            // Respuesta
+            return response()->json(['user' => $user], Response::HTTP_CREATED);
+        } catch (\Exception $e) {
+            Log::error('Error al registrar el usuario: ' . $e->getMessage());
+            return response()->json(['error' => 'Error al registrar el usuario'], Response::HTTP_BAD_REQUEST);
         }
-
-        // Respuesta 
-        return response()->json(['user' => $user], 201);
-    } catch (\Exception $e) {
-        Log::error('Error al registrar el usuario: ' . $e->getMessage());
-        return response()->json(['error' => 'Error al registrar el usuario'], 500);
     }
-    }
+    
 
     public function login(Request $request)
     {
@@ -98,4 +98,26 @@ class AuthController extends Controller
         $users = User::all();
         return response()->json(["users" => $users]);
     }
+
+    public function forgotPassword(Request $request){
+        try {
+            $request->validate([
+                'email'=>'required|email'
+            ]);
+    
+            $status = Password::sendResetLink($request->only('email'));
+    
+            if ($status === Password::RESET_LINK_SENT) {
+                return response()->json(['message'=> __($status)], Response::HTTP_OK);
+            } else {
+                return response()->json(['error'=> __($status)], Response::HTTP_BAD_REQUEST);
+            }
+        } catch (\Exception $e) {
+            // Registra la excepción para poder analizarla
+            Log::error('Error en forgotPassword: ' . $e->getMessage());
+            return response()->json(['error'=> 'Error interno del servidor'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+
 }

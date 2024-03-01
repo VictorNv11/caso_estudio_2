@@ -1,4 +1,4 @@
-import React from 'react';  
+import React, { useState } from 'react';  
 import Logo from '..//..//assets/img/planetas.png';
 import img_home from "..//..//assets/img/img_home.png";
 import { Link } from "react-router-dom";
@@ -6,24 +6,20 @@ import axios from "axios";
 
 export const RecuperarContrasena = () => {
 
-    handleSubmit= e =>{
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const endpoint = 'http://localhost:8000/api'
+    const handleSubmit=async (e) =>{
         e.preventDefault();
-
-        const data ={
-            email:this.email
+        try{
+            const response=await axios.post(`${endpoint}/forgot-password`, {email});
+            setMessage(response.data.message);
+        
+        } catch(error){
+            setMessage('Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.')
         }
-
-        axios.post('forgot', data).then(
-            res =>{
-                console.log(res)
-            }
-        ).catch(
-            err=>{
-                console.log(err);
-            }
-        )
-    }
-
+    
+    };
 
 
   return (
@@ -53,16 +49,17 @@ export const RecuperarContrasena = () => {
             <div className="card bg-dark text-white" style={{ borderRadius: '1rem' }}>
                 <div className="card-body p-5 text-center">
                     <div className="mb-md-5 mt-md-4 pb-5">
-   <form onSubmit={this.handleSubmit}>
+   <form onSubmit={handleSubmit}> 
     <h3>Recuperar Contraseña</h3>
 
     <div className="form-outline form-white mb-4">
         <label htmlFor="" className='form-label'>Correo</label>
         <input type="email" className="form-control form-control-lg" placeholder='ingresar correo' 
-        onChange={e=> this.email= e.target.value}/>
+        onChange={(e)=>setEmail(e.target.value)} value={email}/>
     </div>
     <button className="btn btn-outline-light btn-lg px-5">Enviar</button>
    </form>
+   {message && <p>{message}</p>}
    </div>
                         </div>
                     </div>

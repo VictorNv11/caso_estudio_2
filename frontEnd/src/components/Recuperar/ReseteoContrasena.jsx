@@ -1,44 +1,44 @@
 import React from 'react'
 import Logo from '..//..//assets/img/planetas.png';
 import img_home from "..//..//assets/img/img_home.png";
-import { Link, Redirect } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import axios from "axios";
 
 
 export const ReseteoContrasena = () => {
 
-    state={};
+    // state={};
 
-    handleSubmit = e =>{
-        e.preventDefault();
+    // handleSubmit = e =>{
+    //     e.preventDefault();
 
-        const data={
-            token:this.props.match.params.id,
-            password:this.password,
-            password_confirm:this.password_confirm
-        };
+    //     const data={
+    //         token:this.props.match.params.id,
+    //         password:this.password,
+    //         password_confirm:this.password_confirm
+    //     };
 
-        axios.post('reset', data).then(
-            res=>{
-                console.log(res);
-                this.setState({
-                    reset:true
-                }
-                )
-            }
-        ).catch(
-            err=>{
-                console.log(err);
-            }
-        )
+    //     axios.post('reset', data).then(
+    //         res=>{
+    //             console.log(res);
+    //             this.setState({
+    //                 reset:true
+    //             }
+    //             )
+    //         }
+    //     ).catch(
+    //         err=>{
+    //             console.log(err);
+    //         }
+    //     )
         
 
-    }
+    // }
 
-    if(this.state.reset){
-        return <Redirect to={'/login'}></Redirect>
+    // if(this.state.reset){
+    //     return <Redirect to={'/login'}></Redirect>
 
-    }
+    // }
 
   return (
         <section className="vh-100 gradient-custom"  style={{ backgroundImage: `url(${img_home})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center center' }}>
@@ -67,7 +67,7 @@ export const ReseteoContrasena = () => {
                 <div className="card bg-dark text-white" style={{ borderRadius: '1rem' }}>
                     <div className="card-body p-5 text-center">
                         <div className="mb-md-5 mt-md-4 pb-5">
-       <form onSubmit={this.handleSubmit}>
+       <form>
         <h3>Resetear Contraseña</h3>
     
         <div className="input-group">
