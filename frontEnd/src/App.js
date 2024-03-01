@@ -23,6 +23,7 @@ import { TodoList } from './components/Clientes/TodoList.jsx';
 import Notifications from './components/Notifications/Notifications.jsx';
 import Pusher from 'pusher-js';
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
+import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
 
 // Configuración de Pusher
 const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
@@ -39,7 +40,7 @@ export default function App() {
         <Route path="/formRegistro" element={<FormRegistro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
-
+        <Route path="/reset" element={<ReseteoContrasena/>}/>
 
         <Route path="/clientes" element={<ImportCliente/>} />
         <Route path="/createC" element={<CreateCliente />} />

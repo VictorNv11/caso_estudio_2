@@ -58,7 +58,8 @@ export const RecuperarContrasena = () => {
 
     <div className="form-outline form-white mb-4">
         <label htmlFor="" className='form-label'>Correo</label>
-        <input type="email" className="form-control form-control-lg" placeholder='ingresar correo' />
+        <input type="email" className="form-control form-control-lg" placeholder='ingresar correo' 
+        onChange={e=> this.email= e.target.value}/>
     </div>
     <button className="btn btn-outline-light btn-lg px-5">Enviar</button>
    </form>
