@@ -1,31 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Logo from '..//..//assets/img/planetas.png';
 import img_home from "..//..//assets/img/img_home.png";
-import { Link, } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import queryString from 'query-string';
 import axios from "axios";
 
-
 export const ReseteoContrasena = () => {
-
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [message, setMessage] = useState ('');
-    const endpoint = 'http://localhost:8000/api'; // URL de tu backend
+    const [message, setMessage] = useState('');
+    const location = useLocation();
 
-    const handleSubmit =async (e) =>{
+    useEffect(() => {
+        const { email, token } = queryString.parse(location.search);
+        // Hacer algo con el correo electrónico y el token, si es necesario
+    }, [location.search]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-            const response =await axios.post(`${endpoint}/password/reset`, {
-                email:"correo@example.com",
-                token: "token_de_reset",
-                password: password,
-                password_confirmation:confirmPassword
-            });
-            setMessage(response.data.message);
-        }catch(error){
-            setMessage('Hubo un error al restablecer la contraseña.')
+        try {
+            const { email, token } = queryString.parse(location.search);
+          const response = await axios.post('http://localhost:8000/password/reset', {
+            email: email,
+            token: token,
+            password: password,
+            password_confirmation: confirmPassword
+          });
+          setMessage(response.data.message);
+        } catch (error) {
+          setMessage('Hubo un error al restablecer la contraseña.');
         }
-    };
+      };
+    
 
   return (
         <section className="vh-100 gradient-custom"  style={{ backgroundImage: `url(${img_home})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center center' }}>
@@ -56,32 +62,36 @@ export const ReseteoContrasena = () => {
                         <div className="mb-md-5 mt-md-4 pb-5">
        <form onSubmit={handleSubmit}>
         <h3>Resetear Contraseña</h3>
-    
-        <div className="input-group">
-                                        <input
-                                            type='password'
-                                            id= 'password'
-                                            value={password}
-                                            className="form-control form-control-lg"
-                                            placeholder='ingresa tu nueva contraseña'
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            required
-                                        />
-                                        <label className="form-label" htmlFor="password">Nueva Contraseña:</label>
+ 
+        <div className="form-group">
+                                            <label className="form-label" htmlFor="password">Nueva Contraseña:</label>
+                                            <input
+                                                className="form-control form-control-lg"
+                                                placeholder='Ingresa tu nueva contraseña'
+                                                type="password"
+                                                id="password"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                required
+                                            />
+                                        </div>
 
-                                        <input
-                                            type='password'
-                                            id= 'confirmPassword'
-                                            value={confirmPassword}
-                                            className="form-control form-control-lg"
-                                            placeholder='ingresa tu nueva contraseña'
-                                            onChange={(e) =>setConfirmPassword(e.target.value)}
-                                            required
-                                        />
+                                        <div className="form-group">
+                                            <label className="form-label" htmlFor="confirmPassword">Confirmar Contraseña:</label>
+                                            <input
+                                                className="form-control form-control-lg"
+                                                placeholder='Confirma tu nueva contraseña'
+                                                type="password"
+                                                id="confirmPassword"
+                                                value={confirmPassword}
+                                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                                required
+                                            />
+                                        </div>
                                        
-                                        <label className="form-label" htmlFor="confirmPassword">Confirmar Contraseña:</label>
-        <button className="btn btn-outline-light btn-lg px-5">Restablecer Contraseña</button>
-        </div>
+                                        
+        <button className="btn btn-outline-light btn-lg px-5" type="submit">Restablecer Contraseña</button>
+   
        </form>
        {message && <p>{message}</p>}
        </div>
