@@ -17,6 +17,18 @@ import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
 import EditUsuarios from './components/usuarios/EditUsuarios.js';
 
 import ImportCliente from './components/Clientes/ImportClient.js';
+import CreateCliente from './components/Clientes/CreateCliente.js';
+import EditCliente from './components/Clientes/EditCliente.js';
+import { TodoList } from './components/Clientes/TodoList.jsx';
+import Notifications from './components/Notifications/Notifications.jsx';
+import Pusher from 'pusher-js';
+import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
+import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
+
+// Configuración de Pusher
+const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
+  cluster: 'us2'
+});
 
 
 export default function App() {
@@ -27,11 +39,16 @@ export default function App() {
 
         <Route path="/formRegistro" element={<FormRegistro />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
+         {/*<Route path="/reset" element={<ReseteoContrasena/>}/> */}
 
         <Route path="/clientes" element={<ImportCliente/>} />
+        <Route path="/createC" element={<CreateCliente />} />
+        <Route path="/editC/:id" element={<EditCliente />} />
 
+        <Route path="/servicios" element={<TodoList/>} />
 
-
+        <Route path="notifications" element={<Notifications />} />
         
         <Route path="/supAdmins" element={<ShowSupAdmin />} />
         <Route path="/create" element={<CreateSupAdmin />} />

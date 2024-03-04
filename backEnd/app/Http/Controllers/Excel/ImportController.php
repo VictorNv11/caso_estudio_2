@@ -20,13 +20,19 @@ class ImportController extends Controller
         $clientes = Cliente::all();
         return  $clientes;
     }
+    
+    public function show(string $id)
+    {
+        $clientes = Cliente::find($id);
+        return $clientes;
+    }
 
     // Función de importación a la base de datos
     public function importar(Request $request)
     {
 
         try {
-            $nombreColumnas = ["id", "cc/nit", "nombre_completo", "direccion", "ciudad", "telefono", "correo_electronico"];
+            $nombreColumnas = ["id", "cc_nit", "nombre_completo", "direccion", "ciudad", "telefono", "correo_electronico"];
             $data = json_decode($request->getContent(), true);
             $dataContenido = $data['contenido'];
             if (!empty($dataContenido)) {
@@ -71,7 +77,7 @@ class ImportController extends Controller
     // Actualizar (Update)
     public function update(Request $request, string $id)
     {
-        $clientes = Cliente::findOrFail($request->id);
+        $clientes = Cliente::findOrFail($id);
         $clientes->cc_nit = $request->cc_nit;
         $clientes->nombre_completo = $request->nombre_completo;
         $clientes->direccion = $request->direccion;

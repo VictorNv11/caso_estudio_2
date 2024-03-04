@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UsuariosController;
 use App\Http\Controllers\Excel\ImportController;
+use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Support\Facades\Auth;
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -38,19 +40,36 @@ Route::controller(UsuariosController::class)->group(function () {
 });
 
 
+// Rutas de Servicios
+Route::prefix('servicios')->group(function (){
+    Route::get('/', [TaskController::class, 'index']); 
+    Route::post('/crear',[TaskController::class, 'store']);               //SIRVE
+    Route::get('/{id}',[TaskController::class, 'show']);            //SIRVE
+    Route::put('/{id}',[TaskController::class, 'update']);         //SIRVE
+    Route::delete('/delete/{id}',[TaskController::class, 'destroy']);    //SIRVE
+    Route::put('/complete/{id}', [TaskController::class, 'completeServicio']);
+});
+
 // Rutas del módulo de clientes
 Route::prefix('clientes')->group(function () {
     Route::get('/', [ImportController::class, 'index']); // SIRVE
     Route::post('/import', [ImportController::class, 'importar']); // SIRVE
     Route::get('/export', [ImportController::class, 'exportar']); // SIRVE
+    
 
-    Route::get('/export/excel', [ImportController::class, 'exportarExcel']);
+    Route::get('/export/excel', [ImportController::class, 'exportarExcel']); // SIRVE
+    Route::post('/create',[ImportController::class, 'store']);  // SIRVE
+    Route::get('/{id}', [ImportController::class,'show']); // SIRVE
+    Route::put('/{id}',[ImportController::class,'update']);         //SIRVE
+    Route::delete('/delete/{id}',[ImportController::class,'destroy']); 
+    
 });
 
 //__________________PRUEBA LOGIN Y REGISTRO__________________________
 
 Route::post('register',[AuthController::class, 'register']);
 Route::post('login',[AuthController::class, 'login']);
+Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
 //Route::put('edit',[AuthController::class, 'edit']);
 
 Route::group(['middleware'=>['auth:sanctum']], function(){

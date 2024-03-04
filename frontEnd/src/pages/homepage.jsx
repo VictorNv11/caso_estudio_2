@@ -38,7 +38,7 @@ const Homepage = () => {
                   rel="noopener noreferrer"
                   target="_blank"
                   title="Síguenos en  Twitter">
-                  <FaTwitter style={{color: 'white', fontSize:35, padding:'0 4 0 10' }}/>
+                  <FaTwitter style={{ color: 'white', fontSize: 45, padding: '0 10px' }}/>
                   <p className="d-lg-none d-xl-none">Twitter</p>
                 </NavLink>
             </NavItem>
@@ -50,7 +50,7 @@ const Homepage = () => {
                 target="_blank"
                 title="Síguenos en  Facebook"
               >
-                <FaFacebookSquare style={{color: 'white', fontSize:35, padding:'0 4 0 10' }}/>
+                <FaFacebookSquare style={{ color: 'white', fontSize: 40, padding: '0 10px' }} />
                 <p className="d-lg-none d-xl-none">Facebook</p>
               </NavLink>
             </NavItem>
@@ -62,7 +62,7 @@ const Homepage = () => {
                 target="_blank"
                 title="Síguenos en Instagram"
               >
-               <FaInstagram style={{color: 'white', fontSize:92, padding:'0 4 0 10', paddingRight:60 }}/>
+               <FaInstagram style={{ color: 'white', fontSize: 43, padding: '0 10px' }}/>
                 <p className="d-lg-none d-xl-none">Instagram</p>
               </NavLink>
             </NavItem>

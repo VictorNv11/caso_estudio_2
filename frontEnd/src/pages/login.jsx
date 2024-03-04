@@ -6,7 +6,7 @@ import GoogleLogin from 'react-google-login';
 import Logo from '../assets/img/planetas.png';
 import img_home from "../assets/img/img_home.png"
 import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
-
+import avatar from "../assets/img/avatar.png";
 
 
 export default function Login() {
@@ -49,6 +49,11 @@ export default function Login() {
         } catch (error) {
             // Si hay un error en la solici;tud, muestra el mensaje de error
             setError("Credenciales inválidas");
+            // Configurar el temporizador para limpiar el error después de 5 segundos
+        setTimeout(() => {
+            setError(null);
+          }, 5000);
+          return;
         }
     };
 
@@ -74,12 +79,16 @@ export default function Login() {
         </header>
             
         <div className="container py-5 h-100">
+           
             <div className="row d-flex justify-content-center align-items-center h-100">
                 <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div className="card bg-dark text-white" style={{ borderRadius: '1rem' }}>
                         <div className="card-body p-5 text-center">
                             <div className="mb-md-5 mt-md-4 pb-5">
-                                <h2 className="fw-bold mb-2 text-">Inicio de Sesion</h2>
+                            
+                <img src={avatar} alt="icono de usuario" title="icono de usuario" className="img-fluid" style={{width:'10rem'}} />
+            
+                                <h2 className="fw-bold mb-2 text-">Inicio de Sesión</h2>
                                     <p className="text-white-50 mb-5">Por favor digite su Correo y Contraseña</p>
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-outline form-white mb-4">
@@ -127,7 +136,10 @@ export default function Login() {
                                 {error && <p className="text-danger mt-3">{error}</p>}
                             </div>
                             <div>
-                                <p className="mb-0">No tiene cuenta? <Link to="/FormRegistro" className="link" style={{color:'#BF9DFC'}}>Registrarse</Link></p>
+                               <p className="forgot-password">
+                                <Link className="mb-0" to={'/recuperarContrasena'} style={{color:'#BF9DFC'}}>¿Olvidaste tu Contraseña?</Link>
+                                </p> 
+                                    <p className="mb-0">¿No tienes Cuenta? <Link to="/FormRegistro" className="link" style={{color:'#BF9DFC'}}>Registrarse</Link></p>
                             </div>
                         </div>
                     </div>
