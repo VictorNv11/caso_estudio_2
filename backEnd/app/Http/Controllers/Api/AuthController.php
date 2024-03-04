@@ -129,8 +129,8 @@ class AuthController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-                    ? response()->json(['message' => __($status)], 200)
-                    : response()->json(['error' => __($status)], 400);
+                    ? response()->json(['message' => 'Contraseña restablecida con exitó'], 200)
+                    : response()->json(['error' => 'Error al restablecer la Contraseña'], 400);
     }
     
 

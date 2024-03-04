@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from '..//..//assets/img/planetas.png';
 import img_home from "..//..//assets/img/img_home.png";
 import { Link, } from "react-router-dom";
@@ -7,38 +7,25 @@ import axios from "axios";
 
 export const ReseteoContrasena = () => {
 
-    // state={};
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [message, setMessage] = useState ('');
+    const endpoint = 'http://localhost:8000/api'; // URL de tu backend
 
-    // handleSubmit = e =>{
-    //     e.preventDefault();
-
-    //     const data={
-    //         token:this.props.match.params.id,
-    //         password:this.password,
-    //         password_confirm:this.password_confirm
-    //     };
-
-    //     axios.post('reset', data).then(
-    //         res=>{
-    //             console.log(res);
-    //             this.setState({
-    //                 reset:true
-    //             }
-    //             )
-    //         }
-    //     ).catch(
-    //         err=>{
-    //             console.log(err);
-    //         }
-    //     )
-        
-
-    // }
-
-    // if(this.state.reset){
-    //     return <Redirect to={'/login'}></Redirect>
-
-    // }
+    const handleSubmit =async (e) =>{
+        e.preventDefault();
+        try{
+            const response =await axios.post(`${endpoint}/password/reset`, {
+                email:"correo@example.com",
+                token: "token_de_reset",
+                password: password,
+                password_confirmation:confirmPassword
+            });
+            setMessage(response.data.message);
+        }catch(error){
+            setMessage('Hubo un error al restablecer la contraseña.')
+        }
+    };
 
   return (
         <section className="vh-100 gradient-custom"  style={{ backgroundImage: `url(${img_home})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center center' }}>
@@ -67,27 +54,36 @@ export const ReseteoContrasena = () => {
                 <div className="card bg-dark text-white" style={{ borderRadius: '1rem' }}>
                     <div className="card-body p-5 text-center">
                         <div className="mb-md-5 mt-md-4 pb-5">
-       <form>
+       <form onSubmit={handleSubmit}>
         <h3>Resetear Contraseña</h3>
     
         <div className="input-group">
                                         <input
+                                            type='password'
+                                            id= 'password'
+                                            value={password}
                                             className="form-control form-control-lg"
                                             placeholder='ingresa tu nueva contraseña'
-                                            onChange={(e) => this.password=e.target.value}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
                                         />
-                                        <label className="form-label" htmlFor="typePasswordX">Contraseña</label>
+                                        <label className="form-label" htmlFor="password">Nueva Contraseña:</label>
 
                                         <input
+                                            type='password'
+                                            id= 'confirmPassword'
+                                            value={confirmPassword}
                                             className="form-control form-control-lg"
                                             placeholder='ingresa tu nueva contraseña'
-                                            onChange={(e) =>this.password_confirm=e.target.value}
+                                            onChange={(e) =>setConfirmPassword(e.target.value)}
+                                            required
                                         />
                                        
-                                        <label className="form-label" htmlFor="typePasswordX">Confirmar Contraseña</label>
-        <button className="btn btn-outline-light btn-lg px-5">Enviar</button>
+                                        <label className="form-label" htmlFor="confirmPassword">Confirmar Contraseña:</label>
+        <button className="btn btn-outline-light btn-lg px-5">Restablecer Contraseña</button>
         </div>
        </form>
+       {message && <p>{message}</p>}
        </div>
                             </div>
                         </div>
