@@ -39,7 +39,7 @@ export default function Login() {
                 console.log(role)
                 // Comparar el nombre del rol para redirigir al usuario
                     if (role === 1) {
-                        window.location.href = "/supAdmins";
+                        window.location.href = "/HomePageSuperAdmin";
                     } else if (role ===2) {
                         window.location.href = "/Admin";
                     } else if (role ===3) {

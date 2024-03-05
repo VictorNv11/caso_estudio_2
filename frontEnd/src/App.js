@@ -4,24 +4,30 @@ import Homepage from './pages/homepage.jsx';
 import FormRegistro from './pages/formRegistro.jsx';
 import Login from './pages/login.jsx';
 
+// SUPERADMINISTRADOR
 import ShowSupAdmin from './components/supAdmin/ShowSupAdmin.js';
 import CreateSupAdmin from './components/supAdmin/CreateSupAdmin.js';
 import EditSupAdmin from './components/supAdmin/EditSupAdmin.js';
+import HomePageSupAdmin from './components/supAdmin/homePageSupAdmin.js';
 
+// ADMINISTRADOR
 import ShowAdmin from './components/Admin/showAdmin.js';
 import CreateAdmin from './components/Admin/CreateAdmin.js';
 import EditAdmin from './components/Admin/EditAdmin.js';
 
+// USUARIO
 import ShowUsuarios from './components/usuarios/ShowUsuarios.js';
 import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
 import EditUsuarios from './components/usuarios/EditUsuarios.js';
 
+// EXCEL
 import ImportCliente from './components/Clientes/ImportClient.js';
 import CreateCliente from './components/Clientes/CreateCliente.js';
 import EditCliente from './components/Clientes/EditCliente.js';
 import { TodoList } from './components/Clientes/TodoList.jsx';
 import Notifications from './components/Notifications/Notifications.jsx';
 import Pusher from 'pusher-js';
+
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
 import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
 
@@ -40,8 +46,14 @@ export default function App() {
         <Route path="/formRegistro" element={<FormRegistro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
-         {/*<Route path="/reset" element={<ReseteoContrasena/>}/> */}
-
+     
+        {/* SUEPERADMINISTRADOR */}
+        <Route path="/homePageSuperAdmin" element={<HomePageSupAdmin />} />
+        <Route path="/supAdmins" element={<ShowSupAdmin />} />
+        <Route path="/create" element={<CreateSupAdmin />} />
+        <Route path="/edit/:id" element={<EditSupAdmin />} />
+        
+        {/* EXCEL */}
         <Route path="/clientes" element={<ImportCliente/>} />
         <Route path="/createC" element={<CreateCliente />} />
         <Route path="/editC/:id" element={<EditCliente />} />
@@ -50,14 +62,12 @@ export default function App() {
 
         <Route path="notifications" element={<Notifications />} />
         
-        <Route path="/supAdmins" element={<ShowSupAdmin />} />
-        <Route path="/create" element={<CreateSupAdmin />} />
-        <Route path="/edit/:id" element={<EditSupAdmin />} />
-        
+        {/* ADMINISTRADOR */}
         <Route path="/Admin" element={<ShowAdmin />} />
         <Route path="/createA" element={<CreateAdmin />} />
         <Route path="/editA/:id" element={<EditAdmin />} />
 
+        {/* USUARIOS */}
         <Route path="/usuarios" element={<ShowUsuarios />} />
         <Route path="/createU" element={<CreateUsuarios />} />
         <Route path="/editU/:id" element={<EditUsuarios />} />

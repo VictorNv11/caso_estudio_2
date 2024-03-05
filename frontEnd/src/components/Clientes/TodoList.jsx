@@ -86,7 +86,7 @@ export const TodoList = () => {
           <AiTwotoneBell style={{color:'white'}} />
         </div>
         <div className="ml-auto" style={{ paddingRight: 30, display: 'flex', alignItems: 'center' }}>
-            <Link to='/supAdmins' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
+            <Link to='/homePageSuperAdmin' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
          </div>
       <div className="ms-auto " style={{ paddingRight:30}}>
         <button onClick={salir} className='btn btn-dark'>Salir</button>
