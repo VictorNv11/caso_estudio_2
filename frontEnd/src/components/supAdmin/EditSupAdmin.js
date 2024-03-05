@@ -104,23 +104,21 @@ const EditSupAdmin = () => {
                     </button>
                     </div>
                   </div>
-                  <div>
-                  <label className='form-label' style={{color:"#E7DFDD", padding:'1%' }}>Roles</label>
-                  <select className="form-select" aria-label="seleccione un rol" value={roles} onChange={(e)=>setRoles(e.target.value)}>
-                    <option selected>Seleccione un Rol</option>
-                    <option value="1">Super Administrador</option>
-                    <option value="2">Administrador</option>
-                    <option value="3">Usuario</option>
-                  </select>
+                <div>
+                    <label className='form-label' style={{color:"#E7DFDD", padding:'1%' }}>Roles</label>
+                    <select className="form-select" aria-label="seleccione un rol" value={roles} onChange={(e)=>setRoles(e.target.value)}>
+                        <option selected>Seleccione un Rol</option>
+                        <option value="1">Super Administrador</option>
+                        <option value="2">Administrador</option>
+                        <option value="3">Usuario</option>
+                    </select>
                 </div>
                 <div style={{ paddingTop:'10px', display: 'flex', flexDirection: 'column', alignItems: 'right' }}>
                   <button type="submit" className="btn btn-primary">Editar</button> 
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'right', paddingTop:'5px' }}>
-    {/* ... (otro contenido) */}
-    {/* <button className='btn btn-secondary' style={{margin:'1px', marginTop: '1px 0' }}>Cancelar</button> */}
-    <Link to='/supAdmins' className='btn btn-secondary'  style={{color:'#E7DFDD'}}>Cancelar</Link>
-</div>      
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'right', paddingTop:'5px' }}>
+                    <Link to='/supAdmins' className='btn btn-secondary'  style={{color:'#E7DFDD'}}>Cancelar</Link>
+                </div>      
               </form>
           </div>
       </div>
