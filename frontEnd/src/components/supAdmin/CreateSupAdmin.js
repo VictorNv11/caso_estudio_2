@@ -1,11 +1,14 @@
 import axios from 'axios';
-import React,{useState}from 'react';
+import React,{useEffect, useState}from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
+import Cookies from 'js-cookie';
+ 
 
 const endpoint = 'http://localhost:8000/api/register'
 const CreateSupAdmin = () => {
-    const [name, setName] = useState('')
+  const [setUsers] = useState([]);   
+  const [name, setName] = useState('')
     const [documento, setDocumento] = useState('')
     const[telefono, setTelefono] = useState ('')
     const [email, setEmail] = useState('')
@@ -14,7 +17,29 @@ const CreateSupAdmin = () => {
     const [showPassword, setShowPassword] = useState(false);
     
     const navigate = useNavigate()
+
+    const showData = async () => {
+      try {
+        const token = Cookies.get("token");
+        const response = await axios.get(`${endpoint}/users`, {
+          headers: {  
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setUsers(response.data.users);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    useEffect(() => {
+      if (Cookies.get("token") === undefined) {
+        window.location.href = "/";
+      }
+      showData();
+    }, []);
+
     
+
     const store = async (e) =>{
         e.preventDefault()
 
@@ -78,9 +103,7 @@ const CreateSupAdmin = () => {
                 </li>
               </ul>
             </div>
-            <div className="ml-auto" style={{paddingRight: 30}}>
-              <Link to='/' className='btn btn-dark'>Salir</Link>
-            </div>
+           
         </nav>
         <div>
             <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%', color:'#E7DFDD'}}>Creando Usuarios</h1>

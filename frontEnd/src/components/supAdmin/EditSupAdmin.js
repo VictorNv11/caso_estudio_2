@@ -2,12 +2,14 @@ import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import { Link, useNavigate, useParams} from 'react-router-dom'
 import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
+import Cookies from 'js-cookie';
 
 
 const endpoint = 'http://localhost:8000/api/User/'
 
 const EditSupAdmin = () => {
-
+    
+    const [setUsers] = useState([]);   
     const [name, setName] = useState('')
     const [documento, setDocumento] = useState('')
     const [telefono, setTelefono] = useState('')
@@ -44,6 +46,25 @@ const EditSupAdmin = () => {
         getUserById()
      }, [])
 
+     const showData = async () => {
+        try {
+          const token = Cookies.get("token");
+          const response = await axios.get(`${endpoint}/users`, {
+            headers: {  
+              Authorization: `Bearer ${token}`
+            }
+          });
+          setUsers(response.data.users);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      useEffect(() => {
+        if (Cookies.get("token") === undefined) {
+          window.location.href = "/";
+        }
+        showData();
+      }, []);
 
     return(
         <div>

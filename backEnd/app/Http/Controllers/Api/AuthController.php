@@ -45,12 +45,6 @@ class AuthController extends Controller
             $user->roles = $request->roles;
             $user->save();
 
-        //respuesta
-        return response($user, Response::HTTP_CREATED);
-    }
-
-
-
             // Enviar la notificación al superadministrador
             $superAdmin = User::where('roles', 1)->first();
             if ($superAdmin) {
@@ -79,7 +73,8 @@ class AuthController extends Controller
             $user = Auth::user();
             $token = $user->createToken('token')->plainTextToken;
             $cookie = cookie('cookie_token', $token, 60 * 24);
-            return response(["token" => $token], Response::HTTP_OK)->withoutCookie($cookie);
+            $role = $user->roles;
+            return response(["token" => $token,  "role"=>$role], Response::HTTP_OK)->withoutCookie($cookie);
         } else {
             return response(["message" => "Credenciales invalidas"], Response::HTTP_UNAUTHORIZED);
         }
@@ -105,25 +100,39 @@ class AuthController extends Controller
         return response()->json(["users" => $users]);
     }
 
-    public function forgotPassword(Request $request){
-        try {
-            $request->validate([
-                'email'=>'required|email'
-            ]);
+    public function forgotPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
 
-            $status = Password::sendResetLink($request->only('email'));
+        $status = Password::sendResetLink($request->only('email'));
 
-            if ($status === Password::RESET_LINK_SENT) {
-                return response()->json(['message'=> __($status)], Response::HTTP_OK);
-            } else {
-                return response()->json(['error'=> __($status)], Response::HTTP_BAD_REQUEST);
-            }
-        } catch (\Exception $e) {
-            // Registra la excepción para poder analizarla
-            Log::error('Error en forgotPassword: ' . $e->getMessage());
-            return response()->json(['error'=> 'Error interno del servidor'], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        return $status === Password::RESET_LINK_SENT
+                    ? response()->json(['message' => __($status)], 200)
+                    : response()->json(['error' => __($status)], 400);
     }
+
+    public function resetPassword(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'token' => 'required',
+        'password' => 'required|confirmed|min:8',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) {
+            $user->password = Hash::make($password);
+            $user->save();
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+        ? response()->json(['message' => 'Contraseña restablecida con éxito'], 200)
+        : response()->json(['error' => 'Error al restablecer la contraseña'], 400);
+}
 
 
 }
