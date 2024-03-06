@@ -46,6 +46,8 @@ export default function App() {
         <Route path="/formRegistro" element={<FormRegistro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
+        <Route path="/password-reset/:token" element={<ReseteoContrasena/>}/> 
+
      
         {/* SUEPERADMINISTRADOR */}
         <Route path="/homePageSuperAdmin" element={<HomePageSupAdmin />} />

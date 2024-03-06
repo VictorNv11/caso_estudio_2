@@ -74,7 +74,15 @@ export const TodoAdd = ({handleNewTodo}) => {
       return;
     }
 
-    if(description.length <= 1) return
+    if (description.length <= 1) {
+      setError('La descripción debe tener al menos 2 caracteres.');
+      return;
+  }
+
+  if (isNaN(price)) {
+    setError('El precio debe ser un número válido.');
+    return;
+}
 
     let newTodo ={
       id: new Date().getTime(),
@@ -91,7 +99,7 @@ export const TodoAdd = ({handleNewTodo}) => {
       onResetForm();
     } catch (error) {
       console.error(error.message);
-      setError('Datos incorrectos. Por favor verifica e inténtalo de nuevo.');
+      setError('Ocurrió un error al agregar el servicio. Por favor, inténtalo de nuevo más tarde.');
     }
 
   };

@@ -10,7 +10,8 @@ use App\Http\Controllers\Excel\ImportController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\Api\ForgotPasswordController;
+use App\Http\Controllers\Api\MailController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
@@ -65,12 +66,22 @@ Route::prefix('clientes')->group(function () {
     
 });
 
+    Route::prefix('mail')->group(function(){
+    Route::post('/send-email',[MailController::class, 'sendMail']);   
+    });
+    Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
+    Route::post('password/reset', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
+
+    
+
 //__________________PRUEBA LOGIN Y REGISTRO__________________________
 
 Route::post('register',[AuthController::class, 'register']);
 Route::post('login',[AuthController::class, 'login']);
-Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
 //Route::put('edit',[AuthController::class, 'edit']);
+
+
+
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::get('user-profile', [AuthController::class, 'userProfile']);
