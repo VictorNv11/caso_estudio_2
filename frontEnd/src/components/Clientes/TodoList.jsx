@@ -1,6 +1,6 @@
 import React from 'react'
 import { TodoAdd } from '../Clientes/TodoAdd'
-import { Servicios } from '../Clientes/Servicios'
+import { Servicios } from '../Clientes/Servicios';
 import { useTodo } from '../../hooks/useTodo'
 import Logo from '..//..//assets/img/planetas.png'
 import { AiTwotoneBell } from 'react-icons/ai';
