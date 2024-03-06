@@ -91,6 +91,7 @@ const estilos = {
 export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDeleteTodo }) => {
 
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false); // Estado para controlar la apertura/cierre del modal de confirmación
+  const [error, setError] = useState(null);
 
   const openConfirmationModal = () => {
     setIsConfirmationOpen(true);
@@ -100,11 +101,14 @@ export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDel
     setIsConfirmationOpen(false);
   };
 
-  const confirmDeleteTodo = () => {
-    handleDeleteTodo(todo.id);
-    closeConfirmationModal(); // Cierra el modal de confirmación después de confirmar la eliminación
-  };
-
+  const confirmDeleteTodo = async () => {
+    try {
+        await handleDeleteTodo(todo.id);
+        closeConfirmationModal();
+    } catch (error) {
+        setError('Ocurrió un error al eliminar el servicio. Por favor, inténtalo de nuevo más tarde.');
+    }
+};
   return (
     <>
     <li style={estilos.listItem}>
@@ -135,6 +139,12 @@ export const TodoItem = ({ todo, handleUpdateTodo, handleCompleteTodo, handleDel
        <button type="button" className="btn btn-danger border border-white border-2" onClick={confirmDeleteTodo}>Eliminar</button>
      </div>
    </Modal>
+    {/* Mostrar el modal de error si hay un error */}
+    {error && (
+                <Modal isOpen={true} onClose={() => setError(null)} title="Error">
+                    <p>{error}</p>
+                </Modal>
+    )}
  </>
     
   );
