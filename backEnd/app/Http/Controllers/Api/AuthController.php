@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Password;
+
+ 
+
 
 // Eventos
 use App\Events\NewUserRegistered;
@@ -98,40 +100,7 @@ class AuthController extends Controller
         $users = User::all();
         return response()->json(["users" => $users]);
     }
-
-    public function forgotPassword(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
-
-        $status = Password::sendResetLink($request->only('email'));
-
-        return $status === Password::RESET_LINK_SENT
-                    ? response()->json(['message' => __($status)], 200)
-                    : response()->json(['error' => __($status)], 400);
-    }
-
-    public function resetPassword(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email',
-        'token' => 'required',
-        'password' => 'required|confirmed|min:8',
-    ]);
-
-    $status = Password::reset(
-        $request->only('email', 'password', 'password_confirmation', 'token'),
-        function ($user, $password) {
-            $user->password = Hash::make($password);
-            $user->save();
-        }
-    );
-
-    return $status === Password::PASSWORD_RESET
-        ? response()->json(['message' => 'Contraseña restablecida con éxito'], 200)
-        : response()->json(['error' => 'Error al restablecer la contraseña'], 400);
-}
+   
     
 
 }

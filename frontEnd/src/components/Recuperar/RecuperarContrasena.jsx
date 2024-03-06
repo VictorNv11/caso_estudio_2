@@ -9,14 +9,21 @@ export const RecuperarContrasena = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const endpoint = 'http://localhost:8000/api'; // URL de tu backend
+    const [successMessage, setSuccessMessage] = useState('');  // Nuevo estado para el mensaje de éxito
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${endpoint}/forgot-password`, { email });
-            setMessage(response.data.message);
+            const response = await axios.post(`${endpoint}/mail/send-email`, { 
+                email, 
+                title:'Correo de recuperacion de contraseña',
+                body:'Ejemplo' 
+            });
+            setSuccessMessage('Correo enviado con éxito');  // Establecer el mensaje de éxito
+            setMessage('');  // Limpiar el mensaje de error
         } catch (error) {
             setMessage('Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo más tarde.');
+            setSuccessMessage('');  // Limpiar el mensaje de éxito en caso de error
         }
     };
 
@@ -58,7 +65,8 @@ export const RecuperarContrasena = () => {
     </div>
     <button className="btn btn-outline-light btn-lg px-5">Enviar</button>
    </form>
-   {message && <p>{message}</p>}
+   {message && <p style={{ color: 'red' }}>{message}</p>}
+            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
    </div>
                         </div>
                     </div>
