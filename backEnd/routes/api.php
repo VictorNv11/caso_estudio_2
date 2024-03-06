@@ -68,7 +68,7 @@ Route::prefix('clientes')->group(function () {
 
     Route::prefix('mail')->group(function(){
     Route::post('/send-email',[MailController::class, 'sendMail']);
-    Route::post('')    
+    
     });
     Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
     Route::post('password/reset', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');

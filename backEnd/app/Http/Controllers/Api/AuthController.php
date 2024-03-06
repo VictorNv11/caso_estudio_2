@@ -35,7 +35,7 @@ class AuthController extends Controller
             'password' => 'required',
             'roles' => 'required',
         ]);
-    
+
         try {
             // Crear el usuario
             $user = new User();
@@ -46,7 +46,7 @@ class AuthController extends Controller
             $user->password = Hash::make($request->password);
             $user->roles = $request->roles;
             $user->save();
-    
+
             // Enviar la notificación al superadministrador
             $superAdmin = User::where('roles', 1)->first();
             if ($superAdmin) {
@@ -54,7 +54,7 @@ class AuthController extends Controller
             } else {
                 Log::warning('No se pudo encontrar al superadministrador para enviar la notificación.');
             }
-    
+
             // Respuesta
             return response()->json(['user' => $user], Response::HTTP_CREATED);
         } catch (\Exception $e) {
@@ -62,7 +62,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'Error al registrar el usuario'], Response::HTTP_BAD_REQUEST);
         }
     }
-    
+
 
     public function login(Request $request)
     {
@@ -75,7 +75,8 @@ class AuthController extends Controller
             $user = Auth::user();
             $token = $user->createToken('token')->plainTextToken;
             $cookie = cookie('cookie_token', $token, 60 * 24);
-            return response(["token" => $token], Response::HTTP_OK)->withoutCookie($cookie);
+            $role = $user->roles;
+            return response(["token" => $token,  "role"=>$role], Response::HTTP_OK)->withoutCookie($cookie);
         } else {
             return response(["message" => "Credenciales invalidas"], Response::HTTP_UNAUTHORIZED);
         }
@@ -100,7 +101,6 @@ class AuthController extends Controller
         $users = User::all();
         return response()->json(["users" => $users]);
     }
-   
-    
+
 
 }

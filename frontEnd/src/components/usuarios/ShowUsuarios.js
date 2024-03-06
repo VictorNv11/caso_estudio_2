@@ -57,7 +57,7 @@ const ShowUsuarios = () => {
 return (
     <div>
         <nav className="navbar navbar-expand-lg" style={{backgroundColor:"#0E0B16 ", borderRadius:5}}>
-          <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:"#E7DFDD"}}>Super Administrador </a>
+          <a className="navbar-brand" href="#" style={{paddingLeft: 20, color:"#E7DFDD"}}>USUARIO </a>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">
             <li className="nav-item active" style={{paddingRight: 20}}>
