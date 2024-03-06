@@ -37,7 +37,18 @@ export default function HomePageSupAdmin() {
 
     return (
       <div style={{ display: 'flex', height: '100vh' }}>
-      <nav className="sidebar">
+      <nav className="sidebar" style={{
+          position: 'fixed',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          zIndex: 100,
+          paddingTop: '0.5%', // Altura del navbar
+          boxShadow: 'inset -1px 0 0 rgba(0, 0, 0, .1)',
+          backgroundColor: '#344955', // Color de fondo
+          color: '#fff', // Color de texto
+          width: '260px' // Ancho del sidebar
+      }}>
         <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ margin: 'auto', display: 'block', width: 50, height: 50 }} />
         <h4 style={{ marginLeft: '16px', marginTop:'10%'}}>Super Administrador</h4>
         <ul className="nav flex-column">
