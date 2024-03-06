@@ -99,12 +99,39 @@ const ShowSupAdmin = () => {
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
   };
+
+
+  const validateSearch = (searchInput) => {
+   
+    if (!isNaN(searchInput) && searchInput.toString().length === 10) {
+      return true;
+    }
+    
+    if (typeof searchInput === 'string' && searchInput.trim() !== '') {
+      return true;
+    }
+    return false;
+  };
+  
+  // Función de búsqueda
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    // Validar el campo de búsqueda
+    if (validateSearch(value)) {
+      setSearch(value);
+    } else {
+      setSearch('');
+    }
+  };
+  
+  // Filtro de usuarios
   const filteredUsers = search
-    ? Users.filter((users) =>
-        users.email.toLowerCase().includes(search.toLowerCase()) ||
-        (users.telefono && users.telefono.toString().includes(search.toString()))
+    ? Users.filter((user) =>
+        (user.name.toLowerCase().includes(search.toLowerCase()) ||
+        (user.telefono && user.telefono.toString().includes(search.toString())))
       )
     : Users;
+
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -167,12 +194,16 @@ useEffect(() => {
     <div style={{ marginTop: '5%' }}>
       <h1 className='text-center' style={{color:'#E7DFDD'}}>Listado de Super Administradores</h1>
     </div>
-    <div style={{ marginLeft: '4%', marginTop: '2%' }}>
-      <input value={search} style={{ borderRadius: 5 }} onChange={searcher} type='text' placeholder='buscar por Email' className='form'></input><BsSearch style={{ marginLeft: 5, color: 'white' }} />
-      <Link className='btn btn-success btn-sm' to={'/Clientes'} style={{ marginLeft: '65.5%' }}>importar</Link>{' '}
-      <Link to='/create' className='btn btn-dark btn-sm'>Crear</Link>{' '}
 
+
+    <div style={{ marginLeft: '4%', marginTop: '2%' }}>
+    <input value={search} style={{ borderRadius: 5 }} onChange={handleSearch} type='text' placeholder='Buscar Nombre o Teléfono' className='form'></input>
+      <BsSearch style={{ marginLeft: 5, color: 'white' }} />
+      <Link className='btn btn-success btn-sm' to={'/Clientes'} style={{ marginLeft: '65.5%' }}>Importar</Link>{' '}
+      <Link to='/create' className='btn btn-dark btn-sm'>Crear</Link>{' '}
     </div>
+
+
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
     <a className="navbar-brand" href="#" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
     <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ width: 70, height: 60 }} />
