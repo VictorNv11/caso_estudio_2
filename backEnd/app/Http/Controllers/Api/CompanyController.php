@@ -49,7 +49,7 @@ class CompanyController extends Controller
     // Actualizar (Update)
     public function update(Request $request, string $id)
     {
-        $companies = Company::findOrFail($request->id);
+        $companies = Company::findOrFail($id);
         $companies->name_company = $request->name_company;
         $companies->address = $request->address;
         $companies->nit = $request->nit;
