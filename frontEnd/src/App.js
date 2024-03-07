@@ -19,6 +19,7 @@ import EditAdmin from './components/Admin/EditAdmin.js';
 import ShowUsuarios from './components/usuarios/ShowUsuarios.js';
 import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
 import EditUsuarios from './components/usuarios/EditUsuarios.js';
+import HomePageUsuario from './components/usuarios/HomePageUsuario.js';
 
 // EXCEL
 import ImportCliente from './components/Clientes/ImportClient.js';
@@ -73,6 +74,8 @@ export default function App() {
         <Route path="/usuarios" element={<ShowUsuarios />} />
         <Route path="/createU" element={<CreateUsuarios />} />
         <Route path="/editU/:id" element={<EditUsuarios />} />
+        <Route path='/HomePageUsuario' element={<HomePageUsuario/>}/>
+
       </Routes>
     </BrowserRouter>
   );

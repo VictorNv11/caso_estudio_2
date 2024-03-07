@@ -43,7 +43,7 @@ export default function Login() {
                     } else if (role ===2) {
                         window.location.href = "/Admin";
                     } else if (role ===3) {
-                        window.location.href = "/usuarios"
+                        window.location.href = "/HomePageUsuario"
                     }
             }
         } catch (error) {
