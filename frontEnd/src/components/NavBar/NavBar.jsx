@@ -1,16 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TfiMenuAlt } from "react-icons/tfi";
 import { Navbar, Container, Nav, Button, Offcanvas, NavDropdown } from 'react-bootstrap';
 import Logo from '..//..//assets/img/planetas.png';
+import { AiTwotoneBell } from 'react-icons/ai';
+import Notification from '../Notifications/Notifications';
+import axios from 'axios';
+
+
 
 const NavBar = () => {
     
    const [navBarVisible, setNavBarVisible] = useState(false);
+   const [notifications, setNotifications] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+  
 
    const toggleNavBar = () => {
     setNavBarVisible(!navBarVisible);
   };
+  const toggleNotifications = () => {
+    setShowNotifications(!showNotifications);
+  };
+  const [totalNotifications, setTotalNotifications] = useState(0);
+
+const fetchTotalNotifications = async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/api/notifications');
+    setTotalNotifications(response.data.totalNotifications);
+  } catch (error) {
+    console.error('Error fetching total notifications:', error);
+  }
+};
+
+useEffect(() => {
+  fetchTotalNotifications();
+}, []);
+
+
 
   return (
     <div style={{backgroundColor: '#50727B'}}>   
@@ -20,6 +47,10 @@ const NavBar = () => {
         <Button onClick={toggleNavBar} style={{ position: 'absolute', zIndex: 101, top: '20px', right: '20px', transform: 'translateY(-30%)', backgroundColor: '#50727B' }}>
         <TfiMenuAlt />
         </Button> 
+        <div className='ml-auto' style={{paddingRight:10, fontSize:'25px', transform: 'translateY(-10%)'}} onClick={toggleNotifications}>
+          <AiTwotoneBell style={{color: notifications.length > 0 ? 'red' : '#50727B'}} />
+          {totalNotifications > 0 && <span className="badge badge-danger">{totalNotifications}</span>}
+        </div>
           <Navbar.Toggle aria-controls="offcanvasNavbar" />
           <Navbar.Collapse id="offcanvasNavbar">
             <Offcanvas placement="end" show={navBarVisible} onHide={() => setNavBarVisible(false)} >
@@ -37,7 +68,8 @@ const NavBar = () => {
                   <Nav.Link><Link to={'/calendar'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-calendar-alt"></i> Calendario</Link> </Nav.Link>
                   <Nav.Link><Link to={'/servicios'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-tools"></i> Servicios</Link> </Nav.Link>
                   <Nav.Link><Link to={'/roles'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-users"></i> Roles</Link> </Nav.Link>
-                  <Nav.Link><Link to={'/companies'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
+                  <Nav.Link><Link to={'/formCompany'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
+                  <Nav.Link><Link to={'/notifications'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-bell"></i> Notificaciones</Link> </Nav.Link>
                   <NavDropdown 
                     title={<span style={{ color: '#fff' }}><i className="fas fa-user-circle"></i> Usuario</span>} 
                     id="offcanvasNavbarDropdown"> 

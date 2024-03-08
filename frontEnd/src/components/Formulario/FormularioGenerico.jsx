@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const GenericForm = ({ fields, onSubmit, title, buttonText }) => {
+const GenericForm = ({ fields, onSubmit, title, buttonText, labels }) => {
   const [formValues, setFormValues] = useState(fields);
 
   const handleChange = (event) => {
@@ -27,7 +27,7 @@ const GenericForm = ({ fields, onSubmit, title, buttonText }) => {
                             <form onSubmit={handleSubmit}>
                             {Object.keys(fields).map((fieldName) => (
                                 <div key={fieldName} className="form-outline form-white mb-4">
-                                <label htmlFor={fieldName} className="form-label">{fieldName}</label>
+                                <label htmlFor={fieldName} className="form-label">{labels[fieldName]}</label>
                                 <input
                                     type="text"
                                     id={fieldName}

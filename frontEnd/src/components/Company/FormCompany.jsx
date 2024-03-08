@@ -31,7 +31,7 @@ const FormCompany = () => {
   };
 
   const initialFormFields = {
-    name_company: '',
+    name_company:'',
     address: '',
     nit: '',
     phone:'',
@@ -46,7 +46,15 @@ const FormCompany = () => {
         fields={initialFormFields} 
         onSubmit={handleSubmit} 
         title="Creación de Compañías" 
-        buttonText="Solicitar Creación" 
+        buttonText="Solicitar Creación"
+        labels={{
+          name_company: 'Nombre de la Compañía',
+          address: 'Dirección',
+          nit: 'NIT',
+          phone: 'Teléfono',
+          email: 'Correo Electrónico',
+          document: 'Archivo de la Compañía'
+        }}
         />
     </div>
   );
