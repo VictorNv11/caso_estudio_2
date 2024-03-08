@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { TfiMenuAlt } from "react-icons/tfi";
 import { Navbar, Container, Nav, Button, Offcanvas, NavDropdown } from 'react-bootstrap';
 import Logo from '..//..//assets/img/planetas.png';
+import Cookies from 'js-cookie';
+
+
 
 const NavBar = () => {
     
@@ -12,11 +15,16 @@ const NavBar = () => {
     setNavBarVisible(!navBarVisible);
   };
 
+  const salir = () => {
+    Cookies.remove("token")
+    window.location.href = "/";
+  }
+
   return (
     <div style={{backgroundColor: '#50727B'}}>   
-      <Navbar expand="lg" className="bg-body-tertiary mb-3">
+      <Navbar expand="lg" className="bg-body-tertiary mb-3" >
         <Container fluid>
-        <Navbar.Brand href="#">Gestión de Usuarios</Navbar.Brand>
+        <Navbar.Brand href="#" >Gestión de Usuarios</Navbar.Brand>
         <Button onClick={toggleNavBar} style={{ position: 'absolute', zIndex: 101, top: '20px', right: '20px', transform: 'translateY(-30%)', backgroundColor: '#50727B' }}>
         <TfiMenuAlt />
         </Button> 
@@ -37,7 +45,7 @@ const NavBar = () => {
                   <Nav.Link><Link to={'/calendar'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-calendar-alt"></i> Calendario</Link> </Nav.Link>
                   <Nav.Link><Link to={'/servicios'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-tools"></i> Servicios</Link> </Nav.Link>
                   <Nav.Link><Link to={'/roles'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-users"></i> Roles</Link> </Nav.Link>
-                  <Nav.Link><Link to={'/companies'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
+                  <Nav.Link><Link to={'/formCompany'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
                   <NavDropdown 
                     title={<span style={{ color: '#fff' }}><i className="fas fa-user-circle"></i> Usuario</span>} 
                     id="offcanvasNavbarDropdown"> 
@@ -48,7 +56,7 @@ const NavBar = () => {
                           marginRight: '10px'
                       }} /> Nombre de Usuario</a></li>
                       <li><hr className="dropdown-divider" /></li>
-                      {/* <button className="dropdown-item" onClick={salir}><i className="fas fa-sign-out-alt"></i> Salir</button> */}
+                      <button className="dropdown-item" onClick={salir}><i className="fas fa-sign-out-alt"></i> Salir</button>
                   </NavDropdown>  
                 </Nav>
               </Offcanvas.Body>

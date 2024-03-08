@@ -1,6 +1,6 @@
 // Hooks de react para variables de estado y sincronización externa
 import React, { useState, useEffect } from "react";
-
+import Footer from "../ui/Footer";
 // Analizador CSV
 import Papa from 'papaparse';
 
@@ -234,19 +234,20 @@ export default function ImportClient() {
   }
   };
   return (
-    <div>
+    <div  style={{ backgroundColor: '#50727B'}}>
       {/* NavBar */}
-      <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
-      <a className="navbar-brand" href="#">
-          <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ paddingLeft: 20, width: 50, height: 30 }} />
-        </a>
-         <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
-         <div className="ml-auto" style={{paddingRight: 30}}>
-            <Link to='/supAdmins' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
-         </div>
-     </nav>
+      <nav className="navbar bg-body-tertiary">
+          <div className="container-fluid">
+            <a className="navbar-brand">Gestion de Usuarios</a>
+          
+              <Link className="btn" style={{backgroundColor:'#50717a', color:'white'}} to="/supAdmins">
+                <i className="fa-solid fa-arrow-left"></i> Volver
+              </Link>
+            
+          </div>
+      </nav>
 
-      <div className="container">
+      <div className="container">      AQUI HAY UNO
         <div style={{ marginTop: '5%' }}>
           <h1 className='text-center' style={{color:'#E7DFDD'}}>Listado de Clientes</h1>
         </div>
@@ -265,14 +266,7 @@ export default function ImportClient() {
                     className="btn btn-primary"
                     type="submit"
                     style={{
-                      background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)',
-                      border: 'none',
-                      borderRadius: '5px',
-                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                      cursor: 'pointer',
-                      padding: '8px 16px',
-                      color: 'white',
-                      marginRight: '10px',
+                      
                     }}
                     onMouseOver={(e) =>
                       (e.target.style.background = 'linear-gradient(to right, rgb(58, 36, 118, 1), #752694)')
@@ -378,7 +372,7 @@ export default function ImportClient() {
               </tbody>
             </table>
           )}
-          <footer>
+          <section>
             <div style={{ marginLeft: "44.5%", marginTop: "auto" }}>
               <ul className="pagination">
                 <li
@@ -419,9 +413,11 @@ export default function ImportClient() {
                 </li>
               </ul>
             </div>
-          </footer>
+          </section>
+
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

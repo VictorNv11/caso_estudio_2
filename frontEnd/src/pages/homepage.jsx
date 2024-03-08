@@ -78,24 +78,24 @@ const Homepage = () => {
         <div className="container d-flex flex-column justify-content-center align-items-center vh-100">
           <h1 className="display-4">Bienvenido a Mi Sitio</h1>
           <p className="lead">Descubre más acerca de nosotros y cómo podemos ayudarte.</p>
-          <a className="btn btn-primary btn-lg" href="#about" role="button" style={{backgroundColor:''}}>Acerca de Nosotros</a>
+          <a className="btn btn-primary btn-lg" href="#about" role="button">Acerca de Nosotros</a>
         </div>
       </section>
 
-      <section className="py-5 text-" id="about" style={{background: 'linear-gradient( to right,#0E0B16 , #A239CA )'}}>
+      <section className="py-5 text-" id="about" style={{backgroundColor:'#50727B'}}>
         <div className="container">
         <h3 className='mb-3' style={{ color: "#E7DFDD" }}>Sobre Nosotros</h3>
-        <p style={{ textAlign: 'left', color: "#828081" }}>Descubre una nueva forma de gestionar tus usuarios. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate deserunt fugit recusandae earum perferendis quaerat? Eaque repudiandae vero quas fuga, praesentium inventore tempora maxime, atque neque illum molestias ducimus pariatur?
+        <p style={{ textAlign: 'left', color: "#ffff" }}>Descubre una nueva forma de gestionar tus usuarios. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate deserunt fugit recusandae earum perferendis quaerat? Eaque repudiandae vero quas fuga, praesentium inventore tempora maxime, atque neque illum molestias ducimus pariatur?
           Lorem ipsum dolor sit amet consectetur</p>
           <h3 className='mb-3' style={{ color: "#E7DFDD" }}>¡¡Regístrate ya!!</h3>
-              <h6 style={{ color: "#E7DFDD" }}>Por los Siguientes Motivos</h6>
-              <p style={{ textAlign: 'left', color: "#828081" }}>Experimenta la mejor plataforma de administración de usuarios. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima assumenda quaerat iste consequatur possimus dolorem incidunt in molestiae ipsam inventore doloremque, delectus nisi pariatur. Earum excepturi consequuntur veritatis suscipit quos.
+              <h6 style={{ color: "#ffff" }}>Por los Siguientes Motivos</h6>
+              <p style={{ textAlign: 'left', color: "#ffff" }}>Experimenta la mejor plataforma de administración de usuarios. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima assumenda quaerat iste consequatur possimus dolorem incidunt in molestiae ipsam inventore doloremque, delectus nisi pariatur. Earum excepturi consequuntur veritatis suscipit quos.
               </p>
           <Link to='/formRegistro' className='btn btn-primary' style={{ marginLeft: '0%', marginTop: '1%'}}>¡Regístrate Ahora!</Link>
         </div>
       </section>
       {/* Footer */}
-      <footer style={{ position: 'static', bottom: 0, width: '100%', backgroundColor: 'black' }}>
+      <footer style={{ position: 'static', bottom: 0, width: '100%', backgroundColor: '#35374B' }}>
                 <div className="container-fluid">
                     <div className="row p-5 pb-2  text-white">
                         <div className="col-xs-12 col-md-6 col-lg-3">
@@ -105,13 +105,13 @@ const Homepage = () => {
                         <div className="col-xs-12 col-md-6 col-lg-3">
                             <p className="h5 mb-3">Contactos</p>
                             <div className="mb-2">
-                                <a className='text-secondary text-decoration-none' href="#">Facebook</a>
+                                <a className='text-success text-decoration-none' href="#!">Facebook</a>
                             </div>
                             <div className="mb-2">
-                                <a className='text-secondary text-decoration-none' href="#">GitHub</a>
+                                <a className='text-success text-decoration-none' href="#!">GitHub</a>
                             </div>
                             <div className="mb-2">
-                                <a className='text-secondary text-decoration-none' href="#">Gmail</a>
+                                <a className='text-success text-decoration-none' href="#!">Gmail</a>
                             </div>
 
                         </div>
@@ -119,20 +119,20 @@ const Homepage = () => {
                         <div className="col-xs-12 col-md-6 col-lg-3">
                             <p className="h5">Enlaces</p>
                             <div className="mb-2">
-                                <a className='text-secondary text-decoration-none' href="#">Terms & Conditions</a>
+                                <a className='text-success text-decoration-none' href="#!">Terms & Conditions</a>
                             </div>
                             <div className="mb-2">
-                                <a className='text-secondary text-decoration-none' href="#">Private Policy</a>
+                                <a className='text-success text-decoration-none' href="#!">Private Policy</a>
                             </div>
                         </div>
                         <div className="col-xs-12 col-md-6 col-lg-3">
                             <p className="h5">Acerca De</p>
                             <div className="mb-2">
-                                <a className='text-secondary text-decoration-none' href="#">Documentos</a>
+                                <a className='text-success text-decoration-none' href="#!">Documentos</a>
                             </div>
                         </div>
                         <div className="col-xs-12 pt-4">
-                        <p className='text-white text-center'>Copyright - All rights reserved © 2024</p>
+                        <p className='text-white text-center'> © 2024 Copyright: Gestion de Usuarios</p>
                         </div>
                     </div>
                 </div>

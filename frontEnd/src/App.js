@@ -32,7 +32,7 @@ import Pusher from 'pusher-js';
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
 import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
 import FormCompany from './components/Company/FormCompany.jsx';
-import NavBar from './components/NavBar/NavBar.jsx';
+import NavBar from './components/ui/NavBar.jsx';
 
 // Configuración de Pusher
 const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
