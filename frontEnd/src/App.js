@@ -49,8 +49,6 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
 
-        <Route path='/navbar' element={<NavBar/>}/>
-
         {/*Compañias */}
         <Route path="/formCompany" element={<FormCompany/>}/>
      

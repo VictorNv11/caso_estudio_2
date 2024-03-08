@@ -35,7 +35,7 @@ const NavBar = () => {
                   <Nav.Link><Link to={'/homePageSuperAdmin'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                   <Nav.Link><Link to={'/supAdmins'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Usuarios</Link> </Nav.Link>
                   <Nav.Link><Link to={'/calendar'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-calendar-alt"></i> Calendario</Link> </Nav.Link>
-                  <Nav.Link><Link to={'/services'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-tools"></i> Servicios</Link> </Nav.Link>
+                  <Nav.Link><Link to={'/servicios'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-tools"></i> Servicios</Link> </Nav.Link>
                   <Nav.Link><Link to={'/roles'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-users"></i> Roles</Link> </Nav.Link>
                   <Nav.Link><Link to={'/companies'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
                   <NavDropdown 
