@@ -39,7 +39,7 @@ class CompanyController extends Controller
                 'nit' => 'required|string|max:10',
                 'phone' => 'required|string|max:10',
                 'email' => 'required|email|max:255',
-                'document' => 'nullable|file|mimes:pdf|max:2048', // Ejemplo: solo acepta archivos PDF de hasta 2MB
+                'document' => 'nullable|file|mimes:pdf,xlsx,xls|max:2048', // Ejemplo: solo acepta archivos PDF de hasta 2MB
             ]);
 
             // Genera un código de aprobación genérico
@@ -80,7 +80,7 @@ class CompanyController extends Controller
                 $company = Company::findOrFail($id);
             
 
-            if (Auth::user()->isAdmin()) {
+            if (Auth::user()->roles->contains('description', 'Administrador') || Auth::user()->roles->contains('description', 'Super Administrador')) {
                 // Verifica si el código de aprobación proporcionado coincide con el código de la compañía
                 if ($request->approval_code !== $company->approval_code) {
                     return response()->json(['error' => 'Código de aprobación incorrecto'], 400);
@@ -132,7 +132,7 @@ class CompanyController extends Controller
                 'phone' => 'sometimes|string|max:255',
                 'email' => 'sometimes|email|max:255',
                 'status' => 'sometimes|boolean',
-                'document' => 'nullable|file|mimes:pdf|max:2048', // Ejemplo: solo acepta archivos PDF de hasta 2MB
+                'document' => 'nullable|file|mimes:pdf,xlsx,xls|max:2048', // Ejemplo: solo acepta archivos PDF de hasta 2MB
             ]);
 
             // Actualizar solo los campos válidos

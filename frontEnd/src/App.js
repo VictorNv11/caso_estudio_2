@@ -31,7 +31,7 @@ import Pusher from 'pusher-js';
 
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
 import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
-import FormCompany from './components/Company/FormCompany.jsx';
+import CompanyForm from './components/Company/FormCompany.jsx';
 import NavBar from './components/ui/NavBar.jsx';
 
 // Configuración de Pusher
@@ -51,7 +51,7 @@ export default function App() {
         <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
 
         {/*Compañias */}
-        <Route path="/formCompany" element={<FormCompany/>}/>
+        <Route path="/formCompany" element={<CompanyForm/>}/>
      
         {/* SUEPERADMINISTRADOR */}
         <Route path="/homePageSuperAdmin" element={<HomePageSupAdmin />} />
