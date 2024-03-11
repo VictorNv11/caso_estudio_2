@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import GenericForm from '../Formulario/FormularioGenerico';
 import axios from "axios";
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../ui/NavBar';
 
 const FormCompany = () => {
     

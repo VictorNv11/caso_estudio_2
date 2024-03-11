@@ -57,7 +57,7 @@ Route::prefix('companies')->group(function () {
 
 // Rutas de Servicios
 Route::prefix('servicios')->group(function (){
-    Route::get('/', [TaskController::class, 'index']); 
+    Route::get('/', [TaskController::class, 'index']);
     Route::post('/crear',[TaskController::class, 'store']);               //SIRVE
     Route::get('/{id}',[TaskController::class, 'show']);            //SIRVE
     Route::put('/{id}',[TaskController::class, 'update']);         //SIRVE
@@ -70,14 +70,14 @@ Route::prefix('clientes')->group(function () {
     Route::get('/', [ImportController::class, 'index']); // SIRVE
     Route::post('/import', [ImportController::class, 'importar']); // SIRVE
     Route::get('/export', [ImportController::class, 'exportar']); // SIRVE
-    
+
 
     Route::get('/export/excel', [ImportController::class, 'exportarExcel']); // SIRVE
     Route::post('/create',[ImportController::class, 'store']);  // SIRVE
     Route::get('/{id}', [ImportController::class,'show']); // SIRVE
     Route::put('/{id}',[ImportController::class,'update']);         //SIRVE
-    Route::delete('/delete/{id}',[ImportController::class,'destroy']); 
-    
+    Route::delete('/delete/{id}',[ImportController::class,'destroy']);
+
 });
 
     Route::prefix('mail')->group(function(){
@@ -86,7 +86,7 @@ Route::prefix('clientes')->group(function () {
     Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
     Route::post('password/reset', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset');
 
-    
+
 
 //__________________PRUEBA LOGIN Y REGISTRO__________________________
 
