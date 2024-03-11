@@ -19,6 +19,7 @@ import EditAdmin from './components/Admin/EditAdmin.js';
 import ShowUsuarios from './components/usuarios/ShowUsuarios.js';
 import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
 import EditUsuarios from './components/usuarios/EditUsuarios.js';
+import HomePageUsuario from './components/usuarios/HomePageUsuario.js';
 
 // EXCEL
 import ImportCliente from './components/Clientes/ImportClient.js';
@@ -30,6 +31,8 @@ import Pusher from 'pusher-js';
 
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
 import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
+import CompanyForm from './components/Company/FormCompany.jsx';
+import NavBar from './components/ui/NavBar.jsx';
 
 // Configuración de Pusher
 const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
@@ -46,6 +49,17 @@ export default function App() {
         <Route path="/formRegistro" element={<FormRegistro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
+
+        {/*Compañias */}
+        <Route path="/formCompany" element={<CompanyForm/>}/>
+     
+        {/* SUEPERADMINISTRADOR */}
+        <Route path="/homePageSuperAdmin" element={<HomePageSupAdmin />} />
+        <Route path="/supAdmins" element={<ShowSupAdmin />} />
+        <Route path="/create" element={<CreateSupAdmin />} />
+        <Route path="/edit/:id" element={<EditSupAdmin />} />
+        
+        {/* EXCEL */}
         <Route path="/password-reset/:token" element={<ReseteoContrasena/>}/> 
 
      
@@ -73,6 +87,8 @@ export default function App() {
         <Route path="/usuarios" element={<ShowUsuarios />} />
         <Route path="/createU" element={<CreateUsuarios />} />
         <Route path="/editU/:id" element={<EditUsuarios />} />
+        <Route path='/HomePageUsuario' element={<HomePageUsuario/>}/>
+
       </Routes>
     </BrowserRouter>
   );

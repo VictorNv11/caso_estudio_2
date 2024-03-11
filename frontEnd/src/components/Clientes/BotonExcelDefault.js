@@ -49,13 +49,13 @@ const BotonExcelDefault = ({ clientes }) => {
         </Alert>
       )}
         {!loading ? (
-          <Button color="secondary"  style={{ 
-            background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)',
+          <Button color="primary"  style={{ 
+            
             border: 'none',
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Agregamos una sombra sutil
           }}
-          onMouseOver={(e) => e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 1), #590d77)'}
-          onMouseOut={(e) => e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)'}
+          onMouseOver={(e) => e.target.style.background = ''}
+          onMouseOut={(e) => e.target.style.background = ''}
            onClick={handleDownload} className=" d-lg-block">
         <BsFillCloudArrowDownFill style={{ color: 'white', marginRight: '8px' }} />Extraer a Excel 
           </Button>
@@ -63,7 +63,7 @@ const BotonExcelDefault = ({ clientes }) => {
         
          
         ) : (
-          <Button color="secondary"  style= {{background: 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)'}} disabled>
+          <Button color="secondary"  style= {{background: 'success'}} disabled>
             <Spinner size="sm">Loading...</Spinner>
             <span> Generando...</span>
           </Button>
