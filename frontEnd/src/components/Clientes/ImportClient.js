@@ -247,7 +247,7 @@ export default function ImportClient() {
           </div>
       </nav>
 
-      <div className="container">      AQUI HAY UNO
+      <div className="container">     
         <div style={{ marginTop: '5%' }}>
           <h1 className='text-center' style={{color:'#E7DFDD'}}>Listado de Clientes</h1>
         </div>

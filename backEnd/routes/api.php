@@ -44,6 +44,10 @@ Route::prefix('companies')->group(function () {
     Route::get('/{id}',[CompanyController::class,'show']);            //SIRVE
     Route::put('/{id}',[CompanyController::class,'update']);         //SIRVE
     Route::delete('/delete/{id}',[CompanyController::class,'destroy']);    //SIRVE
+
+    // Aprobación de la compañía
+    Route::put('/{id}/approve', [CompanyController::class, 'approve'])
+        ->middleware(['auth', 'role:1,2']);
 });
 
 
