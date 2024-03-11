@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\SupAdminController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
@@ -9,13 +8,9 @@ use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\UsuariosController;
 use App\Http\Controllers\Excel\ImportController;
 use App\Http\Controllers\Api\TaskController;
-use App\Http\Controllers\Api\NotificationController;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\MailController;
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+
 
 Route::controller(SupAdminController::class)->group(function () {
     Route::get('/supAdmins','index');                 //SIRVE
@@ -24,6 +19,7 @@ Route::controller(SupAdminController::class)->group(function () {
     Route::put('/User/{id}','update');         //SIRVE
     Route::delete('/User/{id}','destroy');    //SIRVE
 });
+
 
 Route::controller(AdminController::class)->group(function () {
     Route::get('/Admins','index');                 //SIRVE
@@ -75,6 +71,7 @@ Route::prefix('clientes')->group(function () {
     Route::delete('/delete/{id}',[ImportController::class,'destroy']);
 
 });
+
 
     Route::prefix('mail')->group(function(){
         Route::post('/send-email',[MailController::class, 'sendMail']);

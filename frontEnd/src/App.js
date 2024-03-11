@@ -11,6 +11,7 @@ import EditSupAdmin from './components/supAdmin/EditSupAdmin.js';
 import HomePageSupAdmin from './components/supAdmin/homePageSupAdmin.js';
 
 // ADMINISTRADOR
+import HomePageAdmin from './components/Admin/HomePageAdmin.js';
 import ShowAdmin from './components/Admin/showAdmin.js';
 import CreateAdmin from './components/Admin/CreateAdmin.js';
 import EditAdmin from './components/Admin/EditAdmin.js';
@@ -32,12 +33,12 @@ import Pusher from 'pusher-js';
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
 import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
 import FormCompany from './components/Company/FormCompany.jsx';
-import NavBar from './components/ui/NavBar.jsx';
 
-// Configuración de Pusher
-const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
-  cluster: 'us2'
-});
+
+//  Configuración de Pusher
+// const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
+//   cluster: 'us2'
+// });
 
 
 export default function App() {
@@ -71,6 +72,7 @@ export default function App() {
         <Route path="notifications" element={<Notifications />} />
         
         {/* ADMINISTRADOR */}
+        <Route path="homePageAdmin" element={<HomePageAdmin/>}/>
         <Route path="/Admin" element={<ShowAdmin />} />
         <Route path="/createA" element={<CreateAdmin />} />
         <Route path="/editA/:id" element={<EditAdmin />} />
