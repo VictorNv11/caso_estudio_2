@@ -16,13 +16,13 @@ const NavBar = () => {
 
   useEffect(() => {
     const token = Cookies.get("token");
-    const role = Cookies.get("role"); // Obtén el rol del usuario de las cookies
+    const role = Cookies.get("role"); // Obtener el rol de las cookies
     if (token && role) {
-        setUserRole(parseInt(role)); // Parsea el rol a un número entero
+        setUserRole(parseInt(role)); 
     }
 }, []);
 
-  //  const [navBarVisible, setNavBarVisible] = useState(false);
+
 
    const toggleNavBar = () => {
     setNavBarVisible(!navBarVisible);
@@ -57,7 +57,6 @@ const NavBar = () => {
                   <>
                     <Nav.Link><Link to={'/HomePageSuperAdmin'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/supAdmins'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Usuarios</Link> </Nav.Link>
-                    <Nav.Link><Link to={'/roles'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-users"></i> Roles</Link> </Nav.Link>
                     <Nav.Link><Link to={'/formCompany'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
                   </>
                )}
@@ -71,6 +70,7 @@ const NavBar = () => {
                   <>
                     <Nav.Link><Link to={'/HomePageUsuario'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/userProfile'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Perfil</Link> </Nav.Link>
+                    <Nav.Link><Link to={'/formCompany'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
                   </>
                )}
                <NavDropdown 

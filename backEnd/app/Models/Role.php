@@ -11,7 +11,7 @@ class Role extends Model
     protected $fillable = [
         'name',
         'description'
-    
+
     ];
 
     public function users(){
@@ -24,5 +24,5 @@ class Role extends Model
     public function super_admin(){
         return $this->belongsToMany('App\Models\Super_Admin')->withTimesTamps();
     }
-    
+
 }
