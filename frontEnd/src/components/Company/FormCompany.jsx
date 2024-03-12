@@ -14,11 +14,15 @@ const CompanyForm = () => {
   });
   const [error, setError] = useState(null);
   const [missingFieldsError, setMissingFieldsError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null); 
+  // Estado para controlar la creación de la compañía
+  const [creatingCompany, setCreatingCompany] = useState(false);
 
   // Limpia el mensaje de error
   useEffect(() => {
     setMissingFieldsError(null);
     setError(null);
+    setSuccessMessage(null); 
   });
 
   const handleChange = (e) => {
@@ -30,10 +34,7 @@ const CompanyForm = () => {
     setFormData({ ...formData, document: e.target.files[0] });
   };
 
-
-    
-  
-   const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.name_company.trim() || 
@@ -42,7 +43,6 @@ const CompanyForm = () => {
     !formData.phone.trim() || 
     !formData.email.trim()) {
       setMissingFieldsError("Completa todos los campos, gracias.");
-      // Configurar el temporizador para limpiar el error después de 5 segundos
       setTimeout(() => {
           setMissingFieldsError(null);
         }, 5000);
@@ -50,48 +50,65 @@ const CompanyForm = () => {
     }
 
       // Validación del nombre: no debe estar vacío y solo debe contener caracteres válidos
-     if (!formData.name_company || !/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/.test(formData.name_company)) {
-      alert("Por favor, ingrese un nombre válido");
-      return;
-  }
-      // Validación de correo electrónico con una expresión regular simple
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-          alert("Por favor, ingrese un correo electrónico válido");
-          return;
-      }
-
-      // Validación de nit: solo números y al menos 8 caracteres
-      if (!/^\d{5,10}$/.test(formData.nit)) {
-        alert("Por favor, ingrese un nit válido (al menos de 5 a 10 dígitos)");
+      if (!formData.name_company || !/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/.test(formData.name_company)) {
+        alert("Por favor, ingrese un nombre válido");
         return;
     }
-
-      // Validación de teléfono: solo números y al menos 7 caracteres
-     if (!/^\d{10,}$/.test(formData.phone)) {
-         alert("Por favor, ingrese un número de teléfono válido (al menos 10 dígitos)");
-         return;
+        // Validación de correo electrónico con una expresión regular simple
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            alert("Por favor, ingrese un correo electrónico válido");
+            return;
+        }
+  
+        // Validación de nit: solo números y al menos 8 caracteres
+        if (!/^\d{5,10}$/.test(formData.nit)) {
+          alert("Por favor, ingrese un nit válido (al menos de 5 a 10 dígitos)");
+          return;
       }
-          // Validación de contraseña: al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número
-  /* if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)) {
-     alert("La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula y un número");
-     return;
- }*/
+  
+        // Validación de teléfono: solo números y al menos 7 caracteres
+       if (!/^\d{10,}$/.test(formData.phone)) {
+           alert("Por favor, ingrese un número de teléfono válido (al menos 10 dígitos)");
+           return;
+        }
+            // Validación de contraseña: al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número
+    /* if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)) {
+       alert("La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula y un número");
+       return;
+   }*/
+
     try {
+      setCreatingCompany(true); // Cambia el estado a true para saber que se esta creando la compañía
       const formDataToSend = new FormData();
       for (let key in formData) {
         formDataToSend.append(key, formData[key]);
       }
+
       await axios.post(`${endpoint}/companies/create`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log("Compañía creada exitosamente");
+      console.log('Compañía creada con éxito');
+      setSuccessMessage('Solicitud para la creación de la compañía enviada con éxito');
+        setFormData({ // Limpiar el formulario después de enviarlo correctamente
+          name_company: '',
+          address: '',
+          nit: '',
+          phone: '',
+          email: '',
+          document: null,
+        });
     } catch (error) {
-      console.error('Error al enviar el formulario:', error);
-      // Aquí podrías mostrar un mensaje de error al usuario
+      console.error('Error al enviar el formulario: ', error);
+      setError('Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo más tarde.');
+    } finally {
+      setTimeout(() => {
+        setCreatingCompany(false); // Reestablece el estado a false después de crear la compañía
+      }, 3000);
     }
+
   };
 
   return (
@@ -105,7 +122,15 @@ const CompanyForm = () => {
                         <div className="mb-md-5 mt-md-4 pb-5">
                           <h2 className="fw-bold mb-2 text-">Creación de Compaía</h2> 
                           {error && <div className="alert alert-danger">{error}</div>}
-                          {missingFieldsError && <div className="alert alert-danger">{missingFieldsError}</div>} 
+                          {missingFieldsError && <div className="alert alert-danger">{missingFieldsError}</div>}
+                          {successMessage && (
+                            <div className="alert alert-success">
+                              {successMessage}
+                              <button className="btn-close" onClick={() => setSuccessMessage(null)}></button>
+                            </div>
+                          )}
+                          {creatingCompany && <div className="alert alert-info">Creando compañía...</div>} {/* Mensaje de proceso de creación */}
+                          {!creatingCompany && ( 
                           <form onSubmit={handleSubmit}>
                           <div className="form-outline form-white mb-4">
                             <label htmlFor="name_company" className="form-label">Nombre de la compañía:</label>
@@ -133,6 +158,7 @@ const CompanyForm = () => {
                           </div>
                           <button type="submit" className="btn btn-outline-light btn-lg px-5">Solicitar Creación</button>
                         </form>
+                         )}
                         </div>
                     </div>
                 </div>
