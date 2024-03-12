@@ -13,8 +13,8 @@ use App\Http\Controllers\Api\MailController;
 
 
 Route::controller(SupAdminController::class)->group(function () {
-    Route::get('/supAdmins','index');                 //SIRVE
-    Route::post('/supAdmin', 'store');               //SIRVE
+    Route::get('/supAdmins','index');             //SIRVE
+    Route::post('/supAdmin', 'store');           //SIRVE
     Route::get('/User/{id}','show');            //SIRVE
     Route::put('/User/{id}','update');         //SIRVE
     Route::delete('/User/{id}','destroy');    //SIRVE
@@ -39,11 +39,11 @@ Route::controller(UsuariosController::class)->group(function () {
 
 // Rutas de compañías
 Route::prefix('companies')->group(function () {
-    Route::get('/',[CompanyController::class,'index']);                 //SIRVE
-    Route::post('/create',[CompanyController::class,'store']);               //SIRVE
-    Route::get('/{id}',[CompanyController::class,'show']);            //SIRVE
-    Route::put('/{id}',[CompanyController::class,'update']);         //SIRVE
-    Route::delete('/delete/{id}',[CompanyController::class,'destroy']);    //SIRVE
+    Route::get('/',[CompanyController::class,'index']);                         //SIRVE
+    Route::post('/create',[CompanyController::class,'store']);                 //SIRVE
+    Route::get('/{id}',[CompanyController::class,'show']);                    //SIRVE
+    Route::put('/{id}',[CompanyController::class,'update']);                 //SIRVE
+    Route::delete('/delete/{id}',[CompanyController::class,'destroy']);     //SIRVE
 
     // Aprobación de la compañía
     Route::put('/{id}/approve', [CompanyController::class, 'approve'])
@@ -54,10 +54,10 @@ Route::prefix('companies')->group(function () {
 // Rutas de Servicios
 Route::prefix('servicios')->group(function (){
     Route::get('/', [TaskController::class, 'index']);
-    Route::post('/crear',[TaskController::class, 'store']);               //SIRVE
-    Route::get('/{id}',[TaskController::class, 'show']);            //SIRVE
-    Route::put('/{id}',[TaskController::class, 'update']);         //SIRVE
-    Route::delete('/delete/{id}',[TaskController::class, 'destroy']);    //SIRVE
+    Route::post('/crear',[TaskController::class, 'store']);                //SIRVE
+    Route::get('/{id}',[TaskController::class, 'show']);                  //SIRVE
+    Route::put('/{id}',[TaskController::class, 'update']);               //SIRVE
+    Route::delete('/delete/{id}',[TaskController::class, 'destroy']);   //SIRVE
     Route::put('/complete/{id}', [TaskController::class, 'completeServicio']);
 });
 

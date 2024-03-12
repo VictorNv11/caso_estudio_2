@@ -54,11 +54,18 @@ const NavBar = () => {
             <Offcanvas.Body style={{   backgroundColor: '#344955'}}>
               <Nav className="justify-content-end flex-grow-1 pe-3">
                {userRole === 1 && (
-                  <>
+                  <div>
                     <Nav.Link><Link to={'/HomePageSuperAdmin'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/supAdmins'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Usuarios</Link> </Nav.Link>
-                    <Nav.Link><Link to={'/formCompany'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
-                  </>
+                    
+                      <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <NavDropdown title={<span style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</span>} id="nav-dropdown">
+                          <NavDropdown.Item><Link to={'/formCompany'} className="nav-link">Crear compañia</Link></NavDropdown.Item>
+                          <NavDropdown.Item><Link to={'/ShowCompanies'} className="nav-link">Ver compañias</Link></NavDropdown.Item>                          
+                        </NavDropdown>
+                      </Nav>
+               
+                  </div>
                )}
                {userRole === 2 && (
                   <>
