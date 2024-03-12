@@ -79,7 +79,7 @@ export default function App() {
 
         <Route path="/servicios" element={<TodoList/>} />
 
-        <Route path="notifications" element={<Notifications />} />
+        <Route path="/notifications" element={<Notifications />} />
         
         {/* ADMINISTRADOR */}
         <Route path="homePageAdmin" element={<HomePageAdmin/>}/>

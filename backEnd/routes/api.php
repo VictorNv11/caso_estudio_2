@@ -47,7 +47,10 @@ Route::prefix('companies')->group(function () {
 
     // Aprobación de la compañía
     Route::put('/{id}/approve', [CompanyController::class, 'approve'])
-        ->middleware(['auth', 'role:1,2']);
+        ->middleware(['auth', 'roles:Super Administrador, Administrador']);
+
+    //Notificación de Compañías
+    Route::get('/{id}/notifications', [CompanyController::class, 'getCompanyNotifications']);
 });
 
 
