@@ -10,8 +10,6 @@ import React, { useEffect, useState } from 'react';
 import Notification from '../Notifications/Notifications';
 
 
-// import { Servicios } from '../Clientes/Servicios';
-
 const ShowSupAdmin = () => {
   const [Users, setUsers] = useState([]);
   const [search, setSearch] = useState('');

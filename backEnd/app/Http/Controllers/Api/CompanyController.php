@@ -25,7 +25,7 @@ class CompanyController extends Controller
         } catch(Exception $e) {
             return response()->json(['error' => 'Hubo un error al obtener las compañías: ' . $e->getMessage()], 500);
         }
-        
+
     }
 
     // Creación de compañías (Create)
@@ -40,7 +40,7 @@ class CompanyController extends Controller
                 'nit' => 'required|string|max:10',
                 'phone' => 'required|string|max:10',
                 'email' => 'required|email|max:255',
-                'document' => 'nullable|file|mimes:pdf,xlsx,xls|max:2048', // Ejemplo: solo acepta archivos PDF de hasta 2MB
+                'document' => 'nullable|file|mimes:pdf,xlsx,xls|max:15048', // Ejemplo: solo acepta archivos PDF de hasta 2MB
             ]);
 
             // Genera un código de aprobación genérico
@@ -69,7 +69,7 @@ class CompanyController extends Controller
         } catch(Exception $e) {
             return response()->json(['error' => 'Hubo un error al crear la compañía: ' . $e->getMessage()], 500);
         }
-             
+
     }
 
     public function approve(Request $request, string $id)
@@ -79,7 +79,7 @@ class CompanyController extends Controller
             if (Auth::check()) {
                 // Encuentra la compañía por su ID
                 $company = Company::findOrFail($id);
-            
+
 
             if (Auth::user()->roles->contains('description', 'Administrador') || Auth::user()->roles->contains('description', 'Super Administrador')) {
                 // Verifica si el código de aprobación proporcionado coincide con el código de la compañía
@@ -100,7 +100,7 @@ class CompanyController extends Controller
             }
        } else {
             return response()->json(['error' => 'Debes iniciar sesión para aprobar compañías'], 401);
-        } 
+        }
     } catch(Exception $e) {
             return response()->json(['error' => 'Hubo un error al aprobar la compañía: ' . $e->getMessage()], 500);
         }
