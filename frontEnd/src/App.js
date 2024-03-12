@@ -38,8 +38,10 @@ import ShowCompanies from './components/Company/ShowCompany.js';
 import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
 
+
 import NavBar from './components/ui/NavBar.jsx';
 import Pipeline from './components/Company/Pipeline.jsx';
+import PerfilUser from './components/usuarios/PerfilUser.jsx';
 
 //  Configuración de Pusher
 // const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
@@ -98,6 +100,7 @@ export default function App() {
         <Route path="/createU" element={<CreateUsuarios />} />
         <Route path="/editU/:id" element={<EditUsuarios />} />
         <Route path='/HomePageUsuario' element={<HomePageUsuario/>}/>
+        <Route path="/userProfile" element={<PerfilUser />}/>
 
       </Routes>
     </BrowserRouter>

@@ -76,7 +76,7 @@ class AuthController extends Controller
             $token = $user->createToken('token')->plainTextToken;
             $cookie = cookie('cookie_token', $token, 60 * 24);
             $role = $user->roles;
-            return response(["token" => $token,  "role"=>$role], Response::HTTP_OK)->withoutCookie($cookie);
+            return response(["token" => $token,  "role"=>$role, "username" => $user->name ], Response::HTTP_OK)->withoutCookie($cookie);
         } else {
             return response(["message" => "Credenciales invalidas"], Response::HTTP_UNAUTHORIZED);
         }

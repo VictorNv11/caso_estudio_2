@@ -15,6 +15,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    
 
     const endpoint = 'http://localhost:8000/api/'
     
@@ -37,6 +38,9 @@ export default function Login() {
                 Cookies.set("token", response.data.token);
                 const role = response.data.role;
                 Cookies.set("role", role); // Almacena el rol del usuario en las cookies
+
+                // Almacena el nombre de usuario en el almacenamiento local
+                localStorage.setItem('username', response.data.username);
                 console.log(role);
                 // Redirige al usuario según su rol
                 if (role === 1) {

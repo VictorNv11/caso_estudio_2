@@ -12,13 +12,17 @@ const NavBar = () => {
   const [navBarVisible, setNavBarVisible] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+
 
 
   useEffect(() => {
     const token = Cookies.get("token");
     const role = Cookies.get("role"); // Obtener el rol de las cookies
+    const storedUsername = localStorage.getItem('username'); 
     if (token && role) {
         setUserRole(parseInt(role)); 
+        setUsername(storedUsername);
     }
 }, []);
 
@@ -48,7 +52,7 @@ const NavBar = () => {
               <button type="button" className="btn-close btn-close-white" style={{ color: '#fff', position: 'absolute', top: '10px', right: '10px' }} onClick={() => setNavBarVisible(false)}></button>
               <div style={{ position: 'relative', marginTop: '30px' }}>
                <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ position: 'absolute', top: '-30px', left: '50%', transform: 'translateX(-50%)', width: 50, height: 50 }} />
-               <Offcanvas.Title style={{ marginTop: '20px', color: '#fff' }}>{userRole === '1' ? 'Super Administrador' : userRole === '2' ? 'Administrador' : 'Usuario'}</Offcanvas.Title>
+               <Offcanvas.Title style={{ marginTop: '20px', color: '#fff' }}>{userRole === '1' ? 'Super Administrador' : userRole === '2' ? 'Administrador' : `${username}`}</Offcanvas.Title>
               </div>
             </Offcanvas.Header>
             <Offcanvas.Body style={{   backgroundColor: '#344955'}}>
@@ -77,6 +81,7 @@ const NavBar = () => {
                   <>
                     <Nav.Link><Link to={'/HomePageUsuario'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/userProfile'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Perfil</Link> </Nav.Link>
+                    
                     <Nav.Link><Link to={'/formCompany'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
                   </>
                )}
@@ -87,8 +92,8 @@ const NavBar = () => {
                         width: '30px',
                         height: '30px',
                         borderRadius: '50%',
-                        marginRight: '10px'
-                    }} /> Nombre de Usuario</a></li>
+                        marginRight: '10px', 
+                    }} />  {username} {/* Mostrar el nombre de usuario */}</a></li>
                     <li><hr className="dropdown-divider" /></li>
                     <button className="dropdown-item" onClick={salir}><i className="fas fa-sign-out-alt"></i> Salir</button>
                </NavDropdown>  
