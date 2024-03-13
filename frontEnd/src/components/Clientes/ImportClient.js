@@ -234,7 +234,7 @@ export default function ImportClient() {
   }
   };
   return (
-    <div  style={{ backgroundColor: '#50727B'}}>
+    <div  style={{ backgroundColor: '#50727B', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '100vh' }}>
       {/* NavBar */}
       <nav className="navbar bg-body-tertiary">
           <div className="container-fluid">
@@ -249,46 +249,15 @@ export default function ImportClient() {
 
       <div className="container">     
         <div style={{ marginTop: '5%' }}>
-          <h1 className='text-center' style={{color:'#E7DFDD'}}>Listado de Clientes</h1>
+          <h1 className='text-center' style={{color:'white'}}>Listado de Clientes</h1>
         </div>
-        <h1 className='text-center' style={{color:'#E7DFDD'}}>Importar/Exportar - Excel</h1>
+        <h5 className='text-center' style={{color:'#E7DFDD'}}>Importar/Exportar - Excel</h5>
         <br />
         <div className="row">
           <div className="col-md-4"></div>
           <div className="col-md-6">
             <div className="row">
-              <form onSubmit={handleSubmit}>
-                <div className="col-md-6">
-                  <input type="file" onChange={handleFileChange} />
-                </div>
-                <div className="col-md-6">
-                  <button
-                    className="btn btn-primary"
-                    type="submit"
-                    style={{
-                      
-                    }}
-                    onMouseOver={(e) =>
-                      (e.target.style.background = 'linear-gradient(to right, rgb(58, 36, 118, 1), #752694)')
-                    }
-                    onMouseOut={(e) =>
-                      (e.target.style.background = 'linear-gradient(to right, rgba(58, 36, 118, 0.8), #590d77)')
-                    }
-                  >
-                    <BsFillCloudArrowUpFill style={{ color: 'white', marginRight: '8px' }} /> Cargar Archivos
-                  </button>
-                  {error && (
-                    <div className="alert alert-danger" role="alert">
-                      {error}
-                    </div>
-                  )}
-                  {successMessage && (
-                    <div className="alert alert-success" role="alert">
-                      {successMessage}
-                    </div>
-                  )}
-                </div>
-              </form>
+              
             </div>
           </div>
           <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
@@ -298,32 +267,56 @@ export default function ImportClient() {
         <div
          style={{
           display: "flex",
-          justifyContent: "flex-end",
-          marginLeft: "4%",
+          justifyContent: "flex-end",     
           marginTop: "2%",
           paddingBottom: "30px",
+       
         }}
         >
           <input
             value={search}
-            style={{ borderRadius: 5 }}
+            style={{ borderRadius: 5, marginRight:'10px' }}
             onChange={searcher}
             type="text"
             placeholder="Buscar por Email"
             className="form"
           />
-          <BsSearch style={{ marginLeft: 5, color: 'white' }} />
+      
+          <form onSubmit={handleSubmit} style={{}}>
+    <div className="col-md-6">
+        <input type="file" onChange={handleFileChange} />
+    </div>
+    <div className="" style={{marginLeft:'10px'}}>
+        
+        {error && (
+            <div className="alert alert-danger" role="alert">
+                {error}
+            </div>
+        )}
+        {successMessage && (
+            <div className="alert alert-success" role="alert">
+                {successMessage}
+            </div>
+        )}
+    </div>
+</form>
 
+          <button className="btn btn-primary" onClick={handleSubmit} style={{marginLeft:'42%'}}>
+              <BsFillCloudArrowUpFill style={{ color: 'white'}} /> Cargar Archivos
+          </button>
+          
           <Link
             to="/createC"
             className="btn btn-primary btn-sm"
             style={{ marginLeft: 'auto', marginRight: 0 }}
           > Crear
-          </Link>{" "}
+          </Link>
         </div>
+
+
         <div className="row">
           {currentClientes.length > 0 && (
-            <table className="table table-striped">
+            <table className="table table-striped"  style={{ marginTop: '2%', border: '1px solid black', backgroundColor: 'white' }}>
               <thead>
                 <tr>
                   <th>CC/NIT</th>

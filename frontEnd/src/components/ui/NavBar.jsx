@@ -45,7 +45,7 @@ const NavBar = () => {
         <Navbar.Collapse id="offcanvasNavbar">
           <Offcanvas placement="end" show={navBarVisible} onHide={() => setNavBarVisible(false)} >
             <Offcanvas.Header style={{   backgroundColor: '#344955', color: '#fff'}} >
-              <button type="button" className="btn-close btn-close-white" style={{ color: '#fff', position: 'absolute', top: '10px', right: '10px' }} onClick={() => setNavBarVisible(false)}></button>
+              <button type="button" className="btn-close btn-close-white" style={{ position: 'absolute', top: '10px', right: '10px' }} onClick={() => setNavBarVisible(false)}></button>
               <div style={{ position: 'relative', marginTop: '30px' }}>
                <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ position: 'absolute', top: '-30px', left: '50%', transform: 'translateX(-50%)', width: 50, height: 50 }} />
                <Offcanvas.Title style={{ marginTop: '20px', color: '#fff' }}>{userRole === '1' ? 'Super Administrador' : userRole === '2' ? 'Administrador' : 'Usuario'}</Offcanvas.Title>
@@ -57,11 +57,14 @@ const NavBar = () => {
                   <div>
                     <Nav.Link><Link to={'/HomePageSuperAdmin'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/supAdmins'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Usuarios</Link> </Nav.Link>
+                   
+
+                    <Nav.Link><Link to={'/servicios'} className="nav-link" style={{ color: '#fff' }}><i class="fa-solid fa-list-check"></i> Crear Tarea</Link> </Nav.Link>
                     
                       <Nav className="justify-content-end flex-grow-1 pe-3">
                         <NavDropdown title={<span style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</span>} id="nav-dropdown">
-                          <NavDropdown.Item><Link to={'/formCompany'} className="nav-link">Crear compañia</Link></NavDropdown.Item>
-                          <NavDropdown.Item><Link to={'/ShowCompanies'} className="nav-link">Ver compañias</Link></NavDropdown.Item>                          
+                        <NavDropdown.Item><Link to={'/formCompany'} className="nav-link"><i className="fa-solid fa-plus" style={{ marginRight: '5px' }}></i>Crear compañía</Link></NavDropdown.Item>                          
+                          <NavDropdown.Item><Link to={'/ShowCompanies'} className="nav-link"><i class="fa-regular fa-eye"></i>Ver compañias</Link></NavDropdown.Item>                          
                         </NavDropdown>
                       </Nav>
                

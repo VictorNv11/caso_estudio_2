@@ -37,9 +37,8 @@ import ShowCompanies from './components/Company/ShowCompany.js';
 
 import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
-import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
-import CompanyForm from './components/Company/FormCompany.jsx';
-import NavBar from './components/ui/NavBar.jsx';
+
+
 import Pipeline from './components/Company/Pipeline.jsx';
 
 //  Configuración de Pusher
@@ -61,6 +60,7 @@ export default function App() {
         {/*Compañias */}
         <Route path="/formCompany" element={<CompanyForm/>}/>
         <Route path="/pipeline" element={<Pipeline />} />
+        <Route path="/ShowCompanies" element={<ShowCompanies />} />
      
         {/* SUEPERADMINISTRADOR */}
         <Route path="/homePageSuperAdmin" element={<HomePageSupAdmin />} />

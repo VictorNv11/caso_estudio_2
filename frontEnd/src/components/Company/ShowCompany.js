@@ -34,7 +34,7 @@ const ShowCompany = () => {
 
   const discard = async () => {
     if (companyIdToDelete) {
-      await axios.delete(`${endpoint}/companies/${companyIdToDelete}`);
+      await axios.delete(`${endpoint}/companies/delete/${companyIdToDelete}`);
       getAllCompanies();
       setCompanyIdToDelete(null);
     }
@@ -77,9 +77,7 @@ const ShowCompany = () => {
     }
   };
 
-  if (loading) {
-    return <div>Cargando...</div>;
-  }
+ 
 
   return (
     <div>
