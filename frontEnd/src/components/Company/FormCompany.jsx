@@ -5,7 +5,7 @@ import NavBar from '../NavBar/NavBar';
 
 const FormCompany = () => {
     
-  
+  const [file, setFile]=useState(null);
 
    const endpoint = 'http://localhost:8000/api'; 
 
@@ -18,6 +18,10 @@ const FormCompany = () => {
         formDataWithFile.append(key, formDataWithStatus[key]);
       });
   
+if(file){
+  formDataWithFile.append('document', file);
+}
+
       const response = await axios.post(`${endpoint}/companies/create`, formDataWithFile);
   
       if (response.status !== 201) {
@@ -35,8 +39,7 @@ const FormCompany = () => {
     address: '',
     nit: '',
     phone:'',
-    email:'',
-    document:null
+    email:''
   };
 
   return (
@@ -54,6 +57,11 @@ const FormCompany = () => {
           phone: 'Teléfono',
           email: 'Correo Electrónico',
           document: 'Archivo de la Compañía'
+        }}
+        additionalInputs={{
+          document:(
+            <input type='file' onChange={(e) =>setFile(e.target.files[0])}/>
+          )
         }}
         />
     </div>

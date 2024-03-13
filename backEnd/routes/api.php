@@ -46,7 +46,7 @@ Route::prefix('companies')->group(function () {
     Route::get('/',[CompanyController::class,'index']);                 //SIRVE
     Route::post('/create',[CompanyController::class,'store']);               //SIRVE
     Route::get('/{id}',[CompanyController::class,'show']);            //SIRVE
-    Route::put('/{id}',[CompanyController::class,'update']);         //SIRVE
+    Route::put('/{id}',[CompanyController::class,'update']);         
     Route::delete('/delete/{id}',[CompanyController::class,'destroy']);    //SIRVE
 });
 
