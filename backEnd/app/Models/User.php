@@ -8,8 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class User extends Authenticatable
+class User extends Authenticatable implements ShouldBroadcast
 {
     use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
 
@@ -31,5 +32,10 @@ class User extends Authenticatable
 
     public function roles(){
         return $this->belongsToMany('App\Models\Role')->withTimesTamps();
+    }
+
+    public function broadcastOn(): array
+    {
+        return ['new-user-channel'];
     }
 }

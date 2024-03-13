@@ -4,8 +4,10 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import { Navbar, Container, Nav, Button, Offcanvas, NavDropdown } from 'react-bootstrap';
 import Logo from '..//..//assets/img/planetas.png';
 import Cookies from 'js-cookie';
-
-
+import { AiTwotoneBell } from 'react-icons/ai';
+import axios from 'axios';
+import Echo from 'laravel-echo';
+import { Pusher } from 'pusher-js';
 
 const NavBar = () => {
     
@@ -13,6 +15,9 @@ const NavBar = () => {
   const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
+  const [notifications, setNotifications] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+  
 
 
 
@@ -27,10 +32,51 @@ const NavBar = () => {
 }, []);
 
 
+// useEffect(() => {
+//   // Configuración de Laravel Echo
+//   window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.VITE_PUSHER_APP_KEY,
+//     cluster: process.env.VITE_PUSHER_APP_CLUSTER,
+    
+// });
+
+//   // Escuchar el canal 'new-user-channel' y manejar la notificación
+//   window.Echo.channel('new-user-channel')
+//     .listen('NewUserRegistered', (event) => {
+//       // Manejar la notificación aquí
+//       console.log('Nuevo usuario registrado:', event.user);
+//       // Actualizar el estado de las notificaciones, si es necesario
+//       // setNotifications([...notifications, event.user]); 
+//     });
+
+//   // Fetch total notifications y otros efectos aquí
+// }, []);
+
 
    const toggleNavBar = () => {
     setNavBarVisible(!navBarVisible);
   };
+
+  
+  const toggleNotifications = () => {
+    setShowNotifications(!showNotifications);
+  };
+  const [totalNotifications, setTotalNotifications] = useState(0);
+
+const fetchTotalNotifications = async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/api/notifications');
+    setTotalNotifications(response.data.totalNotifications);
+  } catch (error) {
+    console.error('Error fetching total notifications:', error);
+  }
+};
+
+useEffect(() => {
+  fetchTotalNotifications();
+}, []);
+
 
   const salir = () => {
     Cookies.remove("token")
@@ -45,6 +91,10 @@ const NavBar = () => {
         <Button onClick={toggleNavBar} style={{ position: 'absolute', zIndex: 101, top: '20px', right: '20px', transform: 'translateY(-30%)', backgroundColor: '#50727B' }}>
           <TfiMenuAlt />
         </Button> 
+        <div className='ml-auto' style={{paddingRight:10, fontSize:'25px', transform: 'translateY(-10%)'}} onClick={toggleNotifications}>
+          <AiTwotoneBell style={{color: notifications.length > 0 ? 'red' : '#50727B'}} />
+          {/* {totalNotifications > 0 && <span className="badge badge-danger">{totalNotifications}</span>} */}
+        </div>
         <Navbar.Toggle aria-controls="offcanvasNavbar" />
         <Navbar.Collapse id="offcanvasNavbar">
           <Offcanvas placement="end" show={navBarVisible} onHide={() => setNavBarVisible(false)} >
@@ -68,6 +118,7 @@ const NavBar = () => {
                           <NavDropdown.Item><Link to={'/ShowCompanies'} className="nav-link">Ver compañias</Link></NavDropdown.Item>                          
                         </NavDropdown>
                       </Nav>
+                      <Nav.Link><Link to={'/notifications'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-bell"></i> Notificaciones</Link> </Nav.Link>
                
                   </div>
                )}
@@ -75,14 +126,16 @@ const NavBar = () => {
                   <>
                     <Nav.Link><Link to={'/Admin'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/userProfile'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Perfil</Link> </Nav.Link>
+                    <Nav.Link><Link to={'/notifications'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-bell"></i> Notificaciones</Link> </Nav.Link>
                   </>
+
                )}
                {userRole === 3 && (
                   <>
                     <Nav.Link><Link to={'/HomePageUsuario'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/userProfile'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Perfil</Link> </Nav.Link>
-                    
                     <Nav.Link><Link to={'/formCompany'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
+                    <Nav.Link><Link to={'/notifications'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-bell"></i> Notificaciones</Link> </Nav.Link>                  
                   </>
                )}
                <NavDropdown 
