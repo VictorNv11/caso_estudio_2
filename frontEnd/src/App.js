@@ -42,12 +42,19 @@ import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.
 import NavBar from './components/ui/NavBar.jsx';
 import Pipeline from './components/Company/Pipeline.jsx';
 import PerfilUser from './components/usuarios/PerfilUser.jsx';
+import Echo from 'laravel-echo';
 
 //  Configuración de Pusher
 // const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
 //   cluster: 'us2'
 // });
 
+// window.Echo = new Echo({
+//   broadcaster: 'pusher',
+//   key: process.env.VITE_PUSHER_APP_KEY,
+//   cluster: process.env.VITE_PUSHER_APP_CLUSTER,
+//   encrypted: true,
+// });
 
 export default function App() {
   return (

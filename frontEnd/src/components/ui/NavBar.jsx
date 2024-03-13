@@ -6,7 +6,8 @@ import Logo from '..//..//assets/img/planetas.png';
 import Cookies from 'js-cookie';
 import { AiTwotoneBell } from 'react-icons/ai';
 import axios from 'axios';
-
+import Echo from 'laravel-echo';
+import { Pusher } from 'pusher-js';
 
 const NavBar = () => {
     
@@ -30,6 +31,27 @@ const NavBar = () => {
     }
 }, []);
 
+
+// useEffect(() => {
+//   // Configuración de Laravel Echo
+//   window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.VITE_PUSHER_APP_KEY,
+//     cluster: process.env.VITE_PUSHER_APP_CLUSTER,
+    
+// });
+
+//   // Escuchar el canal 'new-user-channel' y manejar la notificación
+//   window.Echo.channel('new-user-channel')
+//     .listen('NewUserRegistered', (event) => {
+//       // Manejar la notificación aquí
+//       console.log('Nuevo usuario registrado:', event.user);
+//       // Actualizar el estado de las notificaciones, si es necesario
+//       // setNotifications([...notifications, event.user]); 
+//     });
+
+//   // Fetch total notifications y otros efectos aquí
+// }, []);
 
 
    const toggleNavBar = () => {
