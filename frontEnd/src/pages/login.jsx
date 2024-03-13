@@ -15,6 +15,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    
 
     const endpoint = 'http://localhost:8000/api/'
     
@@ -31,32 +32,35 @@ export default function Login() {
                 email,
                 password
             });
-            console.log(response)
+            console.log(response);
             // Si la solicitud es exitosa, redirige al usuario a la página de inicio
             if (response.status === 200) {
                 Cookies.set("token", response.data.token);
                 const role = response.data.role;
-                console.log(role)
-                // Comparar el nombre del rol para redirigir al usuario
-                    if (role === 1) {
-                        window.location.href = "/HomePageSuperAdmin";
-                    } else if (role ===2) {
-                        window.location.href = "/Admin";
-                    } else if (role ===3) {
-                        window.location.href = "/usuarios"
-                    }
+                Cookies.set("role", role); // Almacena el rol del usuario en las cookies
+
+                // Almacena el nombre de usuario en el almacenamiento local
+                localStorage.setItem('username', response.data.username);
+                console.log(role);
+                // Redirige al usuario según su rol
+                if (role === 1) {
+                    window.location.href = "/HomePageSuperAdmin";
+                } else if (role === 2) {
+                    window.location.href = "/homePageAdmin";
+                } else if (role === 3) {
+                    window.location.href = "/HomePageUsuario";
+                }
             }
         } catch (error) {
-            // Si hay un error en la solici;tud, muestra el mensaje de error
+            // Si hay un error en la solicitud, muestra el mensaje de error
             setError("Credenciales inválidas");
-            // Configurar el temporizador para limpiar el error después de 5 segundos
-        setTimeout(() => {
-            setError(null);
-          }, 5000);
-          return;
+            // Configura el temporizador para limpiar el error después de 5 segundos
+            setTimeout(() => {
+                setError(null);
+            }, 5000);
+            return;
         }
     };
-
     return (
     <section className="vh-100 gradient-custom"  style={{ backgroundImage: `url(${img_home})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center center' }}>
         <header className="navbar navbar-expand-md navbar-dark fixed-top bg-transparent">

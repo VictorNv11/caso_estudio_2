@@ -4,6 +4,9 @@ import { Link, useNavigate, useParams} from 'react-router-dom'
 import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
 import Cookies from 'js-cookie';
 
+import Footer from '../ui/Footer';
+
+
 
 const endpoint = 'http://localhost:8000/api/User/'
 
@@ -67,11 +70,22 @@ const EditSupAdmin = () => {
       }, []);
 
     return(
-        <div>
+        <div style={{ backgroundColor: '#50727B'}}>
+       <nav className="navbar bg-body-tertiary">
+          <div className="container-fluid">
+            <a className="navbar-brand">Gestion de Usuarios</a>
+          
+              <Link className="btn" style={{backgroundColor:'#50717a', color:'white'}} to="/supAdmins">
+                <i className="fa-solid fa-arrow-left"></i> Volver
+              </Link>
+            
+          </div>
+        </nav>
+
             <div>
             <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%', color:"#E7DFDD"}}>Editando Usuario</h1>
         </div>
-        <div style={{ marginTop:'5%', backgroundColor: '#0E0B16 ', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
+        <div style={{ marginTop:'5%', backgroundColor: '#0E0B16 ', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto', marginBottom:'1%' }}>
               <form onSubmit={update} >
                   <div className="mb-3">
                       <label htmlFor="nombre" className="form-label" style={{color:"#E7DFDD" }}>Nombre completo</label>
@@ -114,13 +128,11 @@ const EditSupAdmin = () => {
                     </select>
                 </div>
                 <div style={{ paddingTop:'10px', display: 'flex', flexDirection: 'column', alignItems: 'right' }}>
-                  <button type="submit" className="btn btn-primary">Editar</button> 
+                  <button type="submit" className="btn btn-success">Editar</button> 
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'right', paddingTop:'5px' }}>
-                    <Link to='/supAdmins' className='btn btn-secondary'  style={{color:'#E7DFDD'}}>Cancelar</Link>
-                </div>      
               </form>
           </div>
+          <Footer/>
       </div>
     )
 

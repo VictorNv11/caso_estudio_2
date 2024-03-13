@@ -3,6 +3,9 @@ import React,{useEffect, useState}from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
 import Cookies from 'js-cookie';
+import NavBar from '../ui/NavBar';
+import Footer from '../ui/Footer';
+
  
 
 const endpoint = 'http://localhost:8000/api/register'
@@ -93,22 +96,21 @@ const CreateSupAdmin = () => {
     
 
   return (
-    <div>
-         <nav className="navbar navbar-expand-lg" style={{ backgroundColor:'#0E0B16 ', borderRadius:5}}>
-            <a className="navbar-brand" href="#" style={{paddingLeft: 20,  color:'#E7DFDD'}}>Super Administrador </a>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item active" style={{paddingRight: 20}}>
-                  <Link to='/supAdmins' className='nav-link'  style={{color:'#E7DFDD'}}>Volver</Link>
-                </li>
-              </ul>
-            </div>
-           
+    <div style={{ backgroundColor: '#50727B'}}>
+        <nav className="navbar bg-body-tertiary">
+          <div className="container-fluid">
+            <a className="navbar-brand" href='#!'>Gestion de Usuarios</a>
+          
+              <Link className="btn" style={{backgroundColor:'#50717a', color:'white'}} to="/supAdmins">
+                <i className="fa-solid fa-arrow-left"></i> Volver
+              </Link>
+            
+          </div>
         </nav>
         <div>
             <h1 className="title-1" style={{textAlign:'center',  marginTop: '4%', color:'#E7DFDD'}}>Creando Usuarios</h1>
         </div>
-      <div style={{ marginTop:'5%', backgroundColor: '#0E0B16', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
+      <div style={{ marginTop:'1%', backgroundColor: '#0E0B16', padding: '20px', borderRadius: '10px', maxWidth: '600px', margin: 'auto',marginBottom:'2%' }}>
             <form onSubmit={store} >
                 <div className="mb-3">
                     <label htmlFor="nombre" className="form-label"  style={{color:"#E7DFDD" }}>Nombre completo</label>
@@ -152,9 +154,10 @@ const CreateSupAdmin = () => {
                     <option value="3">Usuario</option>
                   </select>
                 </div>
-                <button type="submit" className="btn btn-dark">Enviar</button>       
+                <button type="submit" className="btn btn-secondary" style={{marginTop:'10px'}}>Enviar</button>       
             </form>
         </div>
+        <Footer/>
     </div>
   )
 }

@@ -1,42 +1,52 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+//PAGES
+import Login from './pages/login.jsx';
 import Homepage from './pages/homepage.jsx';
 import FormRegistro from './pages/formRegistro.jsx';
-import Login from './pages/login.jsx';
 
 // SUPERADMINISTRADOR
 import ShowSupAdmin from './components/supAdmin/ShowSupAdmin.js';
-import CreateSupAdmin from './components/supAdmin/CreateSupAdmin.js';
 import EditSupAdmin from './components/supAdmin/EditSupAdmin.js';
+import CreateSupAdmin from './components/supAdmin/CreateSupAdmin.js';
 import HomePageSupAdmin from './components/supAdmin/homePageSupAdmin.js';
 
 // ADMINISTRADOR
+import EditAdmin from './components/Admin/EditAdmin.js';
 import ShowAdmin from './components/Admin/showAdmin.js';
 import CreateAdmin from './components/Admin/CreateAdmin.js';
-import EditAdmin from './components/Admin/EditAdmin.js';
+import HomePageAdmin from './components/Admin/HomePageAdmin.js';
 
 // USUARIO
 import ShowUsuarios from './components/usuarios/ShowUsuarios.js';
-import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
 import EditUsuarios from './components/usuarios/EditUsuarios.js';
+import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
+import HomePageUsuario from './components/usuarios/HomePageUsuario.js';
 
 // EXCEL
+import { TodoList } from './components/Clientes/TodoList.jsx';
+import EditCliente from './components/Clientes/EditCliente.js';
 import ImportCliente from './components/Clientes/ImportClient.js';
 import CreateCliente from './components/Clientes/CreateCliente.js';
-import EditCliente from './components/Clientes/EditCliente.js';
-import { TodoList } from './components/Clientes/TodoList.jsx';
 import Notifications from './components/Notifications/Notifications.jsx';
-import Pusher from 'pusher-js';
 
-import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
+//COMPAÑIAS
+import CompanyForm from './components/Company/FormCompany.jsx'; 
+import ShowCompanies from './components/Company/ShowCompany.js';
+
 import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx';
-import FormCompany from './components/Company/FormCompany.jsx';
-import NavBar from './components/NavBar/NavBar.jsx';
+import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
 
-// Configuración de Pusher
-const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
-  cluster: 'us2'
-});
+
+import NavBar from './components/ui/NavBar.jsx';
+import Pipeline from './components/Company/Pipeline.jsx';
+import PerfilUser from './components/usuarios/PerfilUser.jsx';
+
+//  Configuración de Pusher
+// const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
+//   cluster: 'us2'
+// });
 
 
 export default function App() {
@@ -50,7 +60,9 @@ export default function App() {
         <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
 
         {/*Compañias */}
-        <Route path="/formCompany" element={<FormCompany/>}/>
+        <Route path="/formCompany" element={<CompanyForm/>}/>
+        <Route path="/pipeline" element={<Pipeline />} />
+        <Route path="/showCompanies" element={<ShowCompanies />} />
      
         {/* SUEPERADMINISTRADOR */}
         <Route path="/homePageSuperAdmin" element={<HomePageSupAdmin />} />
@@ -75,9 +87,10 @@ export default function App() {
 
         <Route path="/servicios" element={<TodoList/>} />
 
-        <Route path="notifications" element={<Notifications />} />
+        <Route path="/notifications" element={<Notifications />} />
         
         {/* ADMINISTRADOR */}
+        <Route path="homePageAdmin" element={<HomePageAdmin/>}/>
         <Route path="/Admin" element={<ShowAdmin />} />
         <Route path="/createA" element={<CreateAdmin />} />
         <Route path="/editA/:id" element={<EditAdmin />} />
@@ -86,6 +99,9 @@ export default function App() {
         <Route path="/usuarios" element={<ShowUsuarios />} />
         <Route path="/createU" element={<CreateUsuarios />} />
         <Route path="/editU/:id" element={<EditUsuarios />} />
+        <Route path='/HomePageUsuario' element={<HomePageUsuario/>}/>
+        <Route path="/userProfile" element={<PerfilUser />}/>
+
       </Routes>
     </BrowserRouter>
   );

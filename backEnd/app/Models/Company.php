@@ -16,6 +16,7 @@ class Company extends Model
         'phone',
         'email',
         'document',
-        'status'
+        'status',
+        'approval_code'
     ];
 }

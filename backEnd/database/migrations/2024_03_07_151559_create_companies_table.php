@@ -19,7 +19,8 @@ return new class extends Migration
             $table->bigInteger('phone')->unique();
             $table->string('email')->unique();
             $table->string('document')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(false); // Cambia el valor predeterminado a false
+            $table->string('approval_code')->nullable(); // Código de Aprobación
             $table->timestamps();
         });
     }
