@@ -87,7 +87,8 @@ const NavBar = () => {
                )}
                <NavDropdown 
                   title={<span style={{ color: '#fff' }}><i className="fas fa-user-circle"></i> Usuario</span>} 
-                  id="offcanvasNavbarDropdown"> 
+                  id="offcanvasNavbarDropdown"
+                  > 
                   <li><a className="dropdown-item" href="#"><img src="https://via.placeholder.com/30" alt="Profile" style={{
                         width: '30px',
                         height: '30px',
@@ -95,7 +96,7 @@ const NavBar = () => {
                         marginRight: '10px', 
                     }} />  {username} {/* Mostrar el nombre de usuario */}</a></li>
                     <li><hr className="dropdown-divider" /></li>
-                    <button className="dropdown-item" onClick={salir}><i className="fas fa-sign-out-alt"></i> Salir</button>
+                    <button className="dropdown-item" onClick={salir} style={{color: '#fff', backgroundColor: '#50727B'}}><i className="fas fa-sign-out-alt"></i> Salir</button>
                </NavDropdown>  
               </Nav>
             </Offcanvas.Body>
