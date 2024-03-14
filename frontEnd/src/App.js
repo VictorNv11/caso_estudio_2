@@ -23,6 +23,8 @@ import ShowUsuarios from './components/usuarios/ShowUsuarios.js';
 import EditUsuarios from './components/usuarios/EditUsuarios.js';
 import CreateUsuarios from './components/usuarios/CreateUsuarios.js';
 import HomePageUsuario from './components/usuarios/HomePageUsuario.js';
+import Showtask from './components/usuarios/Showtask.js'
+
 
 // EXCEL
 import { TodoList } from './components/Clientes/TodoList.jsx';
@@ -98,6 +100,7 @@ export default function App() {
         <Route path="/createU" element={<CreateUsuarios />} />
         <Route path="/editU/:id" element={<EditUsuarios />} />
         <Route path='/HomePageUsuario' element={<HomePageUsuario/>}/>
+        <Route path='/Showtask' element={<Showtask/>}/>
 
       </Routes>
     </BrowserRouter>

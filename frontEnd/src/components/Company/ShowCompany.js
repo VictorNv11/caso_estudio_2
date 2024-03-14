@@ -77,6 +77,10 @@ const ShowCompany = () => {
     }
   };
 
+
+  const consoleMessage = async () =>{
+    console.log('compañia aceptada ')
+  }
  
 
   return (
@@ -84,18 +88,13 @@ const ShowCompany = () => {
       <div style={{ backgroundColor: '#50727B', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '100vh' }}>
         <div>
           <NavBar />
-
-          <div style={{ marginLeft: '4%', marginTop: '2%' }}>
-            <input value={search} style={{ borderRadius: 5 }} onChange={handleSearch} type='text' placeholder='Buscar Nombre o Teléfono' className='form'></input>
-            <BsSearch style={{ marginLeft: 5, color: 'white' }} />
-            <Link className='btn btn-success btn-sm' to={'/Clientes'} style={{ marginLeft: '65.5%' }}>Importar</Link>{' '}
-            <Link to='/create' className='btn btn-sm' style={{ backgroundColor: '#78A083', color: 'white' }}>Crear</Link>{' '}
-          </div>
-
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <a className="navbar-brand" href="#" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ width: 70, height: 60 }} />
             </a>
+            <div style={{ marginTop: '1%' }}>
+            <h1 className='text-center' style={{color:'white'}}>Listado de Empresas</h1>
+          </div>
             <div>
               <table className='table table-striped container' style={{ marginTop: '2%', border: '1px solid black', backgroundColor: 'white' }}>
                 <thead className='content'>
@@ -118,13 +117,13 @@ const ShowCompany = () => {
                       <td>{company.email}</td>
                       <td>{company.document}</td>
                       <td>
-                        <button className='btn btn-danger btn-sm' onClick={() => showDeleteConfirmation(company.id)}>Eliminar</button>
+                        <button className='btn btn-success btn-sm' onClick={consoleMessage} >Aceptar</button>{" "}
+                        <button className='btn btn-danger btn-sm' onClick={() => showDeleteConfirmation(company.id)}>Descartar</button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-
               {showConfirmation && (
                 <div className="modal fade show " style={{ display: 'block' }}>
                   <div className="modal-dialog">
@@ -133,10 +132,10 @@ const ShowCompany = () => {
                         <h5 className="modal-title text-white">Confirmar eliminación</h5>
                       </div>
                       <div className="modal-body text-white">
-                        <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+                        <p>¿Estás seguro de que deseas desacrtar esta empresa?</p>
                       </div>
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-danger border " onClick={discard}>Eliminar</button>
+                        <button type="button" className="btn btn-danger border " onClick={discard}>Descartar</button>
                         <button type="button" className="btn btn-secondary border " onClick={() => setShowConfirmation(false)}>Cancelar</button>
                       </div>
                     </div>

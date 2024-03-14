@@ -53,14 +53,14 @@ const NavBar = () => {
             </Offcanvas.Header>
             <Offcanvas.Body style={{   backgroundColor: '#344955'}}>
               <Nav className="justify-content-end flex-grow-1 pe-3">
+
+
                {userRole === 1 && (
                   <div>
                     <Nav.Link><Link to={'/HomePageSuperAdmin'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/supAdmins'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Usuarios</Link> </Nav.Link>
-                   
-
                     <Nav.Link><Link to={'/servicios'} className="nav-link" style={{ color: '#fff' }}><i class="fa-solid fa-list-check"></i> Crear Tarea</Link> </Nav.Link>
-                    
+
                       <Nav className="justify-content-end flex-grow-1 pe-3">
                         <NavDropdown title={<span style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</span>} id="nav-dropdown">
                         <NavDropdown.Item><Link to={'/formCompany'} className="nav-link"><i className="fa-solid fa-plus" style={{ marginRight: '5px' }}></i>Crear compañía</Link></NavDropdown.Item>                          
@@ -72,8 +72,14 @@ const NavBar = () => {
                )}
                {userRole === 2 && (
                   <>
-                    <Nav.Link><Link to={'/Admin'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
+                    <Nav.Link><Link to={'/homePageAdmin'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/userProfile'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Perfil</Link> </Nav.Link>
+                    <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <NavDropdown title={<span style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</span>} id="nav-dropdown">
+                        
+                          <NavDropdown.Item><Link to={'/ShowCompanies'} className="nav-link"><i class="fa-regular fa-eye"></i>Ver compañias</Link></NavDropdown.Item>                          
+                        </NavDropdown>
+                      </Nav>
                   </>
                )}
                {userRole === 3 && (
@@ -81,6 +87,7 @@ const NavBar = () => {
                     <Nav.Link><Link to={'/HomePageUsuario'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                     <Nav.Link><Link to={'/userProfile'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Perfil</Link> </Nav.Link>
                     <Nav.Link><Link to={'/formCompany'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
+                    <Nav.Link><Link to={'/Showtask '} className="nav-link" style={{ color: '#fff' }}><i class="fa-solid fa-list"></i> Tareas</Link> </Nav.Link>
                   </>
                )}
                <NavDropdown 

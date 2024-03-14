@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from '../../hooks/useForm'
 import axios from 'axios';
 import Modal from '../Modal/Modal';
+import ShowSupAdmin from '../supAdmin/ShowSupAdmin';
 
 
 const estilos ={
@@ -55,11 +56,26 @@ const estilos ={
 
 }
 
-export const TodoAdd = ({handleNewTodo}) => {
-
+export const TodoAdd = ({ handleNewTodo }) => {
   const [error, setError] = useState(null);
+  const [users, setUsers] = useState([]);
+  const endpoint = 'http://localhost:8000/api';
 
 
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        const response = await axios.get(`${endpoint}/users`);
+        setUsers(response.data.users);
+       
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        setUsers([]); // Inicializar users como un array vacío en caso de error
+      }
+    };
+
+    getAllUsers();
+  }, []);
 
   const {description, price, onInputChange, onResetForm} = useForm({
     description: '', price:0
@@ -110,38 +126,47 @@ export const TodoAdd = ({handleNewTodo}) => {
 
   return (
     <>
-    <form onSubmit={onFormSubmit} style={estilos.form}>
-       <div>
-      <input
-        type="text"
-        style={estilos.inputAdd}
-        name="description"
-        value={description}
-        onChange={onInputChange}
-        placeholder="¿Qué hay que hacer?"
-      />
-      </div>
-      <div> 
-       <input
-        type="text"
-        style={{...estilos.inputAdd, width: '100%'}}
-        name="price"
-        value={price}
-        onChange={onInputChange}
-        placeholder="¿Cuánto cuesta?"
-        inputMode="numeric"  // Agregado para quitar las flechas
-      />
-      </div>
-      <button style={{ ...estilos.btnAdd, ...(description && estilos.btnAddHover) }} type="submit">
-        Agregar
-      </button>
-    </form>
-    {/* Mostrar el modal de error si hay un error */}
+      <form onSubmit={onFormSubmit} style={{ ...estilos.form, display: 'flex', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '10px' }}>
+          <input
+            type="text"
+            style={estilos.inputAdd}
+            name="description"
+            value={description}
+            onChange={onInputChange}
+            placeholder="¿Qué hay que hacer?"
+          />
+          <select
+            style={{ ...estilos.inputAdd, marginTop: '5px' }}
+            name="user"
+          >
+            <option value="">Escoger el usuario</option>
+            {users.map(user => (
+              <option key={user._id} value={user._id}>{user.name}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <input
+            type="text"
+            style={{ ...estilos.inputAdd, width: '100%' }}
+            name="price"
+            value={price}
+            onChange={onInputChange}
+            placeholder="¿Cuánto cuesta?"
+            inputMode="numeric" // Agregado para quitar las flechas
+          />
+        </div>
+        <button style={{ ...estilos.btnAdd, ...(description && estilos.btnAddHover) }} type="submit">
+          Agregar
+        </button>
+      </form>
+      {/* Mostrar el modal de error si hay un error */}
       {error && (
         <Modal isOpen={true} onClose={closeModal} title="Error">
-          <p style={{ fontSize: '20px', margin: '5px 0'}}>{error}</p>
+          <p style={{ fontSize: '20px', margin: '5px 0' }}>{error}</p>
         </Modal>
-      )} 
+      )}
     </>
   );
 };

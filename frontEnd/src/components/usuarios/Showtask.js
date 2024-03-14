@@ -60,12 +60,12 @@ const estilos={
 
 }
 
-export const TodoList = () => {
+ const Showtask = () => {
 
   const {
     todos, 
     todosCount,
-
+    pendingTodosCount,
     handleNewTodo,
     handleDeleteTodo,
     handleCompleteTodo,
@@ -81,13 +81,10 @@ export const TodoList = () => {
     <div style={estilos.cardToDo}>
     <h1 style={estilos.h1}>Lista de Servicios</h1>
     <div style={estilos.counterTodos}>
-      <h3 style={estilos.counterTodosH3}>N° Tareas Asignadas <span style={estilos.counterTodosSpan}>{todosCount}</span></h3>
-      
+      <h3 style={estilos.counterTodosH3}>N° Tareas Asignadas: <span style={estilos.counterTodosSpan}>{todosCount}</span></h3>
+      <h3 style={estilos.counterTodosH3}>Tareas Pendientes: <span style={estilos.counterTodosSpan}>{pendingTodosCount}</span></h3>
     </div>
-    <div style={estilos.addTodo}>
-      <h3>Agregar Servicios</h3>
-      <TodoAdd handleNewTodo={handleNewTodo} />
-    </div>
+ 
 
     <Servicios
       todos={todos}
@@ -100,3 +97,4 @@ export const TodoList = () => {
   </div>
   )
 }
+export default Showtask
