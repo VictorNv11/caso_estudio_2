@@ -8,8 +8,9 @@ const Notifications = ({ companyId }) => {
     // Función para cargar las notificaciones
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/companies/${companyId}/notifications`);
+        const response = await axios.get(`http://localhost:8000/api/notifications`);
         setNotifications(response.data);
+        showNotificationModal(response.data);
       } catch (error) {
         console.error('Error al obtener las notificaciones:', error);
       }
@@ -19,12 +20,29 @@ const Notifications = ({ companyId }) => {
     fetchNotifications();
   }, [companyId]);
 
+  // Función para mostrar el modal de notificación
+  const showNotificationModal = (notifications) => {
+    notifications.forEach(notification => {
+      // Verifica si es una notificación de nuevo usuario registrado
+      if (notification.type === 'App\\Notifications\\NewUserRegisteredNotification') {
+        // Muestra un modal con la información del nuevo usuario
+        alert(`¡Nuevo usuario registrado!\nNombre: ${notification.data.user_name}\nCorreo electrónico: ${notification.data.user_email}`);
+      }
+    });
+  };
+
   return (
     <div className="notifications">
       <h3>Notificaciones</h3>
       <ul>
         {notifications.map(notification => (
-          <li key={notification.id}>{notification.message}</li>
+          <li key={notification.id}>
+            <strong>ID:</strong> {notification.id}<br />
+            <strong>Tipo:</strong> {notification.type}<br />
+            <strong>Notificable:</strong> {notification.notifiable}<br />
+            <strong>Datos:</strong> {notification.data}<br />
+            <strong>Leído:</strong> {notification.read_at ? 'Sí' : 'No'}
+          </li>
         ))}
       </ul>
     </div>

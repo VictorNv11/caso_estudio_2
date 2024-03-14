@@ -48,6 +48,7 @@ class AuthController extends Controller
             $user->save();
 
 
+
             // Enviar la notificación al superadministrador
             $superAdmin = User::where('roles', 1)->first();
             if ($superAdmin) {
@@ -63,6 +64,8 @@ class AuthController extends Controller
             return response()->json(['error' => 'Error al registrar el usuario'], Response::HTTP_BAD_REQUEST);
         }
     }
+
+    
 
 
     public function login(Request $request)

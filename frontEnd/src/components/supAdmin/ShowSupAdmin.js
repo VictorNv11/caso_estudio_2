@@ -85,7 +85,7 @@ const ShowSupAdmin = () => {
   const notifySuperAdmin = async () => {
     try {
       const token = Cookies.get("token");
-      await axios.post(`${endpoint}/notifications/send`, {
+      await axios.post(`${endpoint}/notifications`, {
         // Puedes pasar cualquier dato adicional necesario para la notificación
       }, {
         headers: {
