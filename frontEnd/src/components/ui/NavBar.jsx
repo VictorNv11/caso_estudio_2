@@ -6,9 +6,7 @@ import Logo from '..//..//assets/img/planetas.png';
 import Cookies from 'js-cookie';
 import { AiTwotoneBell } from 'react-icons/ai';
 import axios from 'axios';
-import Echo from 'laravel-echo';
-import { Pusher } from 'pusher-js';
-
+import Notifications from '../Notifications/Notifications';
 
 const NavBar = () => {
     
@@ -75,10 +73,10 @@ const toggleNotifications = () => {
 };
 
 const handleNotificationClick = (notificationId) => {
-  const selected = notifications.find(notification => notification.id === notificationId);
-  setSelectedNotification(selected); // Almacena la notificación seleccionada
+  console.log(notificationId)
+  setSelectedNotification(notificationId); // Almacena la notificación seleccionada
   setShowNotifications(false);
-  navigate('/notifications');
+  navigate(`/notifications`);
 };
 
 const handleCloseNotifications = () => {
@@ -107,12 +105,29 @@ const handleCloseNotifications = () => {
               </Modal.Header>
               <Modal.Body>
               <ListGroup>
-                {notifications.map(notification => (
-                  <ListGroup.Item key={notification.id} onClick={() => handleNotificationClick(notification.id)}>
-                    {notification.type === 'App\\Notifications\\NewUserRegisteredNotification' ? '¡Nuevo usuario registrado!' : 'Otro tipo de notificación'}
+              {notifications.map(notification => {
+                let message;
+
+                switch(notification.type) {
+                  case 'App\\Notifications\\NewUserRegisteredNotification':
+                    message = '¡Nuevo usuario registrado!';
+                    break;
+                  case 'otro_tipo_de_notificacion':
+                    message = 'Otro tipo de notificación';
+                    break;
+                  // Agrega más casos según tus tipos de notificaciones
+                  default:
+                    message = 'Mensaje predeterminado';
+                }
+
+                return (
+                  <ListGroup.Item key={notification.id} onClick={() => handleNotificationClick(notification.id)} >
+                    {message}
                   </ListGroup.Item>
-                ))}
-              </ListGroup>
+                  
+                );
+              })}
+            </ListGroup>
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleCloseNotifications}>
