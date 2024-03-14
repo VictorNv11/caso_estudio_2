@@ -81,6 +81,21 @@ const ShowCompany = () => {
     return <div>Cargando...</div>;
   }
 
+  // Aplicar los estilos CSS en el head del documento HTML
+document.head.appendChild(document.createElement("style")).textContent = `
+@keyframes placeholderAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+`;
+
   return (
     <div>
       <div style={{ backgroundColor: '#50727B', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '100vh' }}>
@@ -96,7 +111,7 @@ const ShowCompany = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <a className="navbar-brand" href="#" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ width: 70, height: 60 }} />
+              <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ width: 70, height: 60, animation: 'placeholderAnimation 2s infinite'  }} />
             </a>
             <div>
               <table className='table table-striped container' style={{ marginTop: '2%', border: '1px solid black', backgroundColor: 'white' }}>

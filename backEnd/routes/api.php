@@ -97,6 +97,7 @@ Route::post('register',[AuthController::class, 'register']);
 
 // Notificaciones
 Route::get('notifications',[NotificationController::class, 'notify']);
+Route::get('notifications/{id}',[NotificationController::class, 'show']);
 
 Route::post('login',[AuthController::class, 'login']);
 //Route::put('edit',[AuthController::class, 'edit']);

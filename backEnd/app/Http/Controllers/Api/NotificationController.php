@@ -16,4 +16,11 @@ class NotificationController extends Controller
             return  $notifications;
  
     }
+
+     // Leer (Read)
+     public function show(string $id)
+     {
+         $notifications= Notifications::find($id);
+         return $notifications;
+     }
 }
