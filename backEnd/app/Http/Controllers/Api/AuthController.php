@@ -48,7 +48,6 @@ class AuthController extends Controller
             $user->save();
 
 
-            broadcast(new NewUserRegistered($user));
             // Enviar la notificación al superadministrador
             $superAdmin = User::where('roles', 1)->first();
             if ($superAdmin) {

@@ -43,7 +43,16 @@ const ShowSupAdmin = () => {
     if (Cookies.get("token") === undefined) {
       window.location.href = "/";
     }
-    showData();
+    else {
+      // Verifica el rol del usuario antes de mostrar la página de superadmin
+      const userRole = Cookies.get("role");
+      if (userRole !== "1") {
+        // Si el usuario no es un superadministrador, redirige a la página adecuada
+        window.location.href = "/"; // Cambia esto a la página a la que deberían redirigir los usuarios normales
+      } else {
+        showData();
+      }
+    }
   }, []);
 
   const confirmDelete = (id) => {
