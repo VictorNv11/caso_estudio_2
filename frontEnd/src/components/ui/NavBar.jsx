@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { TfiMenuAlt } from "react-icons/tfi";
-import { Navbar, Container, Nav, Button, Offcanvas, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Nav, Button, Offcanvas, NavDropdown, Modal, ListGroup  } from 'react-bootstrap';
 import Logo from '..//..//assets/img/planetas.png';
 import Cookies from 'js-cookie';
 import { AiTwotoneBell } from 'react-icons/ai';
@@ -9,14 +9,17 @@ import axios from 'axios';
 import Echo from 'laravel-echo';
 import { Pusher } from 'pusher-js';
 
+
 const NavBar = () => {
     
   const [navBarVisible, setNavBarVisible] = useState(false);
   const [userRole, setUserRole] = useState(null);
-  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [selectedNotification, setSelectedNotification] = useState(null); 
+  const [newNotificationsCount, setNewNotificationsCount] = useState(0);
+  const navigate = useNavigate(); // Importa useNavigate
   
 
 
@@ -32,42 +35,19 @@ const NavBar = () => {
 }, []);
 
 
-// useEffect(() => {
-//   // Configuración de Laravel Echo
-//   window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.VITE_PUSHER_APP_KEY,
-//     cluster: process.env.VITE_PUSHER_APP_CLUSTER,
-    
-// });
-
-//   // Escuchar el canal 'new-user-channel' y manejar la notificación
-//   window.Echo.channel('new-user-channel')
-//     .listen('NewUserRegistered', (event) => {
-//       // Manejar la notificación aquí
-//       console.log('Nuevo usuario registrado:', event.user);
-//       // Actualizar el estado de las notificaciones, si es necesario
-//       // setNotifications([...notifications, event.user]); 
-//     });
-
-//   // Fetch total notifications y otros efectos aquí
-// }, []);
-
-
    const toggleNavBar = () => {
     setNavBarVisible(!navBarVisible);
   };
 
   
-  const toggleNotifications = () => {
-    setShowNotifications(!showNotifications);
-  };
+ 
   const [totalNotifications, setTotalNotifications] = useState(0);
 
 const fetchTotalNotifications = async () => {
   try {
     const response = await axios.get('http://localhost:8000/api/notifications');
-    setTotalNotifications(response.data.totalNotifications);
+    const total = response.data.totalNotifications;
+    setNewNotificationsCount(total);
   } catch (error) {
     console.error('Error fetching total notifications:', error);
   }
@@ -77,6 +57,34 @@ useEffect(() => {
   fetchTotalNotifications();
 }, []);
 
+useEffect(() => {
+  const fetchNotifications = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/notifications');
+      setNotifications(response.data);
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+    }
+  };
+  fetchNotifications();
+}, []);
+
+const toggleNotifications = () => {
+  setShowNotifications(!showNotifications);
+  setNewNotificationsCount(0);
+};
+
+const handleNotificationClick = (notificationId) => {
+  const selected = notifications.find(notification => notification.id === notificationId);
+  setSelectedNotification(selected); // Almacena la notificación seleccionada
+  setShowNotifications(false);
+  navigate('/notifications');
+};
+
+const handleCloseNotifications = () => {
+  setShowNotifications(false);
+  setNewNotificationsCount(0); 
+};
 
   const salir = () => {
     Cookies.remove("token")
@@ -92,8 +100,27 @@ useEffect(() => {
           <TfiMenuAlt />
         </Button> 
         <div className='ml-auto' style={{paddingRight:10, fontSize:'25px', transform: 'translateY(-10%)'}} onClick={toggleNotifications}>
-          <AiTwotoneBell style={{color: notifications.length > 0 ? 'red' : '#50727B'}} />
-          {/* {totalNotifications > 0 && <span className="badge badge-danger">{totalNotifications}</span>} */}
+          <AiTwotoneBell style={{color: newNotificationsCount > 0 ? 'red' : '#50727B'}} />
+          <Modal show={showNotifications} onHide={handleCloseNotifications}>
+              <Modal.Header closeButton>
+                <Modal.Title>Notificaciones</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+              <ListGroup>
+                {notifications.map(notification => (
+                  <ListGroup.Item key={notification.id} onClick={() => handleNotificationClick(notification.id)}>
+                    {notification.type === 'App\\Notifications\\NewUserRegisteredNotification' ? '¡Nuevo usuario registrado!' : 'Otro tipo de notificación'}
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseNotifications}>
+                  Cerrar
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          {newNotificationsCount > 0 && <span className="badge badge-danger">{newNotificationsCount}</span>} 
         </div>
         <Navbar.Toggle aria-controls="offcanvasNavbar" />
         <Navbar.Collapse id="offcanvasNavbar">

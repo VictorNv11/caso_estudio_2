@@ -88,7 +88,7 @@ const CreateUsuario = () => {
   };
     return(
 
-  <div style={{backgroundColor:'#50727B'}}>
+  <div>
     <header className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
           <div className="container">
               <a className="navbar-brand" href="#">
@@ -107,7 +107,7 @@ const CreateUsuario = () => {
               </div>            
           </div>
     </header>
-    <div >
+    <div>
         <h1 className="title-1" style={{textAlign:'center',  marginTop: '6%', color:'#E7DFDD'}}>Formulario de Registro</h1>
    </div>
     <div style={{border:'solid 1px', padding: '20px', borderRadius: '10px', maxWidth: '600px', marginTop:'4%', marginLeft:'35%', backgroundColor:'#0E0B16'}}>
@@ -149,51 +149,7 @@ const CreateUsuario = () => {
             </div>
             <button type="submit" className="btn btn-dark">Enviar</button>       
         </form>
-        
     </div>
-    {/* Footer */}
-    <footer style={{ position: 'static', bottom: 0, width: '100%', backgroundColor: '#35374B' }}>
-                <div className="container-fluid">
-                    <div className="row p-5 pb-2  text-white">
-                        <div className="col-xs-12 col-md-6 col-lg-3">
-                            <p className="h3">Gestión de Usuarios</p>
-                           
-                        </div>
-                        <div className="col-xs-12 col-md-6 col-lg-3">
-                            <p className="h5 mb-3">Contactos</p>
-                            <div className="mb-2">
-                                <a className='text-success text-decoration-none' href="#!">Facebook</a>
-                            </div>
-                            <div className="mb-2">
-                                <a className='text-success text-decoration-none' href="#!">GitHub</a>
-                            </div>
-                            <div className="mb-2">
-                                <a className='text-success text-decoration-none' href="#!">Gmail</a>
-                            </div>
-
-                        </div>
-
-                        <div className="col-xs-12 col-md-6 col-lg-3">
-                            <p className="h5">Enlaces</p>
-                            <div className="mb-2">
-                                <a className='text-success text-decoration-none' href="#!">Terms & Conditions</a>
-                            </div>
-                            <div className="mb-2">
-                                <a className='text-success text-decoration-none' href="#!">Private Policy</a>
-                            </div>
-                        </div>
-                        <div className="col-xs-12 col-md-6 col-lg-3">
-                            <p className="h5">Acerca De</p>
-                            <div className="mb-2">
-                                <a className='text-success text-decoration-none' href="#!">Documentos</a>
-                            </div>
-                        </div>
-                        <div className="col-xs-12 pt-4">
-                        <p className='text-white text-center'> © 2024 Copyright: Gestion de Usuarios</p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
     
  </div>
     )
