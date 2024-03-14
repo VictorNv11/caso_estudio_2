@@ -9,11 +9,14 @@ use App\Models\Company;
 use Exception;
 use App\Models\User;
 use App\Models\NotificationCompany;
-
+use App\Notifications\NewCompanyCreatedNotification;
 // Genera los códigos aleatorios
 use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
 {
@@ -65,6 +68,16 @@ class CompanyController extends Controller
 
             // Guarda la compañía creada
             $company->save();
+
+            $superAdmin = User::where('roles', 1)->first();
+            if ($superAdmin) {
+                Notification::send($superAdmin, new NewCompanyCreatedNotification($company));
+            } else {
+                Log::warning('No se pudo encontrar al superadministrador para enviar la notificación.');
+            }
+
+            // Respuesta
+        
             return response()->json(['message' => 'Compañía creada con éxito'], 201);
 
         } catch(Exception $e) {
