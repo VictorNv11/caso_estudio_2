@@ -89,6 +89,21 @@ const handleCloseNotifications = () => {
     window.location.href = "/";
   }
 
+  // Aplicar los estilos CSS en el head del documento HTML
+document.head.appendChild(document.createElement("style")).textContent = `
+@keyframes placeholderAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+`;
+
   return (
     <div style={{backgroundColor: '#50727B'}}>   
     <Navbar expand="lg" className="bg-body-tertiary mb-3" >
@@ -110,10 +125,10 @@ const handleCloseNotifications = () => {
 
                 switch(notification.type) {
                   case 'App\\Notifications\\NewUserRegisteredNotification':
-                    message = '¡Nuevo usuario registrado!';
+                    message = '¡Nuevo usuario registrado!👨‍💻';
                     break;
-                  case 'otro_tipo_de_notificacion':
-                    message = 'Otro tipo de notificación';
+                  case 'App\\Notifications\\NewCompanyCreatedNotification':
+                    message = '¡Solicitud de creación de compañía!🏢';
                     break;
                   // Agrega más casos según tus tipos de notificaciones
                   default:
@@ -143,7 +158,7 @@ const handleCloseNotifications = () => {
             <Offcanvas.Header style={{   backgroundColor: '#344955', color: '#fff'}} >
               <button type="button" className="btn-close btn-close-white" style={{ color: '#fff', position: 'absolute', top: '10px', right: '10px' }} onClick={() => setNavBarVisible(false)}></button>
               <div style={{ position: 'relative', marginTop: '30px' }}>
-               <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ position: 'absolute', top: '-30px', left: '50%', transform: 'translateX(-50%)', width: 50, height: 50 }} />
+               <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ position: 'absolute', top: '-30px', left: '20%', transform: 'translateX(-50%)', width: 50, height: 50,  animation: 'placeholderAnimation 2s infinite' }} />
                <Offcanvas.Title style={{ marginTop: '20px', color: '#fff' }}>{userRole === '1' ? 'Super Administrador' : userRole === '2' ? 'Administrador' : `${username}`}</Offcanvas.Title>
               </div>
             </Offcanvas.Header>
