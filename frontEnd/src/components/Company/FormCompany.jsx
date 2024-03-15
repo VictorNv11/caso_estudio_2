@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import NavBar from '../ui/NavBar';
+import Footer from './../ui/Footer';
 
 const CompanyForm = () => {
   const endpoint = 'http://localhost:8000/api'; 
@@ -120,7 +121,7 @@ const CompanyForm = () => {
                 <div className="card bg-dark text-white" style={{ borderRadius: '1rem' }}>
                     <div className="card-body p-5 text-center">
                         <div className="mb-md-5 mt-md-4 pb-5">
-                          <h2 className="fw-bold mb-2 text-">Creación de Compaía</h2> 
+                          <h2 className="fw-bold mb-2 text-">Creación de Compañía</h2> 
                           {error && <div className="alert alert-danger">{error}</div>}
                           {missingFieldsError && <div className="alert alert-danger">{missingFieldsError}</div>}
                           {successMessage && (
@@ -165,6 +166,9 @@ const CompanyForm = () => {
             </div>
         </div>
     </div>
+
+    <Footer/>
+
     </div>
   );
 };
