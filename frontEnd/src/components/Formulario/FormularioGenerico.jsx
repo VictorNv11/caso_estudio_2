@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const GenericForm = ({ fields, onSubmit, title, buttonText, labels }) => {
+const GenericForm = ({ fields, onSubmit, title, buttonText, labels, additionalInputs }) => {
   const [formValues, setFormValues] = useState(fields);
 
   const handleChange = (event) => {
@@ -8,6 +8,14 @@ const GenericForm = ({ fields, onSubmit, title, buttonText, labels }) => {
     setFormValues({
       ...formValues,
       [name]: value
+    });
+  };
+
+  const handleFileChange = (event) =>{
+    const {name, files} = event.target;
+    setFormValues({
+      ...formValues,
+      [name]: files[0]
     });
   };
 
@@ -28,15 +36,37 @@ const GenericForm = ({ fields, onSubmit, title, buttonText, labels }) => {
                             {Object.keys(fields).map((fieldName) => (
                                 <div key={fieldName} className="form-outline form-white mb-4">
                                 <label htmlFor={fieldName} className="form-label">{labels[fieldName]}</label>
-                                <input
-                                    type="text"
+                               {fieldName in additionalInputs ? (
+                                additionalInputs[fieldName]
+                               )  : fieldName === 'document' ? (
+                                <>
+                                  <input
+                                    type="file"
                                     id={fieldName}
                                     name={fieldName}
-                                    value={formValues[fieldName]}
-                                    onChange={handleChange}
-                                    className="form-control form-control-lg"
-                                />
-                                </div>
+                                    style={{ display: 'block', visibility: 'hidden', height: 0, width: 0, opacity: 0 }}
+                                    onChange={handleFileChange}
+                                  />
+                                 <button
+                                  type="button"
+                                  className="btn btn-outline-light btn-lg px-5"
+                                  style={{ visibility: 'visible', height: 'auto' }}
+                                  onClick={() => document.getElementById(fieldName).click()}
+                                >
+                                  Cargar Archivo
+                                </button>
+                                  </>
+                      ) : (
+                        <input
+                          type="text"
+                          id={fieldName}
+                          name={fieldName}
+                          value={formValues[fieldName]}
+                          onChange={handleChange}
+                          className="form-control form-control-lg"
+                        />
+                      )}
+                      </div>
                             ))}
                             <button type="submit" className="btn btn-outline-light btn-lg px-5">{buttonText || 'Submit'}</button>
                             </form>            

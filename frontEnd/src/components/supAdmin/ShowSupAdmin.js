@@ -9,7 +9,6 @@ import Logo from '..//..//assets/img/planetas.png'
 import React, { useEffect, useState } from 'react';
 import Notification from '../Notifications/Notifications';
 
-
 const ShowSupAdmin = () => {
   const [Users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
@@ -43,7 +42,16 @@ const ShowSupAdmin = () => {
     if (Cookies.get("token") === undefined) {
       window.location.href = "/";
     }
-    showData();
+    else {
+      // Verifica el rol del usuario antes de mostrar la página de superadmin
+      const userRole = Cookies.get("role");
+      if (userRole !== "1") {
+        // Si el usuario no es un superadministrador, redirige a la página adecuada
+        window.location.href = "/"; // Cambia esto a la página a la que deberían redirigir los usuarios normales
+      } else {
+        showData();
+      }
+    }
   }, []);
 
   const confirmDelete = (id) => {
@@ -76,7 +84,7 @@ const ShowSupAdmin = () => {
   const notifySuperAdmin = async () => {
     try {
       const token = Cookies.get("token");
-      await axios.post(`${endpoint}/notifications/send`, {
+      await axios.post(`${endpoint}/notifications`, {
         // Puedes pasar cualquier dato adicional necesario para la notificación
       }, {
         headers: {
@@ -156,6 +164,21 @@ useEffect(() => {
   fetchTotalNotifications();
 }, []);
 
+// Aplicar los estilos CSS en el head del documento HTML
+document.head.appendChild(document.createElement("style")).textContent = `
+  @keyframes placeholderAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+`;
+ 
 
   return (
   <div style={{ backgroundColor: '#50727B',display:'flex',flexDirection:'column',justifyContent:'space-between', minHeight: '100vh'}}>
@@ -168,7 +191,7 @@ useEffect(() => {
     </div>
 
     <div style={{ marginLeft: '4%', marginTop: '2%' }}>
-      <input value={search} style={{ borderRadius: 5 }} onChange={handleSearch} type='text' placeholder='Buscar Nombre o Teléfono' className='form'></input>
+      <input value={search} style={{ borderRadius: 5, position:'relative' }} onChange={handleSearch} type='text' placeholder='Buscar Nombre o Teléfono' className='form' ></input>
       <BsSearch style={{ marginLeft: 5, color: 'white' }} />
       <Link className='btn btn-success btn-sm' to={'/Clientes'} style={{ marginLeft: '65.5%' }}>Importar</Link>{' '}
       <Link to='/create' className='btn btn-sm' style={{backgroundColor:'#78A083', color:'white'}}>Crear</Link>{' '}
@@ -177,7 +200,7 @@ useEffect(() => {
 
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <a className="navbar-brand" href="#" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ width: 70, height: 60 }} />
+        <img src={Logo} alt="Logo" title='Logo de la Pagina' style={{ width: 70, height: 60, animation: 'placeholderAnimation 2s infinite' }} />
       </a>
       <div style={{   }}>
         <table className='table table-striped  container' style={{ marginTop: '2%', border:'1px solid black', backgroundColor: 'white'  }}>

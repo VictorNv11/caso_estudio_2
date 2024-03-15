@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
+// Importaciones del controlador, request y validaciones
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Exception;
 use App\Models\User;
-
+use App\Models\NotificationCompany;
+use App\Notifications\NewCompanyCreatedNotification;
 // Genera los códigos aleatorios
 use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
 {
@@ -63,6 +68,16 @@ class CompanyController extends Controller
 
             // Guarda la compañía creada
             $company->save();
+
+            $superAdmin = User::where('roles', 1)->first();
+            if ($superAdmin) {
+                Notification::send($superAdmin, new NewCompanyCreatedNotification($company));
+            } else {
+                Log::warning('No se pudo encontrar al superadministrador para enviar la notificación.');
+            }
+
+            // Respuesta
+        
             return response()->json(['message' => 'Compañía creada con éxito'], 201);
 
         } catch(Exception $e) {
@@ -90,6 +105,8 @@ class CompanyController extends Controller
                 $company->status = true;
                 $company->approval_code = null; // Limpia el código de aprobación
                 $company->save();
+
+                $this->sendNotification($company->id, 'Tú compañía ha sido aprobada.');
 
                 return response()->json(['message' => 'Compañía aprobada con éxito'], 200);
             } else {
@@ -156,6 +173,48 @@ class CompanyController extends Controller
         } catch (Exception $e) {
             return response()->json(['error' => 'Hubo un error al eliminar la compañía: ' . $e->getMessage()], 500);
         }
-
+        
     }
+    
+    // Notificaiones 
+    // Función para enviar notificaciones
+protected function sendNotification($companyId, $message)
+{
+    $notification = new NotificationCompany();
+    $notification->company_id = $companyId;
+    $notification->message = $message;
+    $notification->save();
+}
+
+// Función para obtener notificaciones de una compañía
+protected function getCompanyNotifications(Request $request, string $id)
+{   
+    try {
+        if ($request->user()->id !== $id) {
+            return response()->json(['error' => 'No tienes permiso para acceder a estas notificaciones'], 403);
+        }
+
+        $notifications = $this->fetchCompanyNotifications($id);
+
+        return response()->json($notifications);
+    } catch (Exception $e) {
+        return response()->json(['error' => 'Hubo un error al obtener las notificaciones: ' . $e->getMessage()], 500);
+    }
+
+}
+
+
+// Renombra la función para evitar conflicto
+protected function fetchCompanyNotifications($companyId)
+{
+    return NotificationCompany::where('company_id', $companyId)->orderBy('created_at', 'desc')->get();
+}
+
+// Función para marcar una notificación como leída
+protected function markNotificationAsRead($notificationId)
+{
+    $notification = NotificationCompany::findOrFail($notificationId);
+    $notification->read = true;
+    $notification->save();
+}
 }

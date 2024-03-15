@@ -41,13 +41,24 @@ import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx'
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
 
 
+import NavBar from './components/ui/NavBar.jsx';
+
+
 import Pipeline from './components/Company/Pipeline.jsx';
+import PerfilUser from './components/usuarios/PerfilUser.jsx';
+import Echo from 'laravel-echo';
 
 //  Configuración de Pusher
 // const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
 //   cluster: 'us2'
 // });
 
+// window.Echo = new Echo({
+//   broadcaster: 'pusher',
+//   key: process.env.VITE_PUSHER_APP_KEY,
+//   cluster: process.env.VITE_PUSHER_APP_CLUSTER,
+//   encrypted: true,
+// });
 
 export default function App() {
   return (
@@ -62,6 +73,7 @@ export default function App() {
         {/*Compañias */}
         <Route path="/formCompany" element={<CompanyForm/>}/>
         <Route path="/pipeline" element={<Pipeline />} />
+        <Route path="/showCompanies" element={<ShowCompanies />} />
         <Route path="/ShowCompanies" element={<ShowCompanies />} />
      
         {/* SUEPERADMINISTRADOR */}
@@ -87,7 +99,7 @@ export default function App() {
 
         <Route path="/servicios" element={<TodoList/>} />
 
-        <Route path="notifications" element={<Notifications />} />
+        <Route path="/notifications" element={<Notifications />} />
         
         {/* ADMINISTRADOR */}
         <Route path="homePageAdmin" element={<HomePageAdmin/>}/>
@@ -100,6 +112,7 @@ export default function App() {
         <Route path="/createU" element={<CreateUsuarios />} />
         <Route path="/editU/:id" element={<EditUsuarios />} />
         <Route path='/HomePageUsuario' element={<HomePageUsuario/>}/>
+        <Route path="/userProfile" element={<PerfilUser />}/>
         <Route path='/Showtask' element={<Showtask/>}/>
 
       </Routes>

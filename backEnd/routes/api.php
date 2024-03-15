@@ -10,7 +10,7 @@ use App\Http\Controllers\Excel\ImportController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\MailController;
-
+use App\Http\Controllers\Api\NotificationController;
 
 Route::controller(SupAdminController::class)->group(function () {
     Route::get('/supAdmins','index');             //SIRVE
@@ -20,6 +20,9 @@ Route::controller(SupAdminController::class)->group(function () {
     Route::delete('/User/{id}','destroy');    //SIRVE
 });
 
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('/notify','notify');             //SIRVE
+});
 
 Route::controller(AdminController::class)->group(function () {
     Route::get('/Admins','index');                 //SIRVE
@@ -47,7 +50,10 @@ Route::prefix('companies')->group(function () {
 
     // Aprobación de la compañía
     Route::put('/{id}/approve', [CompanyController::class, 'approve'])
-        ->middleware(['auth', 'role:1,2']);
+        ->middleware(['auth', 'roles:Super Administrador, Administrador']);
+
+    //Notificación de Compañías
+    Route::get('/{id}/notifications', [CompanyController::class, 'getCompanyNotifications']);
 });
 
 
@@ -88,8 +94,14 @@ Route::prefix('clientes')->group(function () {
 //__________________PRUEBA LOGIN Y REGISTRO__________________________
 
 Route::post('register',[AuthController::class, 'register']);
+
+// Notificaciones
+Route::get('notifications',[NotificationController::class, 'notify']);
+Route::get('notifications/{id}',[NotificationController::class, 'show']);
+
 Route::post('login',[AuthController::class, 'login']);
 //Route::put('edit',[AuthController::class, 'edit']);
+
 
 
 
