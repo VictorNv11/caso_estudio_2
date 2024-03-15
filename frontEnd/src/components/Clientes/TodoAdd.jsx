@@ -44,6 +44,7 @@ const estilos ={
     borderRadius: '20px',
     cursor: 'pointer',
     fontSize: '17px',
+    marginTop:'9%'
   },
   btnAddHover: {
     backgroundColor: '#48cae4',
@@ -128,6 +129,7 @@ export const TodoAdd = ({ handleNewTodo }) => {
     <>
       <form onSubmit={onFormSubmit} style={{ ...estilos.form, display: 'flex', alignItems: 'flex-start' }}>
         <div style={{ display: 'flex', flexDirection: 'column', marginRight: '10px' }}>
+          <p>Tarea</p>
           <input
             type="text"
             style={estilos.inputAdd}
@@ -136,6 +138,7 @@ export const TodoAdd = ({ handleNewTodo }) => {
             onChange={onInputChange}
             placeholder="¿Qué hay que hacer?"
           />
+            <p>Asignar tarea a un usuario</p>
           <select
             style={{ ...estilos.inputAdd, marginTop: '5px' }}
             name="user"
@@ -147,6 +150,7 @@ export const TodoAdd = ({ handleNewTodo }) => {
           </select>
         </div>
         <div>
+          <p>Costo</p>
           <input
             type="text"
             style={{ ...estilos.inputAdd, width: '100%' }}
@@ -157,7 +161,7 @@ export const TodoAdd = ({ handleNewTodo }) => {
             inputMode="numeric" // Agregado para quitar las flechas
           />
         </div>
-        <button style={{ ...estilos.btnAdd, ...(description && estilos.btnAddHover) }} type="submit">
+        <button style={{ ...estilos.btnAdd, ...(description && estilos.btnAddHover)}} type="submit">
           Agregar
         </button>
       </form>
