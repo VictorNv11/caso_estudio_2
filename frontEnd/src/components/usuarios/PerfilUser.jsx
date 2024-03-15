@@ -51,7 +51,7 @@ const PerfilUser = () => {
           <div className="container-fluid">
             <a className="navbar-brand">Gestion de Usuarios</a>
           
-              <Link className="btn" style={{backgroundColor:'#50717a', color:'white'}} to="/supAdmins">
+              <Link className="btn" style={{backgroundColor:'#50717a', color:'white'}} to="/HomePageUsuario">
                 <i className="fa-solid fa-arrow-left"></i> Volver
               </Link>
             
