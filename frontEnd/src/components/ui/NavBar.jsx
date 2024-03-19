@@ -224,8 +224,8 @@ document.head.appendChild(document.createElement("style")).textContent = `
                         <Nav.Link><Link to={'/supAdmins'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Usuarios</Link> </Nav.Link>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
                           <NavDropdown title={<span style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</span>} id="nav-dropdown">
-                            <NavDropdown.Item><Link to={'/formCompany'} className="nav-link">Crear compañia</Link></NavDropdown.Item>
-                            <NavDropdown.Item><Link to={'/ShowCompanies'} className="nav-link">Ver compañias</Link></NavDropdown.Item>                          
+                            <NavDropdown.Item><Link to={'/formCompany'} className="nav-link"><i class="fa-solid fa-plus"></i> Crear compañia</Link></NavDropdown.Item>
+                            <NavDropdown.Item><Link to={'/ShowCompanies'} className="nav-link">  <i class="fa-regular fa-eye"></i> Ver compañias</Link></NavDropdown.Item>                          
                           </NavDropdown>
                         </Nav>
                         <Nav.Link><Link to={'/notifications'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-bell"></i> Notificaciones</Link> </Nav.Link>
