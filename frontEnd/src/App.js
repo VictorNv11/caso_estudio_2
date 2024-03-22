@@ -43,6 +43,7 @@ import NavBar from './components/ui/NavBar.jsx';
 import Pipeline from './components/Company/Pipeline.jsx';
 import PerfilUser from './components/usuarios/PerfilUser.jsx';
 import Echo from 'laravel-echo';
+import ContactPage from './pages/ContactPage.jsx';
 
 //  Configuración de Pusher
 // const pusher = new Pusher('b84ba64e3b2d8fdd4e3e', {
@@ -65,6 +66,7 @@ export default function App() {
         <Route path="/formRegistro" element={<FormRegistro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recuperarContrasena" element={<RecuperarContrasena/>}/>
+        <Route path="/contactos" element={<ContactPage />} />
 
         {/*Compañias */}
         <Route path="/formCompany" element={<CompanyForm/>}/>
