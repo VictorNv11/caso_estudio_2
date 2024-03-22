@@ -222,6 +222,7 @@ document.head.appendChild(document.createElement("style")).textContent = `
                       <div>
                         <Nav.Link><Link to={'/HomePageSuperAdmin'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                         <Nav.Link><Link to={'/supAdmins'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Usuarios</Link> </Nav.Link>
+                        <Nav.Link><Link to={'/servicios'} className="nav-link" style={{ color: '#fff' }}><i class="fa-solid fa-list-check"></i> Tareas</Link> </Nav.Link>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
                           <NavDropdown title={<span style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</span>} id="nav-dropdown">
                             <NavDropdown.Item><Link to={'/formCompany'} className="nav-link"><i class="fa-solid fa-plus"></i> Crear compañia</Link></NavDropdown.Item>
@@ -243,6 +244,7 @@ document.head.appendChild(document.createElement("style")).textContent = `
                         <Nav.Link><Link to={'/HomePageUsuario'} className="nav-link active" style={{ color: '#fff' }}><i className="fas fa-home"></i> Inicio</Link> </Nav.Link>
                         <Nav.Link><Link to={'/userProfile'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Perfil</Link> </Nav.Link>
                         <Nav.Link><Link to={'/formCompany'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-building"></i> Compañía</Link> </Nav.Link>
+                        <Nav.Link><Link to={'/showTask'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-user"></i> Ver tareas</Link> </Nav.Link>
                         <Nav.Link><Link to={'/notifications'} className="nav-link" style={{ color: '#fff' }}><i className="fas fa-bell"></i> Notificaciones</Link> </Nav.Link>                  
                       </>
                     )}

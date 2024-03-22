@@ -63,12 +63,19 @@ export const TodoAdd = ({ handleNewTodo }) => {
   const endpoint = 'http://localhost:8000/api';
 
 
-  useEffect(() => {
+ useEffect(() => {
     const getAllUsers = async () => {
       try {
         const response = await axios.get(`${endpoint}/users`);
-        setUsers(response.data.users);
-       
+        // Verificar si response.data.users es un array antes de filtrarlo
+        if (Array.isArray(response.data.users)) {
+          // Filtrar solo los usuarios con el rol 3
+          const filteredUsers = response.data.users.filter(user => user.roles === 3);
+          setUsers(filteredUsers);
+        } else {
+          console.error('Error fetching users: response.data.users is not an array');
+          setUsers([]); // Inicializar users como un array vacío en caso de error
+        }
       } catch (error) {
         console.error('Error fetching users:', error);
         setUsers([]); // Inicializar users como un array vacío en caso de error
@@ -138,7 +145,7 @@ export const TodoAdd = ({ handleNewTodo }) => {
             onChange={onInputChange}
             placeholder="¿Qué hay que hacer?"
           />
-            <p>Asignar tarea a un usuario</p>
+            <h6 style={{marginTop: '10px'}}>Asignar tarea a un usuario</h6>
           <select
             style={{ ...estilos.inputAdd, marginTop: '5px' }}
             name="user"
@@ -157,7 +164,6 @@ export const TodoAdd = ({ handleNewTodo }) => {
             name="price"
             value={price}
             onChange={onInputChange}
-            placeholder="¿Cuánto cuesta?"
             inputMode="numeric" // Agregado para quitar las flechas
           />
         </div>

@@ -41,8 +41,6 @@ import { ReseteoContrasena } from './components/Recuperar/ReseteoContrasena.jsx'
 import { RecuperarContrasena } from './components/Recuperar/RecuperarContrasena.jsx';
 
 
-import NavBar from './components/ui/NavBar.jsx';
-
 
 import Pipeline from './components/Company/Pipeline.jsx';
 import PerfilUser from './components/usuarios/PerfilUser.jsx';
