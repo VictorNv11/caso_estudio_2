@@ -72,14 +72,9 @@ export default function App() {
         <Route path="/formCompany" element={<CompanyForm/>}/>
         <Route path="/pipeline" element={<Pipeline />} />
         <Route path="/showCompanies" element={<ShowCompanies />} />
-     
-        {/* SUEPERADMINISTRADOR */}
-        <Route path="/homePageSuperAdmin" element={<HomePageSupAdmin />} />
-        <Route path="/supAdmins" element={<ShowSupAdmin />} />
-        <Route path="/create" element={<CreateSupAdmin />} />
-        <Route path="/edit/:id" element={<EditSupAdmin />} />
+
         
-        {/* EXCEL */}
+        {/* RECUPERACIÓN DE CONTRASEÑA */}
         <Route path="/password-reset/:token" element={<ReseteoContrasena/>}/> 
 
      

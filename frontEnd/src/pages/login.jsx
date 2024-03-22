@@ -2,12 +2,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useState} from "react";
 import { Link } from "react-router-dom";
-import GoogleLogin from 'react-google-login';
+import {GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import Logo from '../assets/img/planetas.png';
 import img_home from "../assets/img/img_home.png"
 import { IoEyeSharp, IoEyeOffSharp } from 'react-icons/io5';
 import avatar from "../assets/img/avatar.png";
-
 
 export default function Login() {
     
@@ -19,12 +18,24 @@ export default function Login() {
 
     const endpoint = 'http://localhost:8000/api/'
     
-    const responseGoogle = (respuesta) => {
-        console.log(respuesta);
-      }
 
-
-
+    const responseMessage = async (response) => {
+        try {
+            console.log("Google OAuth Response:", response);
+            if (response && response.credential) {
+                const token = response.credential.accessToken;
+                console.log("Access Token:", token);
+                Cookies.set("token", token);
+                window.location.href = "/HomePageUsuario"; // Redirige al inicio de la página de usuarios
+            }
+        } catch (error) {
+            console.error('Error al procesar la respuesta:', error);
+        }
+    };
+    
+    const errorMessage = (error) => {
+        console.log(error);
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -53,7 +64,7 @@ export default function Login() {
             }
         } catch (error) {
             // Si hay un error en la solicitud, muestra el mensaje de error
-            setError("Credenciales inválidas");
+            setError("Credenciales inválidas. Por favor, verifique que su contraseña o correo estén bien escritos.");
             // Configura el temporizador para limpiar el error después de 5 segundos
             setTimeout(() => {
                 setError(null);
@@ -127,15 +138,10 @@ export default function Login() {
                                     </div>
                                     <button type="submit" className="btn btn-outline-light btn-lg px-5">Ingresar</button>
                                     <hr style={{border: '1px solid #ccc', margin: '10px 0',marginTop:'5%'}} />   
-                                    <GoogleLogin
-                                        clientId="25474265081-tn5qcf5efuhti5l15qee26scha591a40.apps.googleusercontent.com"
-                                        buttonText="Ingresar con google"
-                                        onSuccess={responseGoogle}
-                                        onFailure={responseGoogle}
-                                        cookiePolicy={'single_host_origin'}
-                                        className="btn btn-outline-light btn-lg px-5"
-                                        style={{ marginTop: '2%', display: 'flex', alignItems: 'center' }}
-                                    />
+                                    <GoogleOAuthProvider clientId="512672351143-7s42rgpbt98i2q7clupjldda0jpqencp.apps.googleusercontent.com">
+                                        <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+                                    </GoogleOAuthProvider>
+
                                 </form>
                                 {error && <p className="text-danger mt-3">{error}</p>}
                             </div>
